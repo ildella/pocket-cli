@@ -28,7 +28,7 @@ Now run ```npm start``` to start the app in watch mode
 
 ```bash
 npm link
-sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli.js /usr/local/bin/pocklet
+sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli.js /usr/local/bin/pocket-cli-dev
 ```
 
 ### Snap
