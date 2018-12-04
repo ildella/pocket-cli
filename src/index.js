@@ -9,8 +9,6 @@ app.init = () => {
   }, 50)
 }
 
-app.init()
-
 process.on('SIGINT', () => {
   console.log('SIGINT')
   process.exit(0)

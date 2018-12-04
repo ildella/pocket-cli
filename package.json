@@ -49,7 +49,7 @@
     "jest": "23.6.0"
   },
   "scripts": {
-    "start": "nodemon -I src/cli",
+    "start": "nodemon -I src",
     "deps": "npm ls --prod=true --depth=1",
     "test": "node_modules/jest/bin/jest.js --watch",
     "eslint": "node_modules/eslint/bin/eslint.js ",

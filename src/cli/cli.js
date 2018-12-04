@@ -69,7 +69,7 @@ cli.init = () => {
     }
   })
   ui.on('close', () => {
-    console.log('user called CLOSE')
+    console.log('\nuser request to close the app...')
     process.exit(0)
   })
 }
