@@ -1,5 +1,5 @@
 require('dotenv').config()
-const cli = require('./cli')
+const cli = require('./cli/cli')
 
 const app = {}
 
