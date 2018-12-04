@@ -38,6 +38,7 @@
     "luxon": "1.8.2"
   },
   "devDependencies": {
+    "audit-badge": "^1.0.0",
     "chai": "4.2.0",
     "eslint": "5.9.0",
     "eslint-plugin-chai-expect": "2.0.1",
@@ -51,6 +52,7 @@
     "start": "nodemon -I src/cli",
     "deps": "npm ls --prod=true --depth=1",
     "test": "node_modules/jest/bin/jest.js --watch",
-    "eslint": "node_modules/eslint/bin/eslint.js "
+    "eslint": "node_modules/eslint/bin/eslint.js ",
+    "badge": "node_modules/audit-badge/bin/audit-badge"
   }
 }
