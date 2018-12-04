@@ -1,8 +1,11 @@
 {
   "name": "pocket-cli",
-  "version": "0.2.0",
+  "version": "0.1.1",
   "description": "Unofficial CLI for https://getpocket.com",
   "main": "src/cli/index.js",
+  "bin": {
+    "pocket-shell": "bin/pocket-cli.js"
+  },
   "engines": {
     "node": "11",
     "npm": "6.4.1"

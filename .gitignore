@@ -1,0 +1,3 @@
+node_modules
+.*env
+pocket_access_token
