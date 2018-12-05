@@ -24,6 +24,14 @@ POCKET='<your api key here...>'
 
 Now run ```npm start``` to start the app in watch mode
 
+### Use kubeless via serverless-framework
+
+In order not to store the Pocket API consumer key, we host a simple proxy server on Kubeless, using the serverless-framework
+
+```bash
+npm install serverless -g
+```
+
 ### Link
 
 ```bash

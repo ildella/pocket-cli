@@ -97,6 +97,27 @@ pocket.previous = async () => {
   }
 }
 
+pocket.modifyQuery = async index => {
+  const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
+  const id = pocket.articles[index - 1].id
+  const defaultQuery = {
+    consumer_key: process.env.POCKET,
+    access_token: userAccessToken,
+    id: id,
+    operation: 'mark_as_read'
+  }
+  const action = defaultQuery
+  pocket.actions.push({
+    timestamp: DateTime.local(),
+    action: action
+  })
+  return {
+    name: 'pocket-read',
+    action: action, // TODO: hash the tokens
+    execute: () => { return pocket.modify(action) }
+  }
+}
+
 pocket.toQuery = async (inputs = []) => {
   const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const reservedState = intersection([states, inputs])
@@ -128,16 +149,26 @@ pocket.toQuery = async (inputs = []) => {
   }
 }
 
-pocket.read = async (query) => {
+pocket.modify = async action => {
+  await client.post('', action)
+  const output = []
+  output.push('modify executed')
+  output.push(action)
+  return output
+}
+
+pocket.read = async query => {
   // console.log('pocket search ->', query)
   const response = await client.post('get', query)
   const articles = Object.values(response.data.list)
   const parsedArticles = articles.map(article => {
     const authors = Object.values(article.authors || {}).map(author => author.name)
-    const title = article.resolved_title || article.resolved_id || article.item_id || '<No Title - No ID>'
+    const id = article.resolved_id || article.item_id || '<No ID>'
+    const title = article.resolved_title || id || '<No Title>'
     const url = article.resolved_url || article.given_url || ''
     const shortUrl = url.replace('https://', '').replace('http://', '')
     return {
+      id: id,
       title: title,
       excerpt: article.excerpt || '',
       isArticle: article.is_article == 1,
