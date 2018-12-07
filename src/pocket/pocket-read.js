@@ -10,7 +10,7 @@ const client = axios.create({
   }
 })
 const formatter = require('../content-formatter')
-const {red, blue, bold} = require('colorette')
+const {red, blue, bold, yellow} = require('colorette')
 
 client.interceptors.response.use(response => {
   return response
@@ -20,6 +20,7 @@ client.interceptors.response.use(response => {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
     console.error(red(bold(message)))
+    console.error(config)
   } else {
     console.error(red(bold('Network Error')))
   }
@@ -98,7 +99,7 @@ pocket.previous = async () => {
   }
 }
 
-pocket.modifyQuery = async index => {
+pocket.modifyQuery = async (action, index) => {
   const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const item_id = pocket.articles[index - 1].item_id
   const defaultQuery = {
@@ -106,16 +107,16 @@ pocket.modifyQuery = async index => {
     access_token: userAccessToken,
     actions: [
       {
-        'action': 'archive',
+        'action': action,
         'item_id': item_id,
-        'time': DateTime.local().ms * 1000
+        'time': DateTime.local().millisecond * 1000
       }
     ]
   }
-  const action = defaultQuery
+  const query = defaultQuery
   pocket.actions.push({
     timestamp: DateTime.local(),
-    action: action
+    action: query
   })
   return {
     name: 'pocket-read',
@@ -156,6 +157,7 @@ pocket.toQuery = async (inputs = []) => {
 }
 
 pocket.modify = async action => {
+  console.log(action)
   const response = await client.post('/send', action)
   console.log(response)
   const output = []

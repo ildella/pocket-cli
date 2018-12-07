@@ -19,7 +19,7 @@ commands['archive'] = {
   name: 'archive',
   aliases: ['a', 'read'],
   description: 'Archive article / Mark as read',
-  parse: pocket.modifyQuery
+  parse: index => { return pocket.modifyQuery('archive', index) }
 }
 commands['auth'] = {
   name: 'authenticate',
