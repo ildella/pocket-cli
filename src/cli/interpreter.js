@@ -38,6 +38,22 @@ const commands = {
     aliases: ['o'],
     description: 'open the URL in the browser',
     parse: pocket.open
+  },
+  interactive: {
+    name: 'interactive',
+    aliases: ['1', '2', '3', '4'],
+    description: 'interactive action on a listed item (eg: archive, fav, tag...)',
+    parse: () => {
+      return {
+        name: 'interactive-action',
+        execute: () => {
+          const output = []
+          output.push('please code the action...')
+          return output
+        }
+      }
+    }
+
   }
 }
 

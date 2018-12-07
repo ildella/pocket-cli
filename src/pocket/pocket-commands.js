@@ -27,9 +27,3 @@ commands['auth'] = {
   description: 'Authenticate to Pocket',
   parse: parseAuth
 }
-commands['modify'] = {
-  name: 'modify',
-  aliases: ['1', '2', '3', '4'],
-  description: 'Action on list index',
-  parse: pocket.open
-}

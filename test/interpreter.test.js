@@ -17,6 +17,7 @@ test('assume list as default command name', async () => {
   const action = interpreter.getAction('nodejs')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs'])
+  expect(action.original).toBeUndefined()
 })
 
 test('aliases and reserved words', async () => {
@@ -47,4 +48,13 @@ test('quit', async () => {
   const query = await action.parse()
   expect(query.name).toBeDefined()
   expect(query.name).toBe('quit')
+})
+
+test('1', async () => {
+  const action = interpreter.getAction('1')
+  expect(action.command).toBe(commands.interactive)
+  expect(action.input).toEqual([])
+  const query = action.parse()
+  expect(query.name).toBe('interactive-action')
+  // expect(query).toEqual('interactive-action')
 })
