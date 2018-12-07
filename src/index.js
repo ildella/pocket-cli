@@ -1,10 +1,12 @@
 require('dotenv').config()
+const fs = require('fs').promises
 const cli = require('./cli/cli')
 
 const app = {}
 
 app.init = () => {
-  setTimeout(() => {
+  setTimeout(async () => {
+    global.userAccessToken = (await fs.readFile('pocket_access_token')).toString()
     cli.init()
   }, 50)
 }

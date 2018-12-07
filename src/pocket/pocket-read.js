@@ -99,12 +99,11 @@ pocket.previous = async () => {
   }
 }
 
-pocket.modifyQuery = async (action, index) => {
-  const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
+pocket.modifyQuery = (action, index) => {
   const item_id = pocket.articles[index - 1].item_id
   const defaultQuery = {
     consumer_key: process.env.POCKET,
-    access_token: userAccessToken,
+    access_token: global.userAccessToken,
     actions: [
       {
         'action': action,
@@ -125,8 +124,8 @@ pocket.modifyQuery = async (action, index) => {
   }
 }
 
-pocket.toQuery = async (inputs = []) => {
-  const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
+pocket.toQuery = (inputs = []) => {
+  // const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const reservedState = intersection([states, inputs])
   const reservedOrder = intersection([orders, inputs])
   const state = reservedState.length > 0 ? reservedState[0] : 'all'
@@ -134,7 +133,7 @@ pocket.toQuery = async (inputs = []) => {
   const params = reverseIntersection([inputs, states, orders])
   const defaultQuery = {
     consumer_key: process.env.POCKET,
-    access_token: userAccessToken,
+    access_token: global.userAccessToken,
     count: 8,
     offset: 0,
     detailType: 'complete',
