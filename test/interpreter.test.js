@@ -54,6 +54,7 @@ test('1', async () => {
   const action = interpreter.getAction('1')
   expect(action.command).toBe(commands.interactive)
   expect(action.input).toEqual([])
+  expect(action.original).toBe('1')
   const query = action.parse()
   expect(query.name).toBe('interactive-action')
   // expect(query).toEqual('interactive-action')

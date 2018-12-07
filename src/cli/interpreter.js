@@ -80,6 +80,7 @@ const interpreter = {
     }
     const command = isValidCommand ? validCommand[0] : commands[defaultCommand]
     return {
+      original: isValidCommand ? potentialCommand : undefined,
       command: command,
       input: spaceSeparatedInput,
       parse: () => { return command.parse(spaceSeparatedInput) }
