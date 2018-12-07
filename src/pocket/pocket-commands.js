@@ -15,10 +15,10 @@ const parseAuth = () => {
   }
 }
 
-commands['read'] = {
-  name: 'read',
-  aliases: ['r'],
-  description: 'Mark article as read',
+commands['archive'] = {
+  name: 'archive',
+  aliases: ['a', 'read'],
+  description: 'Archive article / Mark as read',
   parse: pocket.modifyQuery
 }
 commands['auth'] = {

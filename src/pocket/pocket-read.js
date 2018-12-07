@@ -99,12 +99,17 @@ pocket.previous = async () => {
 
 pocket.modifyQuery = async index => {
   const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
-  const id = pocket.articles[index - 1].id
+  const item_id = pocket.articles[index - 1].item_id
   const defaultQuery = {
     consumer_key: process.env.POCKET,
     access_token: userAccessToken,
-    id: id,
-    operation: 'mark_as_read'
+    actions: [
+      {
+        'action': 'archive',
+        'item_id': item_id,
+        'time': DateTime.local().ms * 1000
+      }
+    ]
   }
   const action = defaultQuery
   pocket.actions.push({
@@ -150,7 +155,7 @@ pocket.toQuery = async (inputs = []) => {
 }
 
 pocket.modify = async action => {
-  await client.post('', action)
+  await client.post('/send', action)
   const output = []
   output.push('modify executed')
   output.push(action)
@@ -169,6 +174,7 @@ pocket.read = async query => {
     const shortUrl = url.replace('https://', '').replace('http://', '')
     return {
       id: id,
+      item_id: article.item_id,
       title: title,
       excerpt: article.excerpt || '',
       isArticle: article.is_article == 1,
