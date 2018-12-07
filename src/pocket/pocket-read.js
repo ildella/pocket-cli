@@ -49,6 +49,7 @@ const orders = ['newest', 'oldest', 'title', 'site']
 
 pocket.queries = []
 pocket.articles = []
+pocket.actions = []
 
 pocket.expand = async (index = 1) => {
   const selected = pocket.articles[Number(index) - 1]
@@ -155,7 +156,8 @@ pocket.toQuery = async (inputs = []) => {
 }
 
 pocket.modify = async action => {
-  await client.post('/send', action)
+  const response = await client.post('/send', action)
+  console.log(response)
   const output = []
   output.push('modify executed')
   output.push(action)
