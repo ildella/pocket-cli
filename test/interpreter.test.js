@@ -1,6 +1,7 @@
 require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
+require('../src/cli/help')
 const commands = interpreter.commands
 
 test('undefined', () => {
@@ -34,15 +35,6 @@ test('aliases and reserved words', async () => {
   // TODO: integration test for this
 })
 
-// test('help', async () => {
-//   const action = interpreter.getAction('help')
-//   expect(action.input).toEqual([])
-//   expect(action.command).toBe(commands.help)
-//   const query = await action.parse()
-//   expect(query.name).toBeDefined()
-//   expect(query.name).toBe('help')
-// })
-
 test('quit', async () => {
   const action = interpreter.getAction('quit')
   expect(action.command).toBe(commands.quit)
@@ -51,10 +43,27 @@ test('quit', async () => {
   expect(query.name).toBe('quit')
 })
 
+test('help', async () => {
+  const action = interpreter.getAction('help')
+  expect(action.command).toBe(commands.help)
+  const query = await action.parse()
+  expect(query.name).toBeDefined()
+  expect(query.name).toBe('help')
+})
+
 test('archive', async () => {
   expect(interpreter.getAction('archive 1').command).toBe(commands.archive)
   expect(interpreter.getAction('a 1').command).toBe(commands.archive)
   expect(interpreter.getAction('aa 1').command).toBe(commands.list)
+  // expect(interpreter.getAction('a 1')).toBe('')
+})
+
+test('open', async () => {
+  const action = interpreter.getAction('open 1')
+  expect(action.command).toBe(commands.open)
+  const query = action.parse()
+  expect(query.name).toBe('pocket-open')
+  expect(query.index).toBe('1')
   // expect(interpreter.getAction('a 1')).toBe('')
 })
 
@@ -72,14 +81,14 @@ test('1', async () => {
   expect(action.input).toEqual(['1'])
   // expect(action.original).toBe('1')
   const query = action.parse()
-  expect(query.name).toBe('interactive-action')
+  expect(query.name).toBe('interactive-query')
   // expect(query).toEqual('interactive-action')
 })
 
-const cli = require('../src/cli/cli')
+// const cli = require('../src/cli/cli')
 
-test('list + index + choose action', async () => {
-  cli.processInput('list bitcoin')
-  cli.processInput('1')
-  cli.processAnswer('2')
-}
+// test('list + index + choose action', async () => {
+//   cli.processInput('list bitcoin')
+//   cli.processInput('1')
+//   cli.processAnswer('2')
+// })
