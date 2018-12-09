@@ -1,14 +1,13 @@
 const pocket = require('../pocket/pocket-read')
-const quit = require('./quit')
 
 //TODO: get me out of here!
 const commands = {
-  quit: {
-    name: 'quit',
-    aliases: ['exit', 'q'],
-    description: 'Quit Pocket CLI',
-    parse: quit.parse
-  },
+  // quit: {
+  //   name: 'quit',
+  //   aliases: ['exit', 'q'],
+  //   description: 'Quit Pocket CLI',
+  //   parse: quit.parse
+  // },
   list: {
     name: 'list',
     aliases: ['search', 'find', 's', 'l', 'ls'],

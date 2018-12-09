@@ -16,6 +16,8 @@ commands['help'] = {
   description: 'Print this help',
   parse: parse
 }
+output.push('')
 Object.keys(commands).forEach(name => {
   output.push(`${name} (${commands[name].aliases}) - ${commands[name].description}`)
 })
+output.push('')

@@ -1,6 +1,6 @@
-const quit = {}
+const commands = require('./interpreter').commands
 
-quit.parse = async (reserved, params) => {
+const parse = () => {
   return {
     name: 'quit',
     execute: () => {
@@ -10,4 +10,9 @@ quit.parse = async (reserved, params) => {
   }
 }
 
-module.exports = quit
+commands['quit'] = {
+  name: 'quit',
+  aliases: ['exit', 'q'],
+  description: 'Quit Pocket CLI',
+  parse: parse
+}
