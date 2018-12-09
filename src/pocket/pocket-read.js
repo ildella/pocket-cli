@@ -1,6 +1,5 @@
 const {execSync} = require('child_process')
 const {DateTime} = require('luxon')
-const fs = require('fs').promises
 const axios = require('axios')
 const client = axios.create({
   baseURL: 'https://getpocket.com/v3',

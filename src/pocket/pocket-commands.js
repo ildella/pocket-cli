@@ -2,9 +2,6 @@ const commands = require('../cli/interpreter').commands
 const pocketAuth = require('./pocket-auth')
 const pocket = require('./pocket-read')
 
-const output = []
-output.push('')
-
 const listCommands = {
   archive: {
     name: 'archive',
@@ -67,7 +64,7 @@ const parseAuth = () => {
     name: 'pocket-auth',
     execute: async () => {
       await pocketAuth.start()
-      return output
+      return ['']
     }
   }
 }
