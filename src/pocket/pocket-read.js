@@ -100,6 +100,11 @@ pocket.previous = async () => {
 }
 
 pocket.modifyQuery = (action, index) => {
+  if (pocket.articles.length < index) return {
+    name: 'pocket-modify',
+    action: action, // TODO: hash the tokens
+    execute: () => { return [`There is no article with index ${index}`] }
+  }
   const item_id = pocket.articles[index - 1].item_id
   const defaultQuery = {
     consumer_key: process.env.POCKET,
@@ -118,7 +123,7 @@ pocket.modifyQuery = (action, index) => {
     action: query
   })
   return {
-    name: 'pocket-read',
+    name: 'pocket-modify',
     action: action, // TODO: hash the tokens
     execute: () => { return pocket.modify(action) }
   }

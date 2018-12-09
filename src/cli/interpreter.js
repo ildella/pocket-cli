@@ -67,20 +67,20 @@ const interpreter = {
     const validString = isValidString(inputText)
     if (!validString) return null
     const spaceSeparatedInput = validString.split(' ')
-    const defaultCommand = 'list'
     const potentialCommand = spaceSeparatedInput[0]
-    const validCommand = Object.values(commands).filter(command => {
+    const candidates = Object.values(commands).filter(command => {
       const matches = new Set(command.aliases)
       matches.add(command.name)
       return matches.has(potentialCommand)
     })
-    const isValidCommand = validCommand.length > 0
-    if (isValidCommand) {
-      spaceSeparatedInput.shift()
-    }
-    const command = isValidCommand ? validCommand[0] : commands[defaultCommand]
+    const useDefault = candidates.length == 0
+    // if (isValidCommand) {
+    //   spaceSeparatedInput.shift()
+    // }
+    const defaultCommand = 'list'
+    const command = useDefault ? commands[defaultCommand] : candidates[0]
     return {
-      original: isValidCommand ? potentialCommand : undefined,
+      // original: isValidCommand ? potentialCommand : undefined,
       command: command,
       input: spaceSeparatedInput,
       parse: () => { return command.parse(spaceSeparatedInput) }

@@ -36,17 +36,3 @@ test('json query to human readable text', async () => {
   expect(pocket.toHumanText()).toBe('Search for "bitcoin" in "all" documents, order by "site" starting January 1, 1970')
   console.log(pocket.toHumanText())
 })
-
-test('actions with no list', async () => {
-  const action = pocket.modifyQuery(['a', '1'])
-  expect(pocket.toHumanText()).toBe('')
-  expect(action).toEqual()
-})
-
-test('action', async () => {
-  const query = pocket.toQuery(['bitcoin'])
-  const output = await query.execute()
-  const action = pocket.modifyQuery(['a', '1'])
-  expect(pocket.toHumanText()).toBe('')
-  expect(action).toEqual()
-})

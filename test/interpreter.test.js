@@ -1,5 +1,6 @@
 require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
+require('../src/pocket/pocket-commands')
 const commands = interpreter.commands
 
 test('undefined', () => {
@@ -10,7 +11,7 @@ test('undefined', () => {
 test('list with search parameters', async () => {
   const action = interpreter.getAction('list bitcoin yesterday')
   expect(action.command).toBe(commands.list)
-  expect(action.input).toEqual(['bitcoin', 'yesterday'])
+  expect(action.input).toEqual(['list', 'bitcoin', 'yesterday'])
 })
 
 test('assume list as default command name', async () => {
@@ -23,7 +24,7 @@ test('assume list as default command name', async () => {
 test('aliases and reserved words', async () => {
   const action = interpreter.getAction('search nodejs unread')
   expect(action.command).toBe(commands.list)
-  expect(action.input).toEqual(['nodejs', 'unread'])
+  expect(action.input).toEqual(['search', 'nodejs', 'unread'])
   const query = await action.parse()
   expect(query.name).toEqual('pocket-read')
   expect(query.execute).toBeDefined()
@@ -50,11 +51,26 @@ test('quit', async () => {
   expect(query.name).toBe('quit')
 })
 
+test('archive', async () => {
+  expect(interpreter.getAction('archive 1').command).toBe(commands.archive)
+  expect(interpreter.getAction('a 1').command).toBe(commands.archive)
+  expect(interpreter.getAction('aa 1').command).toBe(commands.list)
+  // expect(interpreter.getAction('a 1')).toBe('')
+})
+
+test('archive does not act if the articles list is empty', async () => {
+  const action = interpreter.getAction('archive 1')
+  const query = action.parse()
+  // expect(query).toEqual('')
+  const output = query.execute()
+  expect(output).toEqual(['There is no article with index 1'])
+})
+
 test('1', async () => {
   const action = interpreter.getAction('1')
   expect(action.command).toBe(commands.interactive)
-  expect(action.input).toEqual([])
-  expect(action.original).toBe('1')
+  expect(action.input).toEqual(['1'])
+  // expect(action.original).toBe('1')
   const query = action.parse()
   expect(query.name).toBe('interactive-action')
   // expect(query).toEqual('interactive-action')
