@@ -103,6 +103,9 @@ const interpreter = {
     const useDefault = candidates.length == 0
     const defaultCommand = 'list'
     const command = useDefault ? commands[defaultCommand] : candidates[0]
+    if (!useDefault) {
+      spaceSeparatedInput.shift()
+    }
     return {
       command: command,
       input: spaceSeparatedInput,

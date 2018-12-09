@@ -12,20 +12,21 @@ test('undefined', () => {
 test('list with search parameters', async () => {
   const action = interpreter.getAction('list bitcoin yesterday')
   expect(action.command).toBe(commands.list)
-  expect(action.input).toEqual(['list', 'bitcoin', 'yesterday'])
+  // expect(action.input).toEqual(['list', 'bitcoin', 'yesterday'])
+  expect(action.input).toEqual(['bitcoin', 'yesterday'])
 })
 
 test('assume list as default command name', async () => {
   const action = interpreter.getAction('nodejs')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs'])
-  expect(action.original).toBeUndefined()
 })
 
 test('aliases and reserved words', async () => {
   const action = interpreter.getAction('search nodejs unread')
   expect(action.command).toBe(commands.list)
-  expect(action.input).toEqual(['search', 'nodejs', 'unread'])
+  expect(action.input).toEqual(['nodejs', 'unread'])
+  // expect(action.input).toEqual(['search', 'nodejs', 'unread'])
   const query = await action.parse()
   expect(query.name).toEqual('pocket-read')
   expect(query.execute).toBeDefined()
@@ -63,12 +64,22 @@ test('open', async () => {
   expect(action.command).toBe(commands.open)
   const query = action.parse()
   expect(query.name).toBe('pocket-open')
-  expect(query.index).toBe('1')
+  expect(query.indexes).toEqual(['1'])
+  // expect(interpreter.getAction('a 1')).toBe('')
+})
+
+test('expand', async () => {
+  const action = interpreter.getAction('e 3')
+  expect(action.command).toBe(commands.expand)
+  const query = action.parse()
+  expect(query.name).toBe('pocket-expand')
+  expect(query.indexes).toEqual(['3'])
   // expect(interpreter.getAction('a 1')).toBe('')
 })
 
 test('archive does not act if the articles list is empty', async () => {
   const action = interpreter.getAction('archive 1')
+  expect(action.command).toBe(commands.archive)
   const query = action.parse()
   // expect(query).toEqual('')
   const output = query.execute()
@@ -78,11 +89,13 @@ test('archive does not act if the articles list is empty', async () => {
 test('1', async () => {
   const action = interpreter.getAction('1')
   expect(action.command).toBe(commands.interactive)
-  expect(action.input).toEqual(['1'])
+  // expect(action.input).toEqual(['1'])
+  expect(action.input).toEqual([])
   // expect(action.original).toBe('1')
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
-  // expect(query).toEqual('interactive-action')
+  const output = query.execute()
+  expect(output).toEqual(['1. open', '2. expand', '3. fav', '4. archive'])
 })
 
 // const cli = require('../src/cli/cli')

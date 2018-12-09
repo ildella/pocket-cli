@@ -9,3 +9,10 @@ test('this', () => {
   }
   o.run()
 })
+
+test('array shift', () => {
+  const a = [1, 2, 3]
+  const b = a.shift()
+  expect(a).toEqual([2, 3])
+  expect(b).toEqual(1)
+})

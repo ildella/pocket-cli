@@ -52,10 +52,17 @@ pocket.queries = []
 pocket.articles = []
 pocket.actions = []
 
-pocket.expand = async (index = 1) => {
+pocket.archive = indexes => {
+  const index = indexes[0]
+  return pocket.modifyQuery('archive', index)
+}
+
+pocket.expand = indexes => {
+  const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
   return {
     name: 'pocket-expand',
+    indexes: indexes,
     index: index,
     execute: () => {
       const output = []
@@ -65,10 +72,12 @@ pocket.expand = async (index = 1) => {
   }
 }
 
-pocket.open = async (index = 1) => {
+pocket.open = indexes => {
+  const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
   return {
     name: 'pocket-open',
+    indexes: indexes,
     index: index,
     execute: () => {
       const exec = execSync(`xdg-open "${selected.url}"`)
@@ -79,7 +88,7 @@ pocket.open = async (index = 1) => {
   }
 }
 
-pocket.next = async () => {
+pocket.next = () => {
   const last = pocket.queries[pocket.queries.length - 1].query
   last.offset = last.offset + last.count
   return {
@@ -89,7 +98,7 @@ pocket.next = async () => {
   }
 }
 
-pocket.previous = async () => {
+pocket.previous = () => {
   const last = pocket.queries[pocket.queries.length - 1].query
   last.offset = last.offset - last.count
   return {
