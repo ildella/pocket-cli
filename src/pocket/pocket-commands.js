@@ -17,7 +17,7 @@ const parseAuth = () => {
 
 commands['archive'] = {
   name: 'archive',
-  aliases: ['a', 'read'],
+  aliases: ['a', 'read', 'r'],
   description: 'Archive article / Mark as read',
   parse: index => { return pocket.modifyQuery('archive', index) }
 }
