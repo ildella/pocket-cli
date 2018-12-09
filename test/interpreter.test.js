@@ -2,6 +2,7 @@ require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
 require('../src/cli/help')
+require('../src/cli/quit')
 const commands = interpreter.commands
 
 test('undefined', () => {
