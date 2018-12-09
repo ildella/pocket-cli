@@ -16,3 +16,8 @@ test('array shift', () => {
   expect(a).toEqual([2, 3])
   expect(b).toEqual(1)
 })
+
+test('object assign with null and undefined', () => {
+  expect(Object.assign({a: 1}, null)).toEqual({a: 1})
+  expect(Object.assign({a: 1}, undefined)).toEqual({a: 1})
+})

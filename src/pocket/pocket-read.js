@@ -73,7 +73,6 @@ pocket.expand = indexes => {
 }
 
 pocket.open = indexes => {
-  console.log(indexes)
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
   return {

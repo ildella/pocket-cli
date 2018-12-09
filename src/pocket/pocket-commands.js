@@ -5,29 +5,6 @@ const pocket = require('./pocket-read')
 const output = []
 output.push('')
 
-const parseAuth = () => {
-  return {
-    name: 'pocket-auth',
-    execute: async () => {
-      await pocketAuth.start()
-      return output
-    }
-  }
-}
-
-commands['auth'] = {
-  name: 'authenticate',
-  aliases: ['auth', 'login'],
-  description: 'Authenticate to Pocket',
-  parse: parseAuth
-}
-commands['list'] = {
-  name: 'list',
-  aliases: ['search', 'find', 's', 'l', 'ls'],
-  description: 'Search for the given keywords. eg: list bitcoin',
-  parse: pocket.toQuery
-}
-
 const listCommands = {
   archive: {
     name: 'archive',
@@ -83,4 +60,28 @@ const listCommands = {
       }
     }
   }
+}
+
+const parseAuth = () => {
+  return {
+    name: 'pocket-auth',
+    execute: async () => {
+      await pocketAuth.start()
+      return output
+    }
+  }
+}
+
+commands['auth'] = {
+  name: 'authenticate',
+  aliases: ['auth', 'login'],
+  description: 'Authenticate to Pocket',
+  parse: parseAuth
+}
+commands['list'] = {
+  name: 'list',
+  aliases: ['search', 'find', 's', 'l', 'ls'],
+  description: 'Search for the given keywords. eg: list bitcoin',
+  submenu: listCommands,
+  parse: pocket.toQuery
 }
