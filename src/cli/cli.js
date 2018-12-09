@@ -9,8 +9,13 @@ const cli = {}
 
 cli.processInput = async string => {
   const action = interpreter.getAction(string)
+  if (action.command.name.startsWith('interactive')) {
+    interpreter.question = action // question deve avere gia' salvato index della entry su cui fare operazione
+  } else {
+    interpreter.question = undefined
+  }
   if (action === null) return []
-  const query = await action.parse()
+  const query = action.parse()
   return await query.execute()
 }
 

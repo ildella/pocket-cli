@@ -75,3 +75,11 @@ test('1', async () => {
   expect(query.name).toBe('interactive-action')
   // expect(query).toEqual('interactive-action')
 })
+
+const cli = require('../src/cli/cli')
+
+test('list + index + choose action', async () => {
+  cli.processInput('list bitcoin')
+  cli.processInput('1')
+  cli.processAnswer('2')
+}

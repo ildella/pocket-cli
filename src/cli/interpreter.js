@@ -40,15 +40,25 @@ const commands = {
     parse: pocket.open
   },
   interactive: {
-    name: 'interactive',
-    aliases: ['1', '2', '3', '4'],
+    name: 'interactive-command',
+    aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-    parse: () => {
+    parseCommand: index => {
+      const options = {
+        '1': 'open',
+        '2': 'expand',
+        '3': 'fav',
+        '4': 'archive',
+      }
+      return options[index]
+    },
+    parse: spaceSeparatedInput => {
+      console.log('interactive', spaceSeparatedInput)
       return {
-        name: 'interactive-action',
+        name: 'interactive-query',
+        index: spaceSeparatedInput[0],
         execute: () => {
-          const output = []
-          output.push('please code the action...')
+          const output = ['1. open', '2. expand', '3. fav', '4. archive']
           return output
         }
       }
@@ -64,8 +74,25 @@ const isValidString = string => {
 const interpreter = {
 
   getAction: inputText => {
+
     const validString = isValidString(inputText)
     if (!validString) return null
+
+    if (interpreter.question) {
+      console.log('ANSWER', inputText)
+      console.log(interpreter.question)
+      const index = Number(inputText)
+      const commandName = interpreter.question.command.parseCommand(index) // recuperi il command input text eg: archive, open...
+      const command = commands[commandName]
+      const spaceSeparatedInput = [commandName, index]
+      console.log('chosen answer -> ', commandName, spaceSeparatedInput)
+      return {
+        command: command,
+        input: spaceSeparatedInput,
+        parse: () => { return command.parse(spaceSeparatedInput) }
+      }
+    }
+
     const spaceSeparatedInput = validString.split(' ')
     const potentialCommand = spaceSeparatedInput[0]
     const candidates = Object.values(commands).filter(command => {
@@ -74,13 +101,9 @@ const interpreter = {
       return matches.has(potentialCommand)
     })
     const useDefault = candidates.length == 0
-    // if (isValidCommand) {
-    //   spaceSeparatedInput.shift()
-    // }
     const defaultCommand = 'list'
     const command = useDefault ? commands[defaultCommand] : candidates[0]
     return {
-      // original: isValidCommand ? potentialCommand : undefined,
       command: command,
       input: spaceSeparatedInput,
       parse: () => { return command.parse(spaceSeparatedInput) }
