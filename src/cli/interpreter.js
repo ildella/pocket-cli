@@ -77,7 +77,7 @@ const interpreter = {
       const index = Number(inputText)
       const commandName = interpreter.question.command.parseCommand(index) // recuperi il command input text eg: archive, open...
       const command = commands[commandName]
-      const spaceSeparatedInput = [commandName, index]
+      const spaceSeparatedInput = [index]
       console.log('chosen answer -> ', commandName, spaceSeparatedInput)
       return {
         command: command,
