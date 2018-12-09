@@ -1,7 +1,7 @@
 const readline = require('readline')
 const interpreter = require('./interpreter')
-require('./version')
 require('../pocket/pocket-commands')
+require('./version')
 require('./quit')
 require('./help')
 process.title = 'pocket-cli'
