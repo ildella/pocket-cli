@@ -1,4 +1,5 @@
 const readline = require('readline')
+const {blue} = require('colorette')
 const interpreter = require('./interpreter')
 require('../pocket/pocket-commands')
 require('./version')
@@ -29,7 +30,7 @@ const completer = line => {
   return [hits.length ? hits : completions, line]
 }
 
-const defaultPrompt = 'Pocket> '
+const defaultPrompt = `${blue('Pocket')}> `
 const ui = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
