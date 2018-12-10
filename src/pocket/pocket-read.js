@@ -159,7 +159,6 @@ pocket.modify = async actions => {
 
 pocket.read = async search => {
   const response = await client.retrieve(search)
-  // TOREFACTOR - upstream data parser
   const articles = Object.values(response.data.list)
   const parsedArticles = articles.map(article => {
     const id = article.resolved_id || article.item_id || '<No ID>'
@@ -182,7 +181,7 @@ pocket.read = async search => {
   })
   parsedArticles.sort(orderByDesc('time_added'))
   pocket.articles = parsedArticles //TOFIX: the horror
-  // TOREFACTOR - renderer (solo output)
+  // TOREFACTOR - renderer function to create output
   const output = []
   output.push(blue(bold(pocket.toHumanText())))
   output.push('')

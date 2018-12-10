@@ -38,7 +38,7 @@ const ui = readline.createInterface({
 })
 
 cli.init = () => {
-  console.log(`${'Pocket CLI is running'} - screen has ${process.stdout.columns} columns.`)
+  console.log(`${'Pocket CLI'} - This screen has ${process.stdout.columns} columns.`)
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
@@ -54,6 +54,7 @@ cli.init = () => {
       })
       .catch(err => console.error(err))
       .finally(() => { ui.prompt() })
+    //TODO: refactor this loader should have a function, and be started in the processInput.then()
     for await (const v of asyncGenerator()) {
       if (loading) {
         process.stdout.clearLine()
