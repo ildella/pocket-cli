@@ -8,18 +8,6 @@ process.title = 'pocket-cli'
 
 const cli = {}
 
-cli.processInput = async string => {
-  const action = interpreter.getAction(string)
-  if (action.command.name.startsWith('interactive')) {
-    interpreter.question = action // question deve avere gia' salvato index della entry su cui fare operazione
-  } else {
-    interpreter.question = undefined
-  }
-  if (action === null) return []
-  const query = action.parse()
-  return await query.execute()
-}
-
 const getValue = index => {
   const values = ['\\', '|', '/']
   return new Promise(resolve=>{
@@ -42,14 +30,15 @@ const completer = line => {
   return [hits.length ? hits : completions, line]
 }
 
+const ui = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+  completer: completer,
+  prompt: 'Pocket> '
+})
+
 cli.init = () => {
   console.log(`${'Pocket CLI is running'} - screen has ${process.stdout.columns} columns.`)
-  const ui = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    completer: completer,
-    prompt: 'Pocket>'
-  })
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
@@ -78,6 +67,22 @@ cli.init = () => {
     console.log('\nuser request to close the app...')
     process.exit(0)
   })
+}
+
+const {yellow} = require('colorette')
+
+cli.processInput = async string => {
+  const action = interpreter.getAction(string)
+  if (action.command.name.startsWith('interactive')) {
+    interpreter.question = action
+    ui.setPrompt(yellow('select: '))
+  } else {
+    interpreter.question = undefined
+    ui.setPrompt('Pocket> ')
+  }
+  if (action === null) return []
+  const query = action.parse()
+  return await query.execute()
 }
 
 module.exports = cli
