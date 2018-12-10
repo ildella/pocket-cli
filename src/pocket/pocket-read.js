@@ -1,5 +1,6 @@
 const {execSync} = require('child_process')
-const {DateTime} = require('luxon')
+const {DateTime, Settings} = require('luxon')
+Settings.defaultZoneName = 'utc'
 const client = require('./pocket-http')
 const formatter = require('../content-formatter')
 const {red, blue, bold} = require('colorette')
@@ -40,7 +41,24 @@ const pocket = {}
 const states = ['unread', 'archive']
 const orders = ['newest', 'oldest', 'title', 'site']
 
-pocket.queries = []
+const history = function (name) {
+  const history = {
+    name: name,
+    items: [],
+    push: item => {
+      history.items.push({
+        timestamp: DateTime.local(),
+        search: item
+      })
+    },
+    // get: index => history.items[index].search,
+    last: () => history.items[history.items.length - 1].search
+  }
+  return history
+}
+
+// pocket.queries = []
+pocket.queries = history('queries')
 pocket.articles = []
 pocket.actions = []
 
@@ -81,7 +99,8 @@ pocket.open = indexes => {
 }
 
 pocket.next = () => {
-  const last = pocket.queries[pocket.queries.length - 1].query
+  // const last = pocket.queries[pocket.queries.length - 1].query
+  const last = pocket.queries.last()
   last.offset = last.offset + last.count
   return {
     name: 'pocket-next',
@@ -91,7 +110,7 @@ pocket.next = () => {
 }
 
 pocket.previous = () => {
-  const last = pocket.queries[pocket.queries.length - 1].query
+  const last = pocket.queries.last()
   last.offset = last.offset - last.count
   return {
     name: 'pocket-next',
@@ -141,10 +160,7 @@ pocket.toQuery = (inputs = []) => {
     // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
     since: 0
   }
-  pocket.queries.push({
-    timestamp: DateTime.local(),
-    search: search
-  })
+  pocket.queries.push(search)
   return {
     name: 'pocket-read',
     search: search,
@@ -196,7 +212,7 @@ pocket.read = async search => {
 }
 
 pocket.toHumanText = () => {
-  const last = pocket.queries[pocket.queries.length - 1].search
+  const last = pocket.queries.last()
   const date = DateTime.fromMillis(last.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
   return `Search for "${last.search}" in "${last.state}" documents, order by "${last.sort}" starting ${date}`
 }
