@@ -79,6 +79,14 @@ test('expand', async () => {
   // expect(interpreter.getAction('a 1')).toBe('')
 })
 
+test('print', async () => {
+  interpreter.getAction('list').parse()
+  const action = interpreter.getAction('print')
+  expect(action.command).toBe(commands.print)
+  const query = action.parse()
+  expect(query.name).toBe('pocket-print')
+})
+
 test('archive does not act if the articles list is empty', async () => {
   const action = interpreter.getAction('archive 1')
   expect(action.command).toBe(commands.archive)

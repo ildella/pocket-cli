@@ -16,6 +16,12 @@ const listCommands = {
     description: 'Delete article (permanently)',
     parse: pocket.delete
   },
+  print: {
+    name: 'print',
+    aliases: ['p'],
+    description: 'print last search results',
+    parse: pocket.print
+  },
   next: {
     name: 'next',
     aliases: ['n'],
@@ -40,7 +46,7 @@ const listCommands = {
     description: 'open the URL in the browser',
     parse: pocket.open
   },
-  interactive: { // TODO: should be generated from other listCommands
+  interactive: { // TODO: should be generated from other listCommands (but not print...)
     name: 'interactive-command',
     type: 'interactive', //TODO: change startsWith check to type check
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
