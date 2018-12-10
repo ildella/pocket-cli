@@ -47,7 +47,6 @@ const listCommands = {
       return options[index]
     },
     parse: spaceSeparatedInput => {
-      console.log('interactive', spaceSeparatedInput)
       return {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],
