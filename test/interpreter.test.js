@@ -70,6 +70,7 @@ test('open', async () => {
 })
 
 test('expand', async () => {
+  interpreter.getAction('list').parse()
   const action = interpreter.getAction('e 3')
   expect(action.command).toBe(commands.expand)
   const query = action.parse()
