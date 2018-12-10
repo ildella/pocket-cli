@@ -17,7 +17,7 @@ client.interceptors.response.use(response => {
   } else {
     console.error(red(bold('Network Error')))
   }
-  return {data: {list: []}}
+  return {error: error, source: 'axios interceptor'}
 })
 
 const intersection = arrays => {
@@ -195,7 +195,9 @@ pocket.modify = async actions => {
 
 pocket.read = async search => {
   const response = await client.retrieve(search)
-  const articles = Object.values(response.data.list)
+  // const response = client.retrieve(search)
+  const data = response.data
+  const articles = Object.values(data ? data.list : [])
   const parsedArticles = articles.map(article => {
     const id = article.resolved_id || article.item_id || '<No ID>'
     const authors = Object.values(article.authors || {}).map(author => author.name)

@@ -21,3 +21,14 @@ test('object assign with null and undefined', () => {
   expect(Object.assign({a: 1}, null)).toEqual({a: 1})
   expect(Object.assign({a: 1}, undefined)).toEqual({a: 1})
 })
+
+test('Event Emitter', () => {
+  const EventEmitter = require('events')
+  class MyEmitter extends EventEmitter {}
+
+  const myEmitter = new MyEmitter()
+  myEmitter.on('event', () => {
+    console.log('an event occurred!')
+  })
+  myEmitter.emit('event')
+})
