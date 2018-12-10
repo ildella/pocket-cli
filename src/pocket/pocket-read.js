@@ -9,7 +9,7 @@ const client = axios.create({
   }
 })
 const formatter = require('../content-formatter')
-const {red, blue, bold, yellow} = require('colorette')
+const {red, blue, bold} = require('colorette')
 
 client.interceptors.response.use(response => {
   return response
@@ -181,47 +181,40 @@ pocket.modify = async action => {
 }
 
 pocket.read = async query => {
-  // console.log('pocket search ->', query)
   const response = await client.post('get', query)
   const articles = Object.values(response.data.list)
   const parsedArticles = articles.map(article => {
-    const authors = Object.values(article.authors || {}).map(author => author.name)
     const id = article.resolved_id || article.item_id || '<No ID>'
+    const authors = Object.values(article.authors || {}).map(author => author.name)
     const title = article.resolved_title || id || '<No Title>'
     const url = article.resolved_url || article.given_url || ''
     const shortUrl = url.replace('https://', '').replace('http://', '')
-    return {
+    const isArticle = article.is_article == 1
+    const excerpt = article.excerpt || ''
+    const newFields = {
       id: id,
-      item_id: article.item_id,
+      authors: authors,
       title: title,
-      excerpt: article.excerpt || '',
-      isArticle: article.is_article == 1,
       url: url,
       shortUrl: shortUrl,
-      tags: article.tags,
-      authors: authors,
-      time_added: article.time_added,
-      time_updated: article.time_updated,
-      time_read: article.time_read,
-      time_favorited: article.time_favorited,
-      wordCount: article.word_count || 0
+      isArticle: isArticle,
+      excerpt: excerpt
     }
+    return Object.assign({}, article, newFields)
   })
-  let index = 0
-  const output = []
   parsedArticles.sort(orderByDesc('time_added'))
   pocket.articles = parsedArticles //TOFIX: the horror
+  const output = []
   output.push(blue(bold(pocket.toHumanText())))
   output.push('')
+  let index = 0
   for (const entry of parsedArticles) {
     index++
     output.push(formatter(entry, index))
   }
   output.push(blue(bold('Type "o 1" to open the first result in the browser')))
   output.push(blue(bold('Type "e 1" to expand the first article excerpt')))
-  return {
-    lines: output
-  }
+  return {lines: output}
 }
 
 pocket.toHumanText = () => {

@@ -12,6 +12,6 @@ module.exports = (entry, index) => {
   const excerptOutput = entry.excerpt.substring(0, maxColumns - 15)
   const timeAdded = DateTime.fromMillis(Number(entry.time_added) * 1000).toISODate()
   const contentType = entry.isArticle ? 'Article' : 'Web Page'
-  const details = `(${contentType}, ${entry.wordCount} words)`
+  const details = `(${contentType}, ${entry.word_count} words)`
   return ` ${cyanBright(indexOutput)}.${margin1}${greenBright(titleOutput)} ${yellow(urlOutput)} ${cyan(timeAdded)} ${magenta(details)}\n${margin2}${excerptOutput}\n`
 }
