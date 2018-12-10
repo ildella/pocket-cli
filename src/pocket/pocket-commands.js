@@ -10,6 +10,12 @@ const listCommands = {
     description: 'Archive article / Mark as read',
     parse: pocket.archive
   },
+  delete: {
+    name: 'delete',
+    aliases: ['d'],
+    description: 'Delete article (permanently)',
+    parse: pocket.delete
+  },
   next: {
     name: 'next',
     aliases: ['n'],
@@ -34,7 +40,7 @@ const listCommands = {
     description: 'open the URL in the browser',
     parse: pocket.open
   },
-  interactive: {
+  interactive: { // TODO: should be generated from other listCommands
     name: 'interactive-command',
     type: 'interactive', //TODO: change startsWith check to type check
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
@@ -45,12 +51,13 @@ const listCommands = {
         '2': 'expand',
         '3': 'fav',
         '4': 'archive',
+        '5': 'delete',
       }
       return options[index]
     },
     parse: spaceSeparatedInput => {
       const output = []
-      const commands = ['1. open', '2. expand', '3. fav', '4. archive']
+      const commands = ['1. open', '2. expand', '3. fav', '4. archive', '5. delete']
       return {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],

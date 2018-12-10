@@ -48,17 +48,20 @@ const history = function (name) {
     push: item => {
       history.items.push({
         timestamp: DateTime.local(),
-        search: item
+        item: item
       })
     },
-    // get: index => history.items[index].search,
-    last: () => history.items[history.items.length - 1].search
+    // get: index => history.items[index].item,
+    get: index => history.items[Number(index) - 1].item,
+    last: () => history.items[history.items.length - 1].item,
+    hasIndex: index => history.items.length < index,
+    pushAll: items => history.items = items // the horror
   }
   return history
 }
 
-// pocket.queries = []
 pocket.queries = history('queries')
+// pocket.articles = history('articles')
 pocket.articles = []
 pocket.actions = []
 
@@ -67,9 +70,24 @@ pocket.archive = indexes => {
   return pocket.modifyQuery('archive', index)
 }
 
+pocket.delete = indexes => {
+  const index = indexes[0]
+  return pocket.modifyQuery('delete', index)
+}
+
+pocket.print = () => {
+  return {
+    name: 'pocket-print',
+    execute: () => pocket.articles
+  }
+
+  return pocket.modifyQuery('delete', index)
+}
+
 pocket.expand = indexes => {
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
+  // const selected = pocket.articles.get(index)
   return {
     name: 'pocket-expand',
     indexes: indexes,
@@ -85,6 +103,7 @@ pocket.expand = indexes => {
 pocket.open = indexes => {
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
+  // const selected = pocket.articles.get(index)
   return {
     name: 'pocket-open',
     indexes: indexes,
@@ -120,6 +139,7 @@ pocket.previous = () => {
 }
 
 pocket.modifyQuery = (action, index) => {
+  // if (pocket.articles.hasIndex(index)) return {
   if (pocket.articles.length < index) return {
     name: 'pocket-modify-none',
     action: action,
@@ -197,6 +217,7 @@ pocket.read = async search => {
   })
   parsedArticles.sort(orderByDesc('time_added'))
   pocket.articles = parsedArticles //TOFIX: the horror
+  // pocket.articles.pushAll(parsedArticles)
   // TOREFACTOR - renderer function to create output
   const output = []
   output.push(blue(bold(pocket.toHumanText())))
