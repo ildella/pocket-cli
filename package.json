@@ -20,7 +20,8 @@
   "keywords": [
     "pocket",
     "readitlater",
-    "nodejs"
+    "cli"
+    "interactive"
   ],
   "author": {
     "name": "Daniele Dellafiore",
