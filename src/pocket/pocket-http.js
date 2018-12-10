@@ -1,3 +1,4 @@
+const fs = require('fs').promises
 const axios = require('axios')
 
 const client = axios.create({
@@ -9,19 +10,21 @@ const client = axios.create({
 })
 
 client.retrieve = async search => {
+  const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const query = Object.assign(
     {
       consumer_key: process.env.POCKET,
-      access_token: global.userAccessToken
+      access_token: userAccessToken
     }, search)
   return client.post('get', query)
 }
 
 client.modify = async actions => {
+  const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const query = Object.assign(
     {
       consumer_key: process.env.POCKET,
-      access_token: global.userAccessToken
+      access_token: userAccessToken
     },
     {actions: actions}
   )

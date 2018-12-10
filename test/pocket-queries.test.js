@@ -10,23 +10,23 @@ pocket.client = {
 test('toQuery defaults', async () => {
   const output = pocket.toQuery()
   expect(output.name).toBe('pocket-read')
-  expect(output.query.count).toEqual(8)
-  expect(output.query.detailType).toEqual('complete')
-  expect(output.query.search).toEqual('')
-  // expect(output.query.since).toEqual('')
-  expect(output.query.sort).toEqual('newest')
-  expect(output.query.state).toEqual('all')
+  expect(output.search.count).toEqual(8)
+  expect(output.search.detailType).toEqual('complete')
+  expect(output.search.search).toEqual('')
+  // expect(output.search.since).toEqual('')
+  expect(output.search.sort).toEqual('newest')
+  expect(output.search.state).toEqual('all')
 })
 
 test('search params', async () => {
   const output = pocket.toQuery(['bitcoin', 'block'])
-  expect(output.query.search).toEqual('bitcoin block')
+  expect(output.search.search).toEqual('bitcoin block')
 })
 
 test('reserverd - unread', async () => {
   const output = pocket.toQuery(['unread', 'nodejs'])
-  expect(output.query.state).toEqual('unread')
-  expect(output.query.search).toEqual('nodejs')
+  expect(output.search.state).toEqual('unread')
+  expect(output.search.search).toEqual('nodejs')
 })
 
 test('json query to human readable text', async () => {

@@ -154,7 +154,7 @@ pocket.toQuery = (inputs = []) => {
 
 pocket.modify = async actions => {
   await client.modify(actions)
-  return {lines: []}
+  return {lines: [`modifications applied: ${actions[0].action}`]}
 }
 
 pocket.read = async search => {
