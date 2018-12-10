@@ -15,12 +15,11 @@ const interpreter = {
   },
 
   getAction: inputText => {
-
     if (interpreter.question) {
-      const index = Number(inputText ? inputText : '1')
-      const commandName = interpreter.question.command.parseCommand(index) // recuperi il command input text eg: archive, open...
+      const answerIndex = Number(inputText ? inputText : '1')
+      const commandName = interpreter.question.command.parseCommand(answerIndex) // recuperi il command input text eg: archive, open...
       const command = commands[commandName]
-      const spaceSeparatedInput = [index]
+      const spaceSeparatedInput = [interpreter.question.input]
       const action = {
         command: command,
         input: spaceSeparatedInput,
@@ -46,7 +45,8 @@ const interpreter = {
     })
     const useDefault = candidates.length == 0
     const command = useDefault ? commands[defaultCommand] : candidates[0]
-    if (!useDefault) {
+    const isInteractive = command.name.startsWith('interactive')
+    if (!useDefault && !isInteractive) {
       spaceSeparatedInput.shift()
     }
     Object.assign(commands, command.submenu)

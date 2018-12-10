@@ -21,10 +21,10 @@ test('pochet oauth', async () => {
   expect(response.data).to.contain('state=')
   const code = response.data.split('&')[0].split('=')[1]
   const state = response.data.split('&')[1].split('=')[1]
-  console.log(code, 'the request token to be associated to user session')
+  // console.log(code, 'the request token to be associated to user session')
   assert.strict.equal(state, 'ok')
   // expect(state).to.be('ok')
-  console.log(`https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${redirectURI}`)
+  // console.log(`https://getpocket.com/auth/authorize?request_token=${code}&redirect_uri=${redirectURI}`)
   // expect(response.data).to.have.property('b').but.not.own.property('b');
 })
 

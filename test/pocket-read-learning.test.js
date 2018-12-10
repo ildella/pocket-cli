@@ -66,16 +66,13 @@ test('search for keywords in URL or Title', async () => {
     sort: 'oldest',
     state: 'all',
     search: query,
-    // since: DateTime.fromISO('2018-11-10').ts / 1000
   })
-  console.log(response.headers)
+  // console.log(response.headers)
   const articles = Object.values(response.data.list)
   //TODO: resolved o altro url? cmq parsa da http:// fino al successivo / come "domain" o "website"
   expect(articles).to.have.lengthOf(8)
   const parsed = articles.map(article => {
     const authors = Object.values(article.authors || {}).map(author => author.name)
-    // expect(article.given_title.includes(query)).toBeTruthy()
-    // expect(article.given_title.toLowerCase()).to.include(query)
     return {
       title: article.given_title,
       isArticle: article.is_article,
@@ -84,7 +81,6 @@ test('search for keywords in URL or Title', async () => {
       authors: authors
     }
   })
-  console.log(articles.map(article => article.given_title))
-  console.log(articles.map(article => article.resolved_title))
-  // console.log(parsed)
+  // console.log(articles.map(article => article.given_title))
+  // console.log(articles.map(article => article.resolved_title))
 })
