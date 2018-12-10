@@ -73,6 +73,7 @@ const {yellow} = require('colorette')
 
 cli.processInput = async string => {
   const action = interpreter.getAction(string)
+  if (action === null) return []
   if (action.command.name.startsWith('interactive')) {
     interpreter.question = action
     ui.setPrompt(yellow('select: '))
@@ -80,7 +81,6 @@ cli.processInput = async string => {
     interpreter.question = undefined
     ui.setPrompt('Pocket> ')
   }
-  if (action === null) return []
   const query = action.parse()
   return await query.execute()
 }
