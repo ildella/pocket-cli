@@ -1,5 +1,6 @@
 const fs = require('fs').promises
 const axios = require('axios')
+const {red, bold} = require('colorette')
 
 const client = axios.create({
   baseURL: 'https://getpocket.com/v3',
@@ -7,6 +8,21 @@ const client = axios.create({
     'Content-Type': 'application/json; charset=UTF-8',
     'X-Accept': 'application/json'
   }
+})
+
+client.interceptors.response.use(response => {
+  return response
+}, error => {
+  const response = error.response
+  if (response) {
+    const config = response.config
+    const message = `${response.status} ${config.method} ${config.url}`
+    console.error(red(bold(message))) //TODO use emit for this kind of low level errors
+    console.error(config)
+  } else {
+    console.error(red(bold('Network Error')))
+  }
+  return {error: error, source: 'axios interceptor'}
 })
 
 client.retrieve = async search => {

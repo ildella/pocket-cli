@@ -3,22 +3,7 @@ const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 const client = require('./pocket-http')
 const formatter = require('../content-formatter')
-const {red, blue, bold} = require('colorette')
-
-client.interceptors.response.use(response => {
-  return response
-}, error => {
-  const response = error.response
-  if (response) {
-    const config = response.config
-    const message = `${response.status} ${config.method} ${config.url}`
-    console.error(red(bold(message))) //TODO use emit for this kind of low level errors
-    console.error(config)
-  } else {
-    console.error(red(bold('Network Error')))
-  }
-  return {error: error, source: 'axios interceptor'}
-})
+const {blue, bold} = require('colorette')
 
 const intersection = arrays => {
   return arrays.reduce((a, b) => a.filter(c => b.includes(c)))
@@ -61,7 +46,6 @@ const history = function (name) {
 }
 
 pocket.queries = history('queries')
-// pocket.articles = history('articles')
 pocket.articles = []
 pocket.actions = []
 
