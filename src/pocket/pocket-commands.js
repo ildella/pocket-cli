@@ -1,6 +1,7 @@
 const {commands} = require('../cli/interpreter')
 const pocketAuth = require('./pocket-auth')
 const pocket = require('./pocket-read')
+const {green, yellow} = require('colorette')
 
 const listCommands = {
   archive: {
@@ -35,6 +36,7 @@ const listCommands = {
   },
   interactive: {
     name: 'interactive-command',
+    type: 'interactive', //TODO: change startsWith check to type check
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
     parseCommand: index => {
@@ -47,7 +49,6 @@ const listCommands = {
       return options[index]
     },
     parse: spaceSeparatedInput => {
-      console.log('interactive created', spaceSeparatedInput)
       const output = []
       const commands = ['1. open', '2. expand', '3. fav', '4. archive']
       return {
@@ -56,7 +57,7 @@ const listCommands = {
         execute: () => {
           return {
             lines: output.concat(commands),
-            prompt: 'select: '
+            prompt: yellow('select: ')
           }
         }
       }
@@ -69,7 +70,7 @@ const parseAuth = () => {
     name: 'pocket-auth',
     execute: async () => {
       await pocketAuth.start()
-      return {lines: ['']}
+      return {lines: [green('User autheticated succesfully')]}
     }
   }
 }
