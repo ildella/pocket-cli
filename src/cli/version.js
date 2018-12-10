@@ -8,7 +8,7 @@ output.push(`${pjson.name} ${pjson.version} - ${pjson.description}`)
 const parse = params => {
   return {
     name: 'version',
-    execute: () => { return output }
+    execute: () => { return {lines: output} }
   }
 }
 

@@ -4,7 +4,6 @@ require('../pocket/pocket-commands')
 require('./version')
 require('./quit')
 require('./help')
-process.title = 'pocket-cli'
 
 const cli = {}
 
@@ -30,11 +29,12 @@ const completer = line => {
   return [hits.length ? hits : completions, line]
 }
 
+const defaultPrompt = 'Pocket> '
 const ui = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
   completer: completer,
-  prompt: 'Pocket> '
+  prompt: defaultPrompt
 })
 
 cli.init = () => {
@@ -44,12 +44,13 @@ cli.init = () => {
     // ui.completer(string)
     let loading = true
     cli.processInput(string)
-      .then(lines => {
+      .then(response => {
         loading = false
         process.stdout.cursorTo(0)
-        for (const line of lines) {
+        for (const line of response.lines) {
           console.log(line)
         }
+        ui.setPrompt(response.prompt ? response.prompt : defaultPrompt)
       })
       .catch(err => console.error(err))
       .finally(() => { ui.prompt() })
@@ -69,17 +70,15 @@ cli.init = () => {
   })
 }
 
-const {yellow} = require('colorette')
-
 cli.processInput = async string => {
   const action = interpreter.getAction(string)
   if (action === null) return []
   if (action.command.name.startsWith('interactive')) {
     interpreter.question = action
-    ui.setPrompt(yellow('select: '))
+    // ui.setPrompt(yellow('select: '))
   } else {
     interpreter.question = undefined
-    ui.setPrompt('Pocket> ')
+    // ui.setPrompt('Pocket> ')
   }
   const query = action.parse()
   return await query.execute()

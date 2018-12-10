@@ -66,7 +66,7 @@ pocket.expand = indexes => {
     execute: () => {
       const output = []
       output.push(blue(selected.excerpt))
-      return output
+      return {lines: output}
     }
   }
 }
@@ -82,7 +82,7 @@ pocket.open = indexes => {
       const exec = execSync(`xdg-open "${selected.url}"`)
       const output = []
       output.push(blue(selected.url))
-      return output
+      return {lines: output}
     }
   }
 }
@@ -175,7 +175,9 @@ pocket.modify = async action => {
   const output = []
   output.push('modify executed')
   output.push(action)
-  return output
+  return {
+    lines: output
+  }
 }
 
 pocket.read = async query => {
@@ -217,7 +219,9 @@ pocket.read = async query => {
   }
   output.push(blue(bold('Type "o 1" to open the first result in the browser')))
   output.push(blue(bold('Type "e 1" to expand the first article excerpt')))
-  return output
+  return {
+    lines: output
+  }
 }
 
 pocket.toHumanText = () => {

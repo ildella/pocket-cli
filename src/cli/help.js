@@ -6,7 +6,7 @@ const output = []
 const parse = params => {
   return {
     name: 'help',
-    execute: () => { return output }
+    execute: () => { return {lines: output} }
   }
 }
 

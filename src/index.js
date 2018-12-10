@@ -1,3 +1,4 @@
+process.title = 'pocket-cli'
 require('dotenv').config()
 const fs = require('fs').promises
 const cli = require('./cli/cli')

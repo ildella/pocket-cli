@@ -54,7 +54,10 @@ const listCommands = {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],
         execute: () => {
-          return output.concat(commands)
+          return {
+            lines: output.concat(commands),
+            prompt: 'select: '
+          }
         }
       }
     }
@@ -66,7 +69,7 @@ const parseAuth = () => {
     name: 'pocket-auth',
     execute: async () => {
       await pocketAuth.start()
-      return ['']
+      return {lines: ['']}
     }
   }
 }
