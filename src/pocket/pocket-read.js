@@ -78,10 +78,8 @@ pocket.delete = indexes => {
 pocket.print = () => {
   return {
     name: 'pocket-print',
-    execute: () => pocket.articles
+    execute: pocket.render
   }
-
-  return pocket.modifyQuery('delete', index)
 }
 
 pocket.expand = indexes => {
@@ -195,7 +193,6 @@ pocket.modify = async actions => {
 
 pocket.read = async search => {
   const response = await client.retrieve(search)
-  // const response = client.retrieve(search)
   const data = response.data
   const articles = Object.values(data ? data.list : [])
   const parsedArticles = articles.map(article => {
@@ -219,13 +216,15 @@ pocket.read = async search => {
   })
   parsedArticles.sort(orderByDesc('time_added'))
   pocket.articles = parsedArticles //TOFIX: the horror
-  // pocket.articles.pushAll(parsedArticles)
-  // TOREFACTOR - renderer function to create output
+  return pocket.render()
+}
+
+pocket.render = () => {
   const output = []
   output.push(blue(bold(pocket.toHumanText())))
   output.push('')
   let index = 0
-  for (const entry of parsedArticles) {
+  for (const entry of pocket.articles) {
     index++
     output.push(formatter(entry, index))
   }
