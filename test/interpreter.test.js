@@ -88,16 +88,19 @@ test('archive does not act if the articles list is empty', async () => {
 })
 
 test('interactive', async () => {
+  interpreter.getAction('list').parse()
   const action = interpreter.getAction('1')
+  expect(interpreter.question).toBe(action)
   expect(action.command).toBe(commands.interactive)
   expect(action.input).toEqual([])
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
   const output = query.execute()
-  expect(output).toEqual(['1. open', '2. expand', '3. fav', '4. archive'])
+  expect(output.lines).toEqual(['1. open', '2. expand', '3. fav', '4. archive'])
 
   const answerAction = interpreter.getAction('2')
   expect(answerAction.command).toBe(commands.expand)
+  expect(interpreter.question).toBeUndefined()
   const answerQuery = answerAction.parse()
   expect(answerQuery.name).toBe('pocket-expand')
   expect(answerQuery.indexes).toEqual(['1'])

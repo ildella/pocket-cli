@@ -43,7 +43,7 @@ cli.init = () => {
   ui.on('line', async string => {
     // ui.completer(string)
     let loading = true
-    cli.processInput(string)
+    interpreter.processInput(string)
       .then(response => {
         loading = false
         process.stdout.cursorTo(0)
@@ -68,20 +68,6 @@ cli.init = () => {
     console.log('\nuser request to close the app...')
     process.exit(0)
   })
-}
-
-cli.processInput = async string => {
-  const action = interpreter.getAction(string)
-  if (action === null) return []
-  if (action.command.name.startsWith('interactive')) {
-    interpreter.question = action
-    // ui.setPrompt(yellow('select: '))
-  } else {
-    interpreter.question = undefined
-    // ui.setPrompt('Pocket> ')
-  }
-  const query = action.parse()
-  return await query.execute()
 }
 
 module.exports = cli

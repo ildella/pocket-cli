@@ -7,6 +7,13 @@ const isValidString = string => {
 const defaultCommand = 'list'
 const interpreter = {
 
+  processInput: async string => {
+    const action = interpreter.getAction(string)
+    if (action === null) return []
+    const query = action.parse()
+    return await query.execute()
+  },
+
   getAction: inputText => {
 
     if (interpreter.question) {
@@ -14,11 +21,17 @@ const interpreter = {
       const commandName = interpreter.question.command.parseCommand(index) // recuperi il command input text eg: archive, open...
       const command = commands[commandName]
       const spaceSeparatedInput = [index]
-      return {
+      const action = {
         command: command,
         input: spaceSeparatedInput,
         parse: () => { return command.parse(spaceSeparatedInput) }
       }
+      if (action.command.name.startsWith('interactive')) {
+        interpreter.question = action
+      } else {
+        interpreter.question = undefined
+      }
+      return action
     }
 
     const validString = isValidString(inputText)
@@ -37,11 +50,17 @@ const interpreter = {
       spaceSeparatedInput.shift()
     }
     Object.assign(commands, command.submenu)
-    return {
+    const action = {
       command: command,
       input: spaceSeparatedInput,
       parse: () => { return command.parse(spaceSeparatedInput) }
     }
+    if (command.name.startsWith('interactive')) {
+      interpreter.question = action
+    } else {
+      interpreter.question = undefined
+    }
+    return action
   }
 }
 
