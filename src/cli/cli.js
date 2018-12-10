@@ -9,7 +9,7 @@ process.title = 'pocket-cli'
 const cli = {}
 
 const getValue = index => {
-  const values = ['\\', '|', '/']
+  const values = ['\\', '|', '/', '|']
   return new Promise(resolve=>{
     setTimeout(()=>resolve(values[index]), 250)
   })
@@ -19,7 +19,7 @@ const asyncGenerator = async function* () {
   let index = 0
   while(true) {
     index++
-    const value = await getValue(index % 3)
+    const value = await getValue(index % 4)
     yield value
   }
 }

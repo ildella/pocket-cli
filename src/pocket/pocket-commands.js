@@ -1,4 +1,4 @@
-const commands = require('../cli/interpreter').commands
+const {commands} = require('../cli/interpreter')
 const pocketAuth = require('./pocket-auth')
 const pocket = require('./pocket-read')
 
