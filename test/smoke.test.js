@@ -1,5 +1,10 @@
 require('dotenv').config()
-const pocket = require('../src/pocket/pocket-read')
+const interpreter = require('../src/cli/interpreter')
+require('../src/pocket/pocket-commands')
+require('../src/cli/version')
+require('../src/cli/quit')
+require('../src/cli/help')
+// const pocket = require('../src/pocket/pocket-read')
 const fs = require('fs').promises
 
 // const app = require('../src')
@@ -9,17 +14,15 @@ beforeAll(async () => {
 })
 
 test('read from pocket API', async () => {
-  // const output = await pocket.read()
-  // expect(output).toHaveLength(5)
+  const output = await interpreter.processInput('bitcoin')
+  expect(output.lines).toHaveLength(12)
 })
 
 test('modify with pocket API - archive/readd', async () => {
-  // const query = pocket.toQuery(['bitcoin',  'unread'])
-  // const output = await query.execute()
-  // expect(output).toHaveLength(12)
-  // // expect(output[2]).toBe('')
-  // const modified = pocket.modifyQuery('archive', 2).execute()
-  // expect(await modified).toBe()
+  const list = await interpreter.processInput('bitcoin')
+  console.log(list.lines)
+  const output = await interpreter.processInput('a 2')
+  expect(output.lines).toEqual(['modify executed', 'archive'])
 })
 
 test('start app', async () => {
