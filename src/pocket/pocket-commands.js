@@ -47,11 +47,14 @@ const listCommands = {
       return options[index]
     },
     parse: spaceSeparatedInput => {
+      console.log('interactive created', spaceSeparatedInput)
+      const output = []
+      const commands = ['1. open', '2. expand', '3. fav', '4. archive']
       return {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],
         execute: () => {
-          return ['1. open', '2. expand', '3. fav', '4. archive']
+          return output.concat(commands)
         }
       }
     }
