@@ -1,19 +1,12 @@
 'use strict'
 const consumerKey = process.env.POCKET || new Error('Pocket consumer_key undefined')
-const axios = require('axios')
 const {execSync} = require('child_process')
+
 const server = require('./pocket-auth-server')
-const session = {}
+const client = require('./pocket-http')
 
 const redirectURI = 'http://localhost:3344/oauth/pocket/callback'
-
-const client = axios.create({
-  baseURL: 'https://getpocket.com/v3',
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-    'X-Accept': 'application/json'
-  }
-})
+const session = {}
 
 const start = async () => {
   await server(session)
@@ -25,10 +18,10 @@ const start = async () => {
   // console.log(body)
   const response = await client.post('/oauth/request', body)
   const requestToken = response.data.code
-  // const state = response.data.state
+  console.log('got request token:', requestToken)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
   session.requestToken = requestToken
-  // console.log(authorizeUrl)
+  console.log('open auth URL to the user ->', authorizeUrl)
   const exec = execSync(`xdg-open "${authorizeUrl}"`)
 }
 

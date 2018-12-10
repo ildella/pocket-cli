@@ -2,14 +2,9 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 app.use(require('cookie-parser')())
-const axios = require('axios')
-const client = axios.create({
-  baseURL: 'https://getpocket.com/v3',
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-    'X-Accept': 'application/json'
-  }
-})
+
+const client = require('./pocket-http')
+
 const port = 3344
 
 app.get('/', (req, res) => {
@@ -23,9 +18,8 @@ const pocketServer = async session => {
       consumer_key: process.env.POCKET,
       code: session.requestToken
     })
-    // console.log(response.data)
-    res.send(`Got the access token for ${response.data.username} -> ${response.data.access_token}`)
     fs.writeFileSync('pocket_access_token', `${response.data.access_token}\n`)
+    res.send(`Stored access token for ${response.data.username}. You can close this tab.`)
   })
 
   const http = require('http')
@@ -41,7 +35,7 @@ const pocketServer = async session => {
     })
   })
   await server.listen(port)
-  // console.log(`Auth Server started -> http://localhost:${port}`)
+  console.log(`Auth Server started -> http://localhost:${port}`)
 }
 
 // console.log(pocketServer[Symbol.toStringTag])

@@ -1,13 +1,6 @@
 const {execSync} = require('child_process')
 const {DateTime} = require('luxon')
-const axios = require('axios')
-const client = axios.create({
-  baseURL: 'https://getpocket.com/v3',
-  headers: {
-    'Content-Type': 'application/json; charset=UTF-8',
-    'X-Accept': 'application/json'
-  }
-})
+const client = require('./pocket-http')
 const formatter = require('../content-formatter')
 const {red, blue, bold} = require('colorette')
 
@@ -18,7 +11,7 @@ client.interceptors.response.use(response => {
   if (response) {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
-    console.error(red(bold(message)))
+    console.error(red(bold(message))) //TODO use emit for this kind of low level errors
     console.error(config)
   } else {
     console.error(red(bold('Network Error')))
@@ -109,31 +102,26 @@ pocket.previous = () => {
 
 pocket.modifyQuery = (action, index) => {
   if (pocket.articles.length < index) return {
-    name: 'pocket-modify',
-    action: action, // TODO: hash the tokens
+    name: 'pocket-modify-none',
+    action: action,
     execute: () => { return [`There is no article with index ${index}`] }
   }
   const item_id = pocket.articles[index - 1].item_id
-  const defaultQuery = {
-    consumer_key: process.env.POCKET,
-    access_token: global.userAccessToken,
-    actions: [
-      {
-        'action': action,
-        'item_id': item_id,
-        'time': DateTime.local().millisecond * 1000
-      }
-    ]
-  }
-  const query = defaultQuery
+  const actions = [
+    {
+      'action': action,
+      'item_id': item_id,
+      'time': DateTime.local().millisecond * 1000
+    }
+  ]
   pocket.actions.push({
     timestamp: DateTime.local(),
-    action: query
+    actions: actions
   })
   return {
     name: 'pocket-modify',
-    action: action, // TODO: hash the tokens
-    execute: () => { return pocket.modify(action) }
+    actions: actions,
+    execute: () => { return pocket.modify(actions) }
   }
 }
 
@@ -168,13 +156,11 @@ pocket.toQuery = (inputs = []) => {
   }
 }
 
-pocket.modify = async action => {
-  console.log(action)
-  const response = await client.post('/send', action)
-  console.log(response)
+pocket.modify = async actions => {
+  console.log(actions)
+  const response = await client.modify(actions)
+  // console.log(response)
   const output = []
-  output.push('modify executed')
-  output.push(action)
   return {
     lines: output
   }
