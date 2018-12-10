@@ -15,13 +15,12 @@ const start = async () => {
     redirect_uri: `${redirectURI}`,
     state: 'ok'
   }
-  // console.log(body)
   const response = await client.post('/oauth/request', body)
   const requestToken = response.data.code
-  console.log('got request token:', requestToken)
+  // console.log('got request token:', requestToken)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
   session.requestToken = requestToken
-  console.log('open auth URL to the user ->', authorizeUrl)
+  // console.log('open auth URL to the user ->', authorizeUrl)
   const exec = execSync(`xdg-open "${authorizeUrl}"`)
 }
 

@@ -8,17 +8,23 @@ const client = axios.create({
   }
 })
 
-client.retrieve = async query => {
+client.retrieve = async search => {
+  const query = Object.assign(
+    {
+      consumer_key: process.env.POCKET,
+      access_token: global.userAccessToken
+    }, search)
   return client.post('get', query)
 }
 
 client.modify = async actions => {
   const query = Object.assign(
-    {actions: actions},
     {
       consumer_key: process.env.POCKET,
       access_token: global.userAccessToken
-    })
+    },
+    {actions: actions}
+  )
   return client.post('/send', query)
 }
 

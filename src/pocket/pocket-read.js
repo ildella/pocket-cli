@@ -85,7 +85,7 @@ pocket.next = () => {
   last.offset = last.offset + last.count
   return {
     name: 'pocket-next',
-    query: last, // TODO: hash the tokens
+    query: last,
     execute: () => { return pocket.read(last) }
   }
 }
@@ -95,7 +95,7 @@ pocket.previous = () => {
   last.offset = last.offset - last.count
   return {
     name: 'pocket-next',
-    query: last, // TODO: hash the tokens
+    query: last,
     execute: () => { return pocket.read(last) }
   }
 }
@@ -126,15 +126,12 @@ pocket.modifyQuery = (action, index) => {
 }
 
 pocket.toQuery = (inputs = []) => {
-  // const userAccessToken = (await fs.readFile('pocket_access_token')).toString()
   const reservedState = intersection([states, inputs])
   const reservedOrder = intersection([orders, inputs])
   const state = reservedState.length > 0 ? reservedState[0] : 'all'
   const order = reservedOrder.length > 0 ? reservedOrder[0] : 'newest'
   const params = reverseIntersection([inputs, states, orders])
-  const defaultQuery = {
-    consumer_key: process.env.POCKET,
-    access_token: global.userAccessToken,
+  const search = {
     count: 8,
     offset: 0,
     detailType: 'complete',
@@ -144,31 +141,24 @@ pocket.toQuery = (inputs = []) => {
     // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
     since: 0
   }
-  const query = defaultQuery
   pocket.queries.push({
     timestamp: DateTime.local(),
-    query: query
+    search: search
   })
   return {
     name: 'pocket-read',
-    query: query, // TODO: hash the tokens
-    execute: () => { return pocket.read(query) }
+    search: search,
+    execute: () => { return pocket.read(search) }
   }
 }
 
 pocket.modify = async actions => {
-  console.log(actions)
-  const response = await client.modify(actions)
-  // console.log(response)
-  const output = []
-  return {
-    lines: output
-  }
+  await client.modify(actions)
+  return {lines: []}
 }
 
-pocket.read = async query => {
-  // TOREFACTOR - ask the driver or the query
-  const response = await client.post('get', query)
+pocket.read = async search => {
+  const response = await client.retrieve(search)
   // TOREFACTOR - upstream data parser
   const articles = Object.values(response.data.list)
   const parsedArticles = articles.map(article => {
@@ -207,7 +197,7 @@ pocket.read = async query => {
 }
 
 pocket.toHumanText = () => {
-  const last = pocket.queries[pocket.queries.length - 1].query
+  const last = pocket.queries[pocket.queries.length - 1].search
   const date = DateTime.fromMillis(last.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
   return `Search for "${last.search}" in "${last.state}" documents, order by "${last.sort}" starting ${date}`
 }
