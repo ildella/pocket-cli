@@ -181,7 +181,9 @@ pocket.modify = async action => {
 }
 
 pocket.read = async query => {
+  // TOREFACTOR - ask the driver or the query
   const response = await client.post('get', query)
+  // TOREFACTOR - upstream data parser
   const articles = Object.values(response.data.list)
   const parsedArticles = articles.map(article => {
     const id = article.resolved_id || article.item_id || '<No ID>'
@@ -204,6 +206,7 @@ pocket.read = async query => {
   })
   parsedArticles.sort(orderByDesc('time_added'))
   pocket.articles = parsedArticles //TOFIX: the horror
+  // TOREFACTOR - renderer (solo output)
   const output = []
   output.push(blue(bold(pocket.toHumanText())))
   output.push('')

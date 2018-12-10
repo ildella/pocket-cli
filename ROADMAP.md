@@ -1,5 +1,12 @@
 # Roadmap
 
+## 9 Dec
+
+* interactive command works, with major refactoring in cli and interpreter
+* lots of test for interpreter + smoke read/modify
+* subcommands prompt menu for interpreter: isolate 1st level (list, help...) to 2nd level (open, next...)
+* 
+
 ## 7 Dec
 
 * "archive" action. 
