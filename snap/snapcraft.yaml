@@ -1,0 +1,26 @@
+name: pocket-cli
+version: git
+# notes: open source https://npmjs.com/package/pocket-cli
+summary: Pocket CLI - Unofficial client for https://getpocket.com
+description: >
+  Start:-
+    $ pocket-cli
+  List all 
+    > list
+  Search for keyword
+    > list something
+    > something
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+parts:
+  pocket-cli:
+    plugin: nodejs
+    source: .
+    node-engine: 11.4.0
+
+
+apps:
+  pocket-cli:
+    command: ./bin/pocket-cli
