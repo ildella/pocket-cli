@@ -1,8 +1,15 @@
 # Roadmap
 
+## 11 Dec
+
+* Yesterday eve started refactoring the auth so that consumer key is added by a proxy server. Worked offline. 
+* Complete auth proxy server, in prod on Webtask
+* Bug: search before auth hangs the console. Need to create a nice setup
+
+
 ## 10-onward Dec
 
-bugs: next/prev broken, need test
+DONE bugs: next/prev broken, need test
 
 Need to add a serious log, and let low-level components emit errors that will be logged accordingly. Log will go to file in prod mode, to stdout in dev mode. Need color. Is there a logger that provides a cli to see logs with colors, navigate, search etc...?
 
@@ -10,7 +17,7 @@ Refactor interpreter: lots of common code, complexity is at 12. Now is more test
 
 Implement all missing actions: delete, fav, tag, readd
 Implement search by date in a smart way (nlp? bert? maybe the change to try...)
-Implement print (last list...) and copy url (in the cli)
+DONE - Implement print (last list...) and copy url (in the cli)
 
 Missing features: 
   Collection: a set of articles to be shared with someone, like Photos album, mabye always in sync etc...
