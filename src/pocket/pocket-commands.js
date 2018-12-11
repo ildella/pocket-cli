@@ -48,7 +48,7 @@ const listCommands = {
   },
   interactive: { // TODO: should be generated from other listCommands (but not print...)
     name: 'interactive-command',
-    type: 'interactive', //TODO: change startsWith check to type check
+    type: 'interactive', //TODO: change name startsWith check to type equality check
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
     parseCommand: index => {

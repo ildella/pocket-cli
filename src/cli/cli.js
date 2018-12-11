@@ -55,7 +55,7 @@ cli.init = () => {
       })
       .catch(err => console.error(err))
       .finally(() => { ui.prompt() })
-    //TODO: refactor this loader should have a function, and be started in the processInput.then()
+    //TODO: this code should go to a function, and probably should be started in the processInput.then()
     for await (const v of asyncGenerator()) {
       if (loading) {
         process.stdout.clearLine()

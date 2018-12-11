@@ -1,4 +1,3 @@
-// require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
 require('../src/cli/help')
@@ -13,7 +12,6 @@ test('undefined', () => {
 test('list with search parameters', async () => {
   const action = interpreter.getAction('list bitcoin yesterday')
   expect(action.command).toBe(commands.list)
-  // expect(action.input).toEqual(['list', 'bitcoin', 'yesterday'])
   expect(action.input).toEqual(['bitcoin', 'yesterday'])
 })
 
@@ -27,14 +25,9 @@ test('aliases and reserved words', async () => {
   const action = interpreter.getAction('search nodejs unread')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs', 'unread'])
-  // expect(action.input).toEqual(['search', 'nodejs', 'unread'])
   const query = await action.parse()
   expect(query.name).toEqual('pocket-read')
   expect(query.execute).toBeDefined()
-  // const result = await query.execute()
-  // expect(result.length).toEqual(10)
-  // this is the array of formatted lines of text, ready to be printed
-  // TODO: integration test for this
 })
 
 test('quit', async () => {
@@ -57,7 +50,6 @@ test('archive', async () => {
   expect(interpreter.getAction('archive 1').command).toBe(commands.archive)
   expect(interpreter.getAction('a 1').command).toBe(commands.archive)
   expect(interpreter.getAction('aa 1').command).toBe(commands.list)
-  // expect(interpreter.getAction('a 1')).toBe('')
 })
 
 test('open', async () => {
@@ -66,7 +58,6 @@ test('open', async () => {
   const query = action.parse()
   expect(query.name).toBe('pocket-open')
   expect(query.indexes).toEqual(['1'])
-  // expect(interpreter.getAction('a 1')).toBe('')
 })
 
 test('expand', async () => {
@@ -76,7 +67,6 @@ test('expand', async () => {
   const query = action.parse()
   expect(query.name).toBe('pocket-expand')
   expect(query.indexes).toEqual(['3'])
-  // expect(interpreter.getAction('a 1')).toBe('')
 })
 
 test('print', async () => {
@@ -98,12 +88,11 @@ test('archive does not act if the articles list is empty', async () => {
 
 test('interactive', async () => {
   interpreter.getAction('list').parse()
-  
+
   const action = interpreter.getAction('1')
   expect(interpreter.question).toBe(action)
   expect(action.command).toBe(commands.interactive)
   expect(action.input).toEqual(['1'])
-  // expect(action.userInput).toEqual('1')
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
   expect(query.index).toBe('1')
@@ -112,17 +101,8 @@ test('interactive', async () => {
 
   const answerAction = interpreter.getAction('2')
   expect(answerAction.command).toBe(commands.expand)
-  // expect(answerAction.input).toBe()
   expect(interpreter.question).toBeUndefined()
   const answerQuery = answerAction.parse()
   expect(answerQuery.name).toBe('pocket-expand')
   expect(answerQuery.index).toEqual(['1'])
 })
-
-// const cli = require('../src/cli/cli')
-
-// test('list + index + choose action', async () => {
-//   cli.processInput('list bitcoin')
-//   cli.processInput('1')
-//   cli.processAnswer('2')
-// })
