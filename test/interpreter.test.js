@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
 require('../src/cli/help')

@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 const pocket = require('../src/pocket/pocket-read')
 
 pocket.client = {
