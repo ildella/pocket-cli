@@ -1,4 +1,4 @@
-# (Unofficial) Pocket from Command Line
+# Pocket CLI (Unofficial, https://getpocket.com)
 
 <p align="center">
     <a href="https://badge.fury.io/js/pocket-cli"><img src="https://badge.fury.io/js/pocket-cli.svg" alt="npm package"></a>
