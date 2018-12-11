@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('hi')
 })
 
-const pocketServer = async session => {
+const pocketServer = session => {
   app.get('/oauth/pocket/callback', async (req, res) => {
     // console.log(`Pocket has called back. Now we authorize the requestToken ${session.requestToken}`)
     const response = await client.post('/oauth/authorize', {
@@ -34,7 +34,7 @@ const pocketServer = async session => {
       console.log('Server closed with no errors. Shutting down connections')
     })
   })
-  await server.listen(port)
+  server.listen(port)
   console.log(`Auth Server started -> http://localhost:${port}`)
 }
 

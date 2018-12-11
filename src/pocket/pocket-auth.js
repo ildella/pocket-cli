@@ -9,7 +9,7 @@ const redirectURI = 'http://localhost:3344/oauth/pocket/callback'
 const session = {}
 
 const start = async () => {
-  await server(session)
+  server(session)
   const body = {
     consumer_key: consumerKey,
     redirect_uri: `${redirectURI}`,
