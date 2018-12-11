@@ -1,11 +1,12 @@
 {
-  "name": "pocket-server",
-  "version": "0.1.0",
   "engines": {
     "node": "8"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "wt serve pocket-proxy-server.js",
+    "create": "wt create pocket-proxy-server.js -b --secrets-file .authproxy.env",
+    "update": "wt update pocket-server pocket-proxy-server.js -b",
+    "update:watch": "wt update pocket-server pocket-proxy-server.js -b -w"
   },
   "dependencies": {
     "axios": "0.18.0",
