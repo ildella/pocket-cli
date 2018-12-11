@@ -34,7 +34,6 @@
     "luxon": "1.8.2"
   },
   "devDependencies": {
-    "audit-badge": "1.0.0",
     "chai": "4.2.0",
     "dotenv": "^6.2.0",
     "eslint": "5.10.0",
