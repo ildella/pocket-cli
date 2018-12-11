@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.sendStatus(200)
+  res.json({name: 'pocket-cli auth proxy server'})
 })
 
 const consumerKey = secrets.POCKET || new Error('Pocket consumer_key undefined')

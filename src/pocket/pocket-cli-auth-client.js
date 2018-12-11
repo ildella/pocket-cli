@@ -1,7 +1,8 @@
 const axios = require('axios')
 
 const client = axios.create({
-  baseURL: `http://localhost:${process.env.AUTH_PROXY_PORT}`,
+  // baseURL: `http://localhost:${process.env.AUTH_PROXY_PORT}`,
+  baseURL: `https://${process.env.AUTH_PROXY_KEY}.sandbox.auth0-extend.com/pocket-server`,
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
     'X-Accept': 'application/json'
