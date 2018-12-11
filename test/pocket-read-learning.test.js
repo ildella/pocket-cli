@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({path: '.authproxy.env'})
 const assert = require('assert')
 const expect = require('chai').expect
 const fs = require('fs').promises
