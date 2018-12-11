@@ -26,7 +26,7 @@ const pocketServer = async requestToken => {
 
   const http = require('http')
   const server = http.createServer(app)
-  const listener = await server.listen(process.env.CALLBACK_PORT)
+  const listener = await server.listen(process.env.CALLBACK_PORT || 3300)
   console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
 
 }

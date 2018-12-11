@@ -3,7 +3,7 @@ const {execSync} = require('child_process')
 
 const callbackServer = require('./pocket-auth-server')
 const client = require('./pocket-cli-http')
-const port = process.env.CALLBACK_PORT
+const port = process.env.CALLBACK_PORT || 3300
 
 const redirectURI = `http://localhost:${port}/oauth/pocket/callback`
 
