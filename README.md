@@ -15,11 +15,13 @@ TDB
 ## Run
 
 ```bash
-pocket-cli
+$ pocket-cli
 Pocket> auth
-...
+[...]
 Pocket> list 
 ```
+
+Use TAB to autocomplete
 
 ## Contribute
 
