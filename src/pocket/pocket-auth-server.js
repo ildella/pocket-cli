@@ -4,7 +4,7 @@ const app = express()
 
 const client = require('./pocket-http')
 
-const port = 3344
+const port = process.env.CALLBACK_PORT
 
 app.get('/', (req, res) => {
   res.send('hi')
