@@ -45,14 +45,23 @@ sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli.js /usr/local/bin
 ## Depencencies. 
 
 I have a quite strict policy on dependencies.
-I do not use any famous nodejs command line interpreter or framework like commander, or inquirer along with chalk for coloring. I also do not use lodash and many other commons nodejs libraries.
 
-I depend on:
+```
+$ npm ls --prod
+pocket-cli@0.4.2 /home/ildella/projects/personal/pocket-cli
+├─┬ axios@0.18.0
+│ ├─┬ follow-redirects@1.5.9
+│ │ └─┬ debug@3.1.0
+│ │   └── ms@2.0.0
+│ └── is-buffer@1.1.6
+├── colorette@1.0.7
+└── luxon@1.8.2
+```
 
-  * Luxon - a dependency free, immutable momentjs
-  * Colorette - a dependency free ansii coloring
-  * Axios - http client, which has 2 dependencies
+I do not use any command line library or framework like commander, or inquirer, with chalk for coloring. I also do not use lodash and many other commons nodejs libraries.
 
-For now I depend on express and all its dependencies for the authentication part. A refactoring is due as there's no point in using express to make one HTTP endpoint.
+What I rely on:
 
-[npm audit badge](...)
+* Axios - http client
+* Colorette - a dependency free ansii coloring
+* Luxon - a dependency free, immutable momentjs
