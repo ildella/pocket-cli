@@ -48,7 +48,7 @@ cli.init = () => {
       .then(response => {
         loading = false
         process.stdout.cursorTo(0)
-        for (const line of response.lines) {
+        for (const line of response.lines || []) {
           console.log(line)
         }
         ui.setPrompt(response.prompt ? response.prompt : defaultPrompt)
