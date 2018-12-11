@@ -49,6 +49,7 @@
     "deps": "npm ls --prod=true --depth=1",
     "test": "node_modules/jest/bin/jest.js --watch",
     "eslint": "node_modules/eslint/bin/eslint.js ",
-    "badge": "node_modules/audit-badge/bin/audit-badge"
+    "snap:build": "snapcraft",
+    "snap:clean": "snapcraft clean pocket-cli -s pull"
   }
 }
