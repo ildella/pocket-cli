@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const client = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: `http://localhost:${process.env.AUTH_PROXY_PORT}`,
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
     'X-Accept': 'application/json'
