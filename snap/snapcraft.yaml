@@ -23,4 +23,4 @@ parts:
 
 apps:
   pocket-cli:
-    command: pocket-cli
+    command: bin/pocket-cli
