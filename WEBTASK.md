@@ -5,8 +5,9 @@ The proxy server runs on Webtask
 ### Create and update commands
 
 ```bash
-wt create src/server/auth-proxy.js -b --secrets-file .authproxy.env --host pocketcli.pipelean.com
-wt update pocket-server src/server/auth-proxy.js -w -b
+cd src/server
+npm run create
+npm run update:watch
 ```
 
 ### Custom domain
