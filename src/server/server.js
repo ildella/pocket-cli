@@ -33,4 +33,21 @@ app.get('/', (req, res) => {
   res.sendStatus(200)
 })
 
+const consumerKey = secrets.POCKET || new Error('Pocket consumer_key undefined')
+const client = require('../pocket/pocket-http')
+
+app.post('/oauth/request', async (req, res) => {
+  const payload = Object.assign({consumer_key: consumerKey}, req.body)
+  tracer.info(payload)
+  const response = await client.post('/oauth/request', payload)
+  res.json(response.data)
+})
+
+app.post('/oauth/authorize', async (req, res) => {
+  const payload = Object.assign({consumer_key: consumerKey}, req.body)
+  tracer.info(payload)
+  const response = await client.post('/oauth/authorize', payload)
+  res.json(response.data)
+})
+
 module.exports = require('webtask-tools').fromExpress(app)

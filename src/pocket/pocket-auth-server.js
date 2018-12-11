@@ -2,7 +2,8 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 
-const client = require('./pocket-http')
+// const client = require('./pocket-http')
+const client = require('./pocket-cli-auth-client')
 
 const port = process.env.CALLBACK_PORT
 
