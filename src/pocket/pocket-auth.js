@@ -4,12 +4,11 @@ const {execSync} = require('child_process')
 
 const server = require('./pocket-auth-server')
 const client = require('./pocket-http')
+// const client = require('./pocket-cli-auth-client')
 
 const redirectURI = 'http://localhost:3344/oauth/pocket/callback'
-const session = {}
 
 const start = async () => {
-  server(session)
   const body = {
     consumer_key: consumerKey,
     redirect_uri: `${redirectURI}`,
@@ -19,7 +18,8 @@ const start = async () => {
   const requestToken = response.data.code
   // console.log('got request token:', requestToken)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
-  session.requestToken = requestToken
+  // session.requestToken = requestToken
+  await server(requestToken)
   // console.log('open auth URL to the user ->', authorizeUrl)
   const exec = execSync(`xdg-open "${authorizeUrl}"`)
 }
