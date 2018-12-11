@@ -1,7 +1,8 @@
 'use strict'
 const {execSync} = require('child_process')
 
-const callbackServer = require('./pocket-auth-server')
+// const callbackServer = require('./pocket-auth-server')
+const callbackServer = require('./simple-server')
 const client = require('./pocket-cli-http')
 const port = process.env.CALLBACK_PORT || 3300
 
