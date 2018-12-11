@@ -1,11 +1,12 @@
 const fs = require('fs').promises
 const axios = require('axios')
 const {red, bold} = require('colorette')
+const containerName = 'wt-c7bbe7e68d36c0caa6436b2be9c7052a-0'
 
 const client = axios.create({
   // baseURL: `http://localhost:${process.env.AUTH_PROXY_PORT}`,
-  baseURL: `https://${process.env.AUTH_PROXY_KEY}.sandbox.auth0-extend.com/pocket-server`,
-  // baseURL: 'https://pocketcli.pipelean.com/pocket-server',
+  baseURL: `https://${containerName}.sandbox.auth0-extend.com/pocket-server`,
+  // baseURL: `https://pocketcli.pipelean.com/${process.env.AUTH_PROXY_KEY}/pocket-server`,
   headers: {
     'Content-Type': 'application/json; charset=UTF-8',
     'X-Accept': 'application/json'
