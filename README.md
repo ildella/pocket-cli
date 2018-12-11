@@ -7,6 +7,14 @@
 
 ## Install
 
+### Prerequisites
+
+You must have Node.js. You can install the required version with:
+
+```bash
+sudo snap install node --channel=11
+```
+
 ### NPM
 
 ```bash

@@ -20,7 +20,6 @@ parts:
     source: .
     node-engine: 11.4.0
 
-
 apps:
   pocket-cli:
     command: bin/pocket-cli
