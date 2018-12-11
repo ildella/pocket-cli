@@ -39,7 +39,7 @@ npm start
 
 ```bash
 npm link
-sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli.js /usr/local/bin/pocket-cli-dev
+sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli /usr/local/bin/pocket-cli-dev
 ```
 
 ## Depencencies. 
