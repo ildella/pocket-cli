@@ -50,6 +50,24 @@ test('archive', async () => {
   expect(interpreter.getAction('archive 1').command).toBe(commands.archive)
   expect(interpreter.getAction('a 1').command).toBe(commands.archive)
   expect(interpreter.getAction('aa 1').command).toBe(commands.list)
+  interpreter.getAction('a 1').parse()
+})
+
+test('archive does not act if the articles list is empty', async () => {
+  const action = interpreter.getAction('archive 1')
+  expect(action.command).toBe(commands.archive)
+  const query = action.parse()
+  // expect(query).toEqual('')
+  const output = query.execute()
+  expect(output).toEqual(['There is no article with index 1'])
+})
+
+test('archive multiple items', async () => {
+  const archiveMultiple = interpreter.getAction('a 1 2 3')
+  expect(archiveMultiple.command).toBe(commands.archive)
+  expect(archiveMultiple.input).toEqual(['1', '2', '3'])
+  // const query = archiveMultiple.parse()
+  // expect(query).toEqual()
 })
 
 test('open', async () => {
@@ -75,15 +93,6 @@ test('print', async () => {
   expect(action.command).toBe(commands.print)
   const query = action.parse()
   expect(query.name).toBe('pocket-print')
-})
-
-test('archive does not act if the articles list is empty', async () => {
-  const action = interpreter.getAction('archive 1')
-  expect(action.command).toBe(commands.archive)
-  const query = action.parse()
-  // expect(query).toEqual('')
-  const output = query.execute()
-  expect(output).toEqual(['There is no article with index 1'])
 })
 
 test('interactive', async () => {

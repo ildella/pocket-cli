@@ -36,3 +36,27 @@ test('json query to human readable text', async () => {
   expect(pocket.toHumanText()).toBe('Search for "bitcoin" in "all" documents, order by "site" starting January 1, 1970')
   console.log(pocket.toHumanText())
 })
+
+test('Modify query', async () => {
+  const article = {item_id: 'abc123'}
+  pocket.articles = [article, article, article]
+  const query = pocket.modifyQuery('archive', '2')
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(1)
+  expect(query.actions[0].action).toBe('archive')
+  expect(query.actions[0].item_id).toBe('abc123')
+})
+
+test('Modify query with multiple indexes', async () => {
+  const article1 = {item_id: 'a1'}
+  const article2 = {item_id: 'a2'}
+  const article3 = {item_id: 'a3'}
+  pocket.articles = [article1, article2, article3]
+  const query = pocket.modifyQuery('archive', ['1', '3'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(2)
+  expect(query.actions[0].action).toBe('archive')
+  expect(query.actions[0].item_id).toBe('a1')
+  expect(query.actions[1].action).toBe('archive')
+  expect(query.actions[2].item_id).toBe('a3')
+})

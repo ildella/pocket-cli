@@ -51,7 +51,7 @@ pocket.actions = []
 
 pocket.archive = indexes => {
   const index = indexes[0]
-  return pocket.modifyQuery('archive', index)
+  return pocket.modifyQuery('archive', indexes)
 }
 
 pocket.delete = indexes => {
@@ -122,11 +122,14 @@ pocket.previous = () => {
 
 pocket.modifyQuery = (action, index) => {
   // if (pocket.articles.hasIndex(index)) return {
+  console.log(index)
   if (pocket.articles.length < index) return {
     name: 'pocket-modify-none',
     action: action,
     execute: () => { return [`There is no article with index ${index}`] }
   }
+  // const matches = index.map(i => pocket.articles[index - 1]).filter(Boolean)
+  // console.log(matches)
   const item_id = pocket.articles[index - 1].item_id
   const actions = [
     {

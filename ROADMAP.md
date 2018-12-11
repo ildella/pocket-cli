@@ -1,10 +1,15 @@
-# Roadmap
+# Roadmap / Diary
 
 ## 11 Dec
 
-* Yesterday eve started refactoring the auth so that consumer key is added by a proxy server. Worked offline. 
-* Complete auth proxy server, in prod on Webtask
-* Bug: search before auth hangs the console. Need to create a nice setup
+* (DONE) Yesterday eve started refactoring the auth so that consumer key is added by a proxy server. Worked offline. 
+* (DONE) omplete auth proxy server, in prod on Webtask
+* BUG: search before auth hangs the console. Need to create a nice setup.
+* DISTRIBUTION: Make snap package (issues... https://bugs.launchpad.net/snapcraft/+bug/1808043)
+* FEATURE: support multiple indexes for commands like archive, delete...
+* POLISH: optional commands should appear on a single line, with colors for number
+* BUG: command selection miss a way to just go back / ignore
+* POLISH: better text/color before list (human readable query) and after list (commands)
 
 
 ## 10-onward Dec
