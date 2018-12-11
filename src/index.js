@@ -1,5 +1,4 @@
 process.title = 'pocket-cli'
-require('dotenv').config()
 const cli = require('./cli/cli')
 
 const app = {}
