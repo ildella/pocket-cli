@@ -1,7 +1,7 @@
 const {execSync} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
-const client = require('./pocket-http')
+const client = require('./pocket-cli-http')
 const formatter = require('../content-formatter')
 const {blue, bold} = require('colorette')
 

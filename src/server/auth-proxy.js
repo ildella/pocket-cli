@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 })
 
 const consumerKey = secrets.POCKET || new Error('Pocket consumer_key undefined')
-const pocketApi = require('../pocket/pocket-http')
+const pocketApi = require('./pocket-http')
 
 app.post('/oauth/request', async (req, res) => {
   const payload = Object.assign({consumer_key: consumerKey}, req.body)
@@ -40,6 +40,20 @@ app.post('/oauth/authorize', async (req, res) => {
   const payload = Object.assign({consumer_key: consumerKey}, req.body)
   // console.log(payload)
   const response = await pocketApi.post('/oauth/authorize', payload)
+  res.json(response.data)
+})
+
+app.post('/send', async (req, res) => {
+  const payload = Object.assign({consumer_key: consumerKey}, req.body)
+  // console.log(payload)
+  const response = await pocketApi.post('/send', payload)
+  res.json(response.data)
+})
+
+app.post('/get', async (req, res) => {
+  const payload = Object.assign({consumer_key: consumerKey}, req.body)
+  // console.log(payload)
+  const response = await pocketApi.post('/get', payload)
   res.json(response.data)
 })
 

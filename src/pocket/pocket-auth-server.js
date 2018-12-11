@@ -2,7 +2,7 @@ const fs = require('fs')
 const express = require('express')
 const app = express()
 
-const client = require('./pocket-cli-auth-client')
+const client = require('./pocket-cli-http')
 
 app.get('/', (req, res) => { res.send('up and running :)') })
 
