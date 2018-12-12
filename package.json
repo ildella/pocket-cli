@@ -1,6 +1,6 @@
 {
   "name": "pocket-cli",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Pocket CLI (Unofficial, https://getpocket.com)",
   "bin": {
     "pocket-cli": "bin/pocket-cli"
