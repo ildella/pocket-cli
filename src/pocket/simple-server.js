@@ -1,12 +1,13 @@
 const fs = require('fs')
 const http = require('http')
+const homedir = require('os').homedir()
 
 const client = require('./pocket-cli-http')
 
 const authorize = async requestToken => {
   const response = await client.post('/oauth/authorize', {code: requestToken})
-  fs.writeFileSync('pocket_access_token', `${response.data.access_token}\n`)
-  console.log('authorization succeded')
+  fs.writeFileSync(`${homedir}/.config/pocket_access_token`, `${response.data.access_token}\n`)
+  // console.log('authorization succeded')
   return response.data.username
 }
 
@@ -32,7 +33,7 @@ const simpleServer = async requestToken => {
     res.end('Do not handle that address\n')
   })
   const listener = await server.listen(process.env.CALLBACK_PORT || 3300)
-  console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
+  // console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
 }
 
 // simpleServer()
