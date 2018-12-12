@@ -17,8 +17,8 @@ const interpreter = {
   getAction: inputText => {
     if (interpreter.question) {
       const answerIndex = Number(inputText ? inputText : '1')
-      const commandName = interpreter.question.command.parseCommand(answerIndex)
-      const command = commands[commandName]
+      // const commandName = 
+      const command = commands[interpreter.question.command.parseCommand(answerIndex)]
       const spaceSeparatedInput = [interpreter.question.input]
       const action = {
         command: command,
