@@ -183,7 +183,7 @@ pocket.read = async search => {
     const title = article.resolved_title || id || '<No Title>'
     const url = article.resolved_url || article.given_url || ''
     const shortUrl = url.replace('https://', '').replace('http://', '')
-    const isArticle = article.is_article == 1
+    const isArticle = article.is_article === 1
     const excerpt = article.excerpt || ''
     const newFields = {
       id: id,

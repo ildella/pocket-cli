@@ -43,7 +43,7 @@ const interpreter = {
       matches.add(command.name)
       return matches.has(potentialCommand)
     })
-    const useDefault = candidates.length == 0
+    const useDefault = candidates.length === 0
     const command = useDefault ? commands[defaultCommand] : candidates[0]
     const isInteractive = command.name.startsWith('interactive')
     if (!useDefault && !isInteractive) {
