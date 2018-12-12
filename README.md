@@ -1,8 +1,7 @@
 # Pocket CLI (Unofficial, https://getpocket.com)
 
-<p align="center">
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-</p>
+[![Build Status](https://travis-ci.com/ildella/pocket-cli.svg?branch=master)](https://travis-ci.com/ildella/pocket-cli)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Install
 

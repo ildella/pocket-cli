@@ -1,0 +1,7 @@
+language: node_js
+cache: npm
+node_js:
+  - "11"
+before_script: 
+  - npm ci
+script: npm run tests
