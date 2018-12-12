@@ -9,6 +9,7 @@
 * (DONE) FEATURE: support multiple indexes for archive, delete.
 * (DONE) POLISH: optional commands should appear on a single line
 * BUG: command selection miss a way to just go back / ignore
+* (DONE) BUG: open command works only on linux
 * (DONE) POLISH: better text/color before list (human readable query) and after list (commands)
 
 
