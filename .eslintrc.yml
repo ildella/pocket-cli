@@ -1,4 +1,4 @@
-env: {node: true, mocha: true}
+env: {node: true}
 extends: ['eslint:recommended', 'plugin:node/recommended', 'plugin:security/recommended',
   'plugin:sonarjs/recommended', 'plugin:jest/recommended']
 parserOptions: {ecmaVersion: 2018}
