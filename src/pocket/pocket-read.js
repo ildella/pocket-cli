@@ -220,7 +220,8 @@ pocket.render = () => {
 pocket.toHumanText = () => {
   const last = pocket.queries.last()
   const date = DateTime.fromMillis(last.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
-  return `Search for "${last.search}" in "${last.state}" documents, order by "${last.sort}" starting ${date}`
+  const searchString = last.search || '*'
+  return `Search for "${searchString}" in "${last.state}" documents, order by "${last.sort}" starting ${date}`
 }
 
 module.exports = pocket
