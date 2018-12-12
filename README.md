@@ -1,4 +1,6 @@
-# Pocket CLI (Unofficial, https://getpocket.com)
+# Pocket CLI 
+
+Interactive terminal application for [Pocket](https://getpocket.com)
 
 <p align="center">
 <img src="screens/screen1.png" alt="pocket-cli" />

@@ -1,7 +1,7 @@
 {
   "name": "pocket-cli",
   "version": "0.5.6",
-  "description": "Pocket CLI (Unofficial, https://getpocket.com)",
+  "description": "Interactive terminal application for Pocket",
   "bin": {
     "pocket-cli": "bin/pocket-cli"
   },
