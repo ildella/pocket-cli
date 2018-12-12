@@ -10,7 +10,9 @@ Interactive terminal application for [Pocket](https://getpocket.com)
 [![Version](https://img.shields.io/npm/v/pocket-cli.svg?style=flat-square)](https://npmjs.com/package/pocket-cli)
 [![Build Status](https://travis-ci.com/ildella/pocket-cli.svg?branch=master)](https://travis-ci.com/ildella/pocket-cli)
 [![Known Vulnerabilities](https://snyk.io/test/github/ildella/pocket-cli/badge.svg?targetFile=package.json)](https://snyk.io/test/github/ildella/pocket-cli?targetFile=package.json)
-
+[![David](https://img.shields.io/david/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
+[![David](https://img.shields.io/david/dev/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
+[![David](https://img.shields.io/david/peer/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
 ## Install
 
 ### Prerequisites
