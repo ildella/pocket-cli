@@ -43,10 +43,10 @@ sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli /usr/local/bin/po
 ```
 
 ## Depencencies. 
-
+  
 I have a quite strict policy on dependencies.
 
-```
+```bash
 $ npm ls --prod
 pocket-cli@0.4.2 /home/ildella/projects/personal/pocket-cli
 ├─┬ axios@0.18.0
@@ -58,7 +58,7 @@ pocket-cli@0.4.2 /home/ildella/projects/personal/pocket-cli
 └── luxon@1.8.2
 ```
 
-I do not use any command line library or framework like commander, or inquirer, with chalk for coloring. I also do not use lodash and many other commons nodejs libraries.
+I do not use most common command line library or framework like commander, inquirer, chalk. I also do not use lodash or similar libraries.
 
 What I rely on:
 
