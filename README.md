@@ -33,7 +33,7 @@ TBD
 
 Some example command
 
-```bash
+```
 $ pocket-cli
 Pocket> auth // starts Oauth with Pocket API
 Pocket> list // last 8 articles
