@@ -6,7 +6,7 @@ require('../src/cli/help')
 
 test('read from pocket API', async () => {
   const output = await interpreter.processInput('bitcoin')
-  expect(output.lines).toHaveLength(12)
+  expect(output.lines).toHaveLength(13)
   await interpreter.processInput('n')
 })
 

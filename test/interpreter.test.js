@@ -53,15 +53,6 @@ test('archive', async () => {
   interpreter.getAction('a 1').parse()
 })
 
-test('archive does not act if the articles list is empty', async () => {
-  const action = interpreter.getAction('archive 1')
-  expect(action.command).toBe(commands.archive)
-  const query = action.parse()
-  // expect(query).toEqual('')
-  const output = query.execute()
-  expect(output).toEqual(['There is no article with index 1'])
-})
-
 test('archive multiple items', async () => {
   const archiveMultiple = interpreter.getAction('a 1 2 3')
   expect(archiveMultiple.command).toBe(commands.archive)
