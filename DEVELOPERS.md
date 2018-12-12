@@ -62,6 +62,6 @@ I do not use most common command line library or framework like commander, inqui
 
 What I rely on:
 
-* Axios - http client
-* Colorette - a dependency free ansii coloring
-* Luxon - a dependency free, immutable momentjs
+  - Axios - http client
+  - Colorette - a dependency free ansii coloring
+  - Luxon - a dependency free, immutable momentjs

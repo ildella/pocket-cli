@@ -2,7 +2,7 @@
 
 The proxy server runs on Webtask
 
-### Create and update commands
+## Create and update commands
 
 ```bash
 cd src/server
@@ -10,7 +10,7 @@ npm run create
 npm run update:watch
 ```
 
-### Custom domain
+## Custom domain
 
 In order to verify the host we need to perform 2 actions on the DNS
 
