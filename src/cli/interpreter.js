@@ -17,48 +17,39 @@ const interpreter = {
   getAction: inputText => {
     if (interpreter.question) {
       const answerIndex = Number(inputText ? inputText : '1')
-      // const commandName = 
       const command = commands[interpreter.question.command.parseCommand(answerIndex)]
-      const spaceSeparatedInput = [interpreter.question.input]
-      const action = {
+      const input = [interpreter.question.input]
+      interpreter.question = undefined
+      return {
         command: command,
-        input: spaceSeparatedInput,
-        parse: () => { return command.parse(spaceSeparatedInput) }
+        input: input,
+        parse: () => { return command.parse(input) }
       }
-      if (action.command.name.startsWith('interactive')) {
-        interpreter.question = action
-      } else {
-        interpreter.question = undefined
-      }
-      return action
     }
 
     const validString = isValidString(inputText)
     if (!validString) return null
 
     const spaceSeparatedInput = validString.split(' ')
-    const potentialCommand = spaceSeparatedInput[0]
+    const firstWord = spaceSeparatedInput[0]
     const candidates = Object.values(commands).filter(command => {
       const matches = new Set(command.aliases)
       matches.add(command.name)
-      return matches.has(potentialCommand)
+      return matches.has(firstWord)
     })
     const useDefault = candidates.length === 0
     const command = useDefault ? commands[defaultCommand] : candidates[0]
     const isInteractive = command.name.startsWith('interactive')
-    if (!useDefault && !isInteractive) {
-      spaceSeparatedInput.shift()
-    }
+    const isFirstWordACommand = (!useDefault && !isInteractive)
+    const input = isFirstWordACommand ? spaceSeparatedInput.slice(1) : spaceSeparatedInput.slice(0)
     Object.assign(commands, command.submenu)
     const action = {
       command: command,
-      input: spaceSeparatedInput,
-      parse: () => { return command.parse(spaceSeparatedInput) }
+      input: input,
+      parse: () => { return command.parse(input) }
     }
-    if (command.name.startsWith('interactive')) {
+    if (isInteractive) {
       interpreter.question = action
-    } else {
-      interpreter.question = undefined
     }
     return action
   }

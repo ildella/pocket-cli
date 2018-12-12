@@ -111,4 +111,10 @@ test('interactive', async () => {
   const answerQuery = answerAction.parse()
   expect(answerQuery.name).toBe('pocket-expand')
   expect(answerQuery.index).toEqual(['1'])
+  
+  const nextAction = interpreter.getAction('something')
+  expect(interpreter.question).toBeUndefined()
+  expect(nextAction.command).toBe(commands.list)
+  expect(nextAction.input).toEqual(['something'])
+
 })
