@@ -36,7 +36,6 @@ const history = function (name) {
         item: item
       })
     },
-    // get: index => history.items[index].item,
     get: index => history.items[Number(index) - 1].item,
     last: () => history.items[history.items.length - 1].item,
     hasIndex: index => history.items.length < index,
@@ -69,7 +68,6 @@ pocket.print = () => {
 pocket.expand = indexes => {
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
-  // const selected = pocket.articles.get(index)
   return {
     name: 'pocket-expand',
     indexes: indexes,
@@ -85,7 +83,6 @@ pocket.expand = indexes => {
 pocket.open = indexes => {
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
-  // const selected = pocket.articles.get(index)
   return {
     name: 'pocket-open',
     indexes: indexes,
@@ -100,7 +97,6 @@ pocket.open = indexes => {
 }
 
 pocket.next = () => {
-  // const last = pocket.queries[pocket.queries.length - 1].query
   const last = pocket.queries.last()
   last.offset = last.offset + last.count
   return {
