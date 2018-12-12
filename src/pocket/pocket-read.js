@@ -13,10 +13,6 @@ const reverseIntersection = arrays => {
   return arrays.reduce((a, b) => a.filter(c => !b.includes(c)))
 }
 
-// const orderByAsc = (key) => {
-//   return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0)
-// }
-
 const orderByDesc = (key) => {
   return (a, b) => (a[key] > b[key]) ? -1 : ((b[key] > a[key]) ? 1 : 0)
 }
