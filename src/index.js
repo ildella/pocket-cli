@@ -1,5 +1,9 @@
 process.title = 'pocket-cli'
 const cli = require('./cli/cli')
+require('./pocket/pocket-commands')
+require('./cli/version')
+require('./cli/quit')
+require('./cli/help')
 
 const app = {}
 

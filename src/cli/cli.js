@@ -1,10 +1,6 @@
 const readline = require('readline')
 const {blue} = require('colorette')
 const interpreter = require('./interpreter')
-require('../pocket/pocket-commands')
-require('./version')
-require('./quit')
-require('./help')
 
 const cli = {}
 
