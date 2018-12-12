@@ -80,6 +80,13 @@ pocket.expand = indexes => {
   }
 }
 
+const platform = require('os').platform()
+const openCommands = {
+  linux: 'xdg-open',
+  osx: 'open',
+  windows: 'start'
+}
+
 pocket.open = indexes => {
   const index = indexes[0]
   const selected = pocket.articles[Number(index) - 1]
@@ -88,7 +95,8 @@ pocket.open = indexes => {
     indexes: indexes,
     index: index,
     execute: () => {
-      const exec = execSync(`xdg-open "${selected.url}"`)
+      const open = openCommands[platform]
+      const exec = execSync(`${open} "${selected.url}"`)
       const output = []
       output.push(blue(selected.url))
       return {lines: output}
