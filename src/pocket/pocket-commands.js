@@ -3,6 +3,18 @@ const pocketAuth = require('./pocket-auth')
 const pocket = require('./pocket-read')
 const {green, yellow} = require('colorette')
 
+const options = {
+  '1': 'open',
+  '2': 'expand',
+  '3': 'fav',
+  '4': 'archive',
+  '5': 'delete',
+}
+const parseCommand = actionIndex => {
+  return options[actionIndex]
+}
+const interactiveOptions = ['1. Open (default)  2. Expand  3. Fav  4. Archive  5. Delete']
+
 const listCommands = {
   archive: {
     name: 'archive',
@@ -51,25 +63,15 @@ const listCommands = {
     type: 'interactive', //TODO: change name startsWith check to type equality check
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-    parseCommand: index => {
-      const options = {
-        '1': 'open',
-        '2': 'expand',
-        '3': 'fav',
-        '4': 'archive',
-        '5': 'delete',
-      }
-      return options[index]
-    },
+    parseCommand: parseCommand,
     parse: spaceSeparatedInput => {
-      const output = []
-      const commands = ['1. open', '2. expand', '3. fav', '4. archive', '5. delete']
+      const output = interactiveOptions
       return {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],
         execute: () => {
           return {
-            lines: output.concat(commands),
+            lines: output,
             prompt: yellow('select: ')
           }
         }

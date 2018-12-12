@@ -7,9 +7,9 @@
 * BUG: search before auth hangs the console. Need to create a nice setup.
 * DISTRIBUTION: Make snap package (issues... https://bugs.launchpad.net/snapcraft/+bug/1808043)
 * (DONE) FEATURE: support multiple indexes for archive, delete.
-* POLISH: optional commands should appear on a single line, with colors for number
+* (DONE) POLISH: optional commands should appear on a single line
 * BUG: command selection miss a way to just go back / ignore
-* POLISH: better text/color before list (human readable query) and after list (commands)
+* (DONE) POLISH: better text/color before list (human readable query) and after list (commands)
 
 
 ## 10-onward Dec
