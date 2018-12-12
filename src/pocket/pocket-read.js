@@ -55,8 +55,8 @@ pocket.archive = indexes => {
 }
 
 pocket.delete = indexes => {
-  const index = indexes[0]
-  return pocket.modifyQuery('delete', index)
+  // const index = indexes[0]
+  return pocket.modifyQuery('delete', indexes)
 }
 
 pocket.print = () => {
