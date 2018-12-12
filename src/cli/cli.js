@@ -26,13 +26,9 @@ cli.init = () => {
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
-    // let loading = true
     interpreter.processInput(string)
       .then(response => {
-        // loading = false
         loader.stop()
-        process.stdout.write('')
-        process.stdout.cursorTo(0)
         for (const line of response.lines || []) {
           console.log(line)
         }
