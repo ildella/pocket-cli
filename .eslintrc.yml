@@ -13,12 +13,10 @@ rules:
     ignoreTemplateLiterals: false, ignoreUrls: false}
   max-lines: [warn, 400]
   max-lines-per-function: [warn, 50]
-  max-nested-callbacks: [error, 2]
-  # max-statements: [error, 20]
-  max-statements: [error, 30]
-  max-depth: [error, 2]
-  # complexity: [error, 5]
-  complexity: [error, 9]
+  max-nested-callbacks: [warn, 2]
+  max-statements: [warn, 25]
+  max-depth: [warn, 2]
+  complexity: [warn, 7]
   no-console: warn
   no-multi-assign: warn
   no-multi-spaces: warn
@@ -51,7 +49,7 @@ rules:
   quotes: [warn, single]
   security/detect-non-literal-fs-filename: off
   semi: [error, never]
-  sonarjs/cognitive-complexity: [error, 6]
+  sonarjs/cognitive-complexity: [warn, 6]
   sonarjs/no-identical-functions: warn
   sonarjs/prefer-immediate-return: warn
   space-before-function-paren: warn
