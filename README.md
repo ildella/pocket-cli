@@ -38,3 +38,7 @@ Use TAB to autocomplete
 ## Contribute
 
 [For developers](DEVELOPERS.md)
+
+## Author
+
+Get in touch [on Twitter](https://twitter.com/ildella)
