@@ -8,22 +8,6 @@ require('./help')
 
 const cli = {}
 
-const getValue = index => {
-  const values = ['\\', '|', '/', '|']
-  return new Promise(resolve=>{
-    setTimeout(()=>resolve(values[index]), 250)
-  })
-}
-
-const asyncGenerator = async function* () {
-  let index = 0
-  while(true) {
-    index++
-    const value = await getValue(index % 4)
-    yield value
-  }
-}
-
 const completer = line => {
   const completions = Object.keys(interpreter.commands)
   const hits = completions.filter(c => c.startsWith(line))
@@ -39,16 +23,19 @@ const ui = readline.createInterface({
 })
 
 const platform = require('os').platform()
+const loader = require('./loader')
 
 cli.init = () => {
   console.log(`${'Pocket CLI'} - ${platform}`)
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
-    let loading = true
+    // let loading = true
     interpreter.processInput(string)
       .then(response => {
-        loading = false
+        // loading = false
+        loader.stop()
+        process.stdout.write('')
         process.stdout.cursorTo(0)
         for (const line of response.lines || []) {
           console.log(line)
@@ -57,16 +44,7 @@ cli.init = () => {
       })
       .catch(err => console.error(err))
       .finally(() => { ui.prompt() })
-    //TODO: this code should go to a function, and probably should be started in the processInput.then()
-    for await (const v of asyncGenerator()) {
-      if (loading) {
-        process.stdout.clearLine()
-        process.stdout.cursorTo(0)
-        process.stdout.write(v)
-      } else {
-        break
-      }
-    }
+    loader.start()
   })
   ui.on('close', () => {
     console.log('\nuser request to close the app...')
