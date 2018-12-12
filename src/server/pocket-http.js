@@ -15,8 +15,8 @@ client.interceptors.response.use(response => {
   if (response) {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
-    console.error(message) //TODO use emit for this kind of low level errors
-    console.error(config)
+    console.error(message) //TODO use emit
+    // console.error(config)
   } else {
     console.error('Network Error')
   }
