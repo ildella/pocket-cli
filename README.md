@@ -1,5 +1,9 @@
 # Pocket CLI (Unofficial, https://getpocket.com)
 
+<p align="center">
+<img src="screens/screen1.png" alt="pocket-cli" />
+</p>
+
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/npm/v/pocket-cli.svg?style=flat-square)](https://npmjs.com/package/pocket-cli)
 [![Build Status](https://travis-ci.com/ildella/pocket-cli.svg?branch=master)](https://travis-ci.com/ildella/pocket-cli)
