@@ -6,8 +6,7 @@
     "pocket-cli": "bin/pocket-cli"
   },
   "engines": {
-    "node": "11",
-    "npm": "6.4.1"
+    "node": ">=11.0.0"
   },
   "homepage": "https://github.com/ildella/pocket-cli#readme",
   "repository": {
@@ -50,7 +49,7 @@
     "test:ci": "node_modules/jest/bin/jest.js --config=jest.ci.js",
     "test:unit": "node_modules/jest/bin/jest.js --config=jest.ci.js --watch",
     "deps": "npm ls --prod=true --depth=3",
-    "eslint": "node_modules/eslint/bin/eslint.js .",
+    "eslint": "node_modules/eslint/bin/eslint.js src",
     "snap:build": "snapcraft",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
   }

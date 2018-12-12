@@ -38,7 +38,7 @@ rules:
   no-whitespace-before-property: error
   no-with: error
   node/no-extraneous-require: error
-  node/no-unpublished-require: off
+  node/no-unpublished-require: warn
   object-curly-newline: warn
   object-curly-spacing: warn
   prefer-arrow-callback: warn
