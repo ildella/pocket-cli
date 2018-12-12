@@ -17,7 +17,7 @@ const interpreter = {
   getAction: inputText => {
     if (interpreter.question) {
       const answerIndex = Number(inputText ? inputText : '1')
-      const commandName = interpreter.question.command.parseCommand(answerIndex) // recuperi il command input text eg: archive, open...
+      const commandName = interpreter.question.command.parseCommand(answerIndex)
       const command = commands[commandName]
       const spaceSeparatedInput = [interpreter.question.input]
       const action = {
