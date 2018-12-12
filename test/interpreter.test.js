@@ -97,7 +97,7 @@ test('interactive', async () => {
   expect(query.name).toBe('interactive-query')
   expect(query.index).toBe('1')
   const output = query.execute()
-  expect(output.lines).toEqual(['1. open', '2. expand', '3. fav', '4. archive', '5. delete'])
+  expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Fav  4. Archive  5. Delete'])
 
   const answerAction = interpreter.getAction('2')
   expect(answerAction.command).toBe(commands.expand)

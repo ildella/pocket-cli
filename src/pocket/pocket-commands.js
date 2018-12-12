@@ -10,10 +10,20 @@ const options = {
   '4': 'archive',
   '5': 'delete',
 }
+
 const parseCommand = actionIndex => {
   return options[actionIndex]
 }
-const interactiveOptions = ['1. Open (default)  2. Expand  3. Fav  4. Archive  5. Delete']
+
+const interactiveOptions = Object.keys(options)
+  .reduce(
+    (previousValue, currentValue, currentIndex) => {
+      const command = options[currentValue]
+      const defaultText = currentIndex === 0 ? ' (default)' : ''
+      return `${previousValue}  ${currentValue}. ${command.charAt(0).toUpperCase()}${command.slice(1)}${defaultText}`
+    }
+    , ''
+  ).trim()
 
 const listCommands = {
   archive: {
@@ -58,14 +68,14 @@ const listCommands = {
     description: 'open the URL in the browser',
     parse: pocket.open
   },
-  interactive: { // TODO: should be generated from other listCommands (but not print...)
+  interactive: {
     name: 'interactive-command',
-    type: 'interactive', //TODO: change name startsWith check to type equality check
+    type: 'interactive', //TODO: better check type or keep using naming convention?
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
     parseCommand: parseCommand,
     parse: spaceSeparatedInput => {
-      const output = interactiveOptions
+      const output = [interactiveOptions]
       return {
         name: 'interactive-query',
         index: spaceSeparatedInput[0],
