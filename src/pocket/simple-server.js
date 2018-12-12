@@ -36,6 +36,4 @@ const simpleServer = async requestToken => {
   // console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
 }
 
-// simpleServer()
-
 module.exports = simpleServer
