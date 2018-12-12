@@ -50,8 +50,20 @@ test('Modify query', async () => {
   expect(query.actions[0].item_id).toBe('a2')
 })
 
+test('Modify query - no matching index', async () => {
+  const query = pocket.modifyQuery('archive', 'ddd')
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(0)
+})
+
+test('Modify query - no index', async () => {
+  const query = pocket.modifyQuery('archive')
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(0)
+})
+
 test('Modify query with multiple indexes', async () => {
-  const query = pocket.modifyQuery('archive', '1', '3', '4')
+  const query = pocket.modifyQuery('archive', ['1', '3', '4'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(2)
   expect(query.actions[0].action).toBe('archive')

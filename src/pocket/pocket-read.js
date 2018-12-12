@@ -121,30 +121,14 @@ pocket.previous = () => {
 }
 
 pocket.modifyQuery = (action, ...index) => {
-  // console.log(index)
-  if (pocket.articles.length < index) return {
-    name: 'pocket-modify-none',
-    action: action,
-    execute: () => { return [`There is no article with index ${index}`] }
-  }
-  const matches = index.map(i => pocket.articles[i - 1]).filter(Boolean)
-  // console.log(matches)
-  // const item_id = pocket.articles[index - 1].item_id
+  const matches = index.flat().map(i => pocket.articles[i - 1]).filter(Boolean)
   const actions = matches.map(article => {
     return {
-      'action': action,
-      'item_id': article.item_id,
-      'time': DateTime.local().millisecond * 1000
+      action: action,
+      item_id: article.item_id,
+      time: DateTime.local().millisecond * 1000
     }
   })
-  console.log(actions)
-  // const actions = [
-  //   {
-  //     'action': action,
-  //     'item_id': item_id,
-  //     'time': DateTime.local().millisecond * 1000
-  //   }
-  // ]
   pocket.actions.push({
     timestamp: DateTime.local(),
     actions: actions

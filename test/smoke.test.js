@@ -1,12 +1,8 @@
-// require('dotenv').config()
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
 require('../src/cli/version')
 require('../src/cli/quit')
 require('../src/cli/help')
-// const pocket = require('../src/pocket/pocket-read')
-
-// const app = require('../src')
 
 test('read from pocket API', async () => {
   const output = await interpreter.processInput('bitcoin')
@@ -17,9 +13,11 @@ test('read from pocket API', async () => {
 test('modify with pocket API - archive/readd', async () => {
   const list = await interpreter.processInput('bitcoin')
   const output = await interpreter.processInput('a 2')
-  expect(output.lines).toEqual(['modifications applied: archive'])
+  expect(output.lines).toEqual(['applied 1 changes'])
 })
 
-test('start app', async () => {
-  // app.init()
+test('multiple archive', async () => {
+  const list = await interpreter.processInput('bitcoin')
+  const output = await interpreter.processInput('a 2 3')
+  expect(output.lines).toEqual(['applied 2 changes'])
 })
