@@ -38,6 +38,12 @@ const listCommands = {
     description: 'Delete article (permanently)',
     parse: pocket.delete
   },
+  favorite: {
+    name: 'favorite',
+    aliases: ['fav', 'f'],
+    description: 'Favorite article',
+    parse: pocket.favorite
+  },
   print: {
     name: 'print',
     aliases: ['p'],

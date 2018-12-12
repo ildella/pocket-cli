@@ -61,6 +61,12 @@ test('archive multiple items', async () => {
   // expect(query).toEqual()
 })
 
+test('favorite multiple items', async () => {
+  const archiveMultiple = interpreter.getAction('fav 1 2 3')
+  expect(archiveMultiple.command).toBe(commands.favorite)
+  expect(archiveMultiple.input).toEqual(['1', '2', '3'])
+})
+
 test('open', async () => {
   const action = interpreter.getAction('open 1')
   expect(action.command).toBe(commands.open)
