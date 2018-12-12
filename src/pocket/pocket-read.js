@@ -13,9 +13,9 @@ const reverseIntersection = arrays => {
   return arrays.reduce((a, b) => a.filter(c => !b.includes(c)))
 }
 
-const orderByAsc = (key) => {
-  return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0)
-}
+// const orderByAsc = (key) => {
+//   return (a, b) => (a[key] > b[key]) ? 1 : ((b[key] > a[key]) ? -1 : 0)
+// }
 
 const orderByDesc = (key) => {
   return (a, b) => (a[key] > b[key]) ? -1 : ((b[key] > a[key]) ? 1 : 0)
@@ -49,13 +49,19 @@ pocket.articles = []
 pocket.actions = []
 
 pocket.archive = indexes => {
-  const index = indexes[0]
   return pocket.modifyQuery('archive', indexes)
 }
 
 pocket.delete = indexes => {
-  // const index = indexes[0]
   return pocket.modifyQuery('delete', indexes)
+}
+
+pocket.favorite = indexes => {
+  return pocket.modifyQuery('favorite', indexes)
+}
+
+pocket.readd = indexes => {
+  return pocket.modifyQuery('readd', indexes)
 }
 
 pocket.print = () => {

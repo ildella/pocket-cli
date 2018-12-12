@@ -71,3 +71,23 @@ test('Modify query with multiple indexes', async () => {
   expect(query.actions[1].action).toBe('archive')
   expect(query.actions[1].item_id).toBe('a3')
 })
+
+test('Favorite multiple items', async () => {
+  const query = pocket.modifyQuery('fav', ['1', '2', '4'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(2)
+  expect(query.actions[0].action).toBe('fav')
+  expect(query.actions[0].item_id).toBe('a1')
+  expect(query.actions[1].action).toBe('fav')
+  expect(query.actions[1].item_id).toBe('a2')
+})
+
+test('Readd multiple items', async () => {
+  const query = pocket.modifyQuery('readd', ['1', '2', '4'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(2)
+  expect(query.actions[0].action).toBe('readd')
+  expect(query.actions[0].item_id).toBe('a1')
+  expect(query.actions[1].action).toBe('readd')
+  expect(query.actions[1].item_id).toBe('a2')
+})

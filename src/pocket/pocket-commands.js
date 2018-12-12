@@ -6,7 +6,7 @@ const {green, yellow} = require('colorette')
 const options = {
   '1': 'open',
   '2': 'expand',
-  '3': 'fav',
+  '3': 'favorite',
   '4': 'archive',
   '5': 'delete',
 }
@@ -43,6 +43,12 @@ const listCommands = {
     aliases: ['fav', 'f'],
     description: 'Favorite article',
     parse: pocket.favorite
+  },
+  readd: {
+    name: 'readd',
+    aliases: ['unarchive'],
+    description: 'Un-archive article / Mark as unread',
+    parse: pocket.readd
   },
   print: {
     name: 'print',
