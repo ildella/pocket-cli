@@ -82,12 +82,7 @@ pocket.expand = indexes => {
   }
 }
 
-const platform = require('os').platform()
-const openCommands = {
-  linux: 'xdg-open',
-  osx: 'open',
-  windows: 'start'
-}
+const open = require('../cli/open')
 
 pocket.open = indexes => {
   const index = indexes[0]
@@ -97,8 +92,7 @@ pocket.open = indexes => {
     indexes: indexes,
     index: index,
     execute: () => {
-      const open = openCommands[platform]
-      const exec = execSync(`${open} "${selected.url}"`)
+      const exec = execSync(`${open.get()} "${selected.url}"`)
       const output = []
       output.push(blue(selected.url))
       return {lines: output}

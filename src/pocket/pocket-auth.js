@@ -1,7 +1,7 @@
 'use strict'
 const {execSync} = require('child_process')
+const open = require('../cli/open')
 
-// const callbackServer = require('./pocket-auth-server')
 const callbackServer = require('./simple-server')
 const client = require('./pocket-cli-http')
 const port = process.env.CALLBACK_PORT || 3300
@@ -17,7 +17,7 @@ const start = async () => {
   const requestToken = response.data.code
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
   await callbackServer(requestToken)
-  const exec = execSync(`xdg-open "${authorizeUrl}"`)
+  const exec = execSync(`${open.get()} "${authorizeUrl}"`)
 }
 
 module.exports.start = start
