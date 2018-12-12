@@ -195,15 +195,17 @@ pocket.read = async search => {
 
 pocket.render = () => {
   const output = []
-  output.push(blue(bold(pocket.toHumanText())))
+  const leftMargin = ' '.repeat(5)
+  output.push('')
+  output.push(`${leftMargin}${blue(bold(pocket.toHumanText()))}`)
   output.push('')
   let index = 0
   for (const entry of pocket.articles) {
     index++
     output.push(formatter(entry, index))
   }
-  output.push(blue(bold('Type "o 1" to open the first result in the browser')))
-  output.push(blue(bold('Type "e 1" to expand the first article excerpt')))
+  output.push(blue(' Type 1-8 to select or "archive 1" to archive. TAB to show commands'))
+  output.push('')
   return {lines: output}
 }
 
