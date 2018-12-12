@@ -38,8 +38,10 @@ const ui = readline.createInterface({
   prompt: defaultPrompt
 })
 
+const platform = require('os').platform()
+
 cli.init = () => {
-  console.log(`${'Pocket CLI'} - This screen has ${process.stdout.columns} columns.`)
+  console.log(`${'Pocket CLI'} - ${platform}`)
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
