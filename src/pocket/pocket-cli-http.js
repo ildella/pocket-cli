@@ -4,6 +4,7 @@ const {red, bold} = require('colorette')
 const containerName = 'wt-c7bbe7e68d36c0caa6436b2be9c7052a-0'
 const taskName = 'pocket-cli-proxy-server'
 const homedir = require('os').homedir()
+const tracer = require('../logger')()
 
 const readToken = () => {
   return fs.readFile(`${homedir}/.config/pocket_access_token`)
@@ -24,10 +25,10 @@ client.interceptors.response.use(response => {
   if (response) {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
-    console.error(red(bold(message))) //TODO use emit
+    tracer.error(message) //TODO use emit
     // console.error(config)
   } else {
-    console.error(red(bold('Network Error')))
+    tracer.error('Network Error')
   }
   return {error: error, source: 'axios interceptor'}
 })

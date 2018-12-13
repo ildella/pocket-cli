@@ -1,3 +1,5 @@
+const tracer = require('../logger')()
+
 const commands = {}
 
 const isValidString = string => {
@@ -8,10 +10,15 @@ const defaultCommand = 'list'
 const interpreter = {
 
   processInput: async string => {
-    const action = interpreter.getAction(string)
-    if (action === null) return []
-    const query = action.parse()
-    return await query.execute()
+    try {
+      const action = interpreter.getAction(string)
+      if (action === null) return []
+      const query = action.parse()
+      return await query.execute()
+    } catch (e) {
+      tracer.error(e)
+      return [e.message]
+    }
   },
 
   getAction: inputText => {
