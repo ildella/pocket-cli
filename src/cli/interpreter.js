@@ -13,8 +13,9 @@ const interpreter = {
 
   processInput: async string => {
     const account = auth.get()
-    if (account === null) return {lines: [yellow('No account found. Please type "auth" to connect to your Pocket account')]}
     const action = interpreter.getAction(string)
+    const block = account === null && action.command != commands.auth
+    if (block) return {lines: [yellow('No account found. Please type "auth" to connect to your Pocket account')]}
     if (action === null) return []
     const query = action.parse()
     return await query.execute()
