@@ -1,14 +1,8 @@
-const fs = require('fs').promises
 const axios = require('axios')
-const {red, bold} = require('colorette')
 const containerName = 'wt-c7bbe7e68d36c0caa6436b2be9c7052a-0'
 const taskName = 'pocket-cli-proxy-server'
-const homedir = require('os').homedir()
 const tracer = require('../logger')()
-
-const readToken = () => {
-  return fs.readFile(`${homedir}/.config/pocket_access_token`)
-}
+const auth = require('../auth')()
 
 const client = axios.create({
   baseURL: `https://${containerName}.sandbox.auth0-extend.com/${taskName}`,
@@ -26,7 +20,6 @@ client.interceptors.response.use(response => {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
     tracer.error(message) //TODO use emit
-    // console.error(config)
   } else {
     tracer.error('Network Error')
   }
@@ -34,15 +27,13 @@ client.interceptors.response.use(response => {
 })
 
 client.retrieve = async search => {
-  const userAccessToken = (await readToken()).toString()
-  const query = Object.assign({access_token: userAccessToken}, search)
+  const query = Object.assign(auth.get(), search)
   return client.post('/get', query)
 }
 
 client.modify = async actions => {
-  const userAccessToken = (await readToken()).toString()
   const query = Object.assign(
-    {access_token: userAccessToken},
+    auth.get(),
     {actions: actions}
   )
   return client.post('/send', query)
