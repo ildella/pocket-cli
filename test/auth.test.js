@@ -1,17 +1,14 @@
-const fs = require('fs')
+const fs = require('fs').promises
 const auth = require('../src/auth')({tokenFileName: 'test_pocket_token'})
 
-beforeEach(() => {
-  fs.unlinkSync(auth.accessTokenPath)
+beforeAll(async () => {
+  await fs.unlink(auth.accessTokenPath)
 })
 
-test('auth exists', () => {
-  expect(() => {
-    auth.get()
-  }).toThrow('ENOENT')
-
+test('auth exists', async () => {
+  expect(auth.get()).toBeNull()
   const token = 'abcd1234'
-  fs.writeFileSync(auth.accessTokenPath, token)
+  await fs.writeFile(auth.accessTokenPath, token)
   const json = auth.get()
   expect(json).toEqual({access_token: token})
 })

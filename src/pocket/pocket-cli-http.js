@@ -1,7 +1,7 @@
 const axios = require('axios')
 const containerName = 'wt-c7bbe7e68d36c0caa6436b2be9c7052a-0'
 const taskName = 'pocket-cli-proxy-server'
-const tracer = require('../logger')()
+// const tracer = require('../logger')()
 const auth = require('../auth')()
 
 const client = axios.create({
@@ -19,9 +19,9 @@ client.interceptors.response.use(response => {
   if (response) {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
-    tracer.error(message) //TODO use emit
+    // tracer.error(message) //TODO use emit
   } else {
-    tracer.error('Network Error')
+    // tracer.error('Network Error')
   }
   return {error: error, source: 'axios interceptor'}
 })

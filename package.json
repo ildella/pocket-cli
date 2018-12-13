@@ -1,6 +1,6 @@
 {
   "name": "pocket-cli",
-  "version": "0.6-0-pre",
+  "version": "0.6.0-pre",
   "description": "Interactive terminal application for Pocket",
   "main": "src/module.js",
   "bin": {
@@ -31,8 +31,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "colorette": "1.0.7",
-    "luxon": "1.8.2",
-    "tracer": "^0.9.6"
+    "luxon": "1.8.2"
   },
   "devDependencies": {
     "chai": "4.2.0",

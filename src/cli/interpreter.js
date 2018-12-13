@@ -1,4 +1,6 @@
-const tracer = require('../logger')()
+// const tracer = require('../logger')()
+const auth = require('../auth')()
+const {yellow} = require('colorette')
 
 const commands = {}
 
@@ -10,15 +12,12 @@ const defaultCommand = 'list'
 const interpreter = {
 
   processInput: async string => {
-    try {
-      const action = interpreter.getAction(string)
-      if (action === null) return []
-      const query = action.parse()
-      return await query.execute()
-    } catch (e) {
-      tracer.error(e)
-      return [e.message]
-    }
+    const account = auth.get()
+    if (account === null) return {lines: [yellow('No account found. Please type "auth" to connect to your Pocket account')]}
+    const action = interpreter.getAction(string)
+    if (action === null) return []
+    const query = action.parse()
+    return await query.execute()
   },
 
   getAction: inputText => {

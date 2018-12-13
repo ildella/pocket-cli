@@ -9,13 +9,12 @@ const auth = config => {
   const accessTokenPath = `${homedir}/.config/${accessTokenFileName}`
 
   const readToken = () => {
-    const file = fs.readFileSync(accessTokenPath)
-    return file.toString()
-    // try {
-    // } catch (e) {
-    //   tracer.error(e)
-    //   throw(new Error())
-    // }
+    try {
+      const file = fs.readFileSync(accessTokenPath)
+      return file.toString()
+    } catch (e) {
+      return null
+    }
   }
 
   return {
@@ -23,7 +22,8 @@ const auth = config => {
     accessTokenPath: accessTokenPath,
 
     get: () => {
-      return {access_token: readToken()}
+      const token = readToken()
+      return token ? {access_token: readToken()} : null
     }
   }
 
