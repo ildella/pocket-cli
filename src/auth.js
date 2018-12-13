@@ -1,4 +1,5 @@
-const fs = require('fs').promises
+// const tracer = require('./logger')()
+const fs = require('fs')
 const homedir = require('os').homedir()
 
 const auth = config => {
@@ -7,17 +8,22 @@ const auth = config => {
   const accessTokenFileName = actualConfig.tokenFileName || 'pocket_access_token'
   const accessTokenPath = `${homedir}/.config/${accessTokenFileName}`
 
-  const readToken = async () => {
-    const file = await fs.readFile(accessTokenPath)
+  const readToken = () => {
+    const file = fs.readFileSync(accessTokenPath)
     return file.toString()
+    // try {
+    // } catch (e) {
+    //   tracer.error(e)
+    //   throw(new Error())
+    // }
   }
 
   return {
 
     accessTokenPath: accessTokenPath,
 
-    get: async () => {
-      return {access_token: await readToken()}
+    get: () => {
+      return {access_token: readToken()}
     }
   }
 
