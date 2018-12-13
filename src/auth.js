@@ -5,8 +5,10 @@ const homedir = require('os').homedir()
 const auth = config => {
 
   const actualConfig = config || {}
-  const accessTokenFileName = actualConfig.tokenFileName || 'pocket_access_token'
-  const accessTokenPath = `${homedir}/.config/${accessTokenFileName}`
+  // const accessTokenFileName = actualConfig.tokenFileName || 'pocket_access_token'
+  const accessTokenPath = actualConfig.tokenFilePath
+    ? actualConfig.tokenFilePath
+    : `${homedir}/.config/pocket_access_token`
 
   const readToken = () => {
     try {

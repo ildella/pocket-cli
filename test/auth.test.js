@@ -1,5 +1,5 @@
 const fs = require('fs').promises
-const auth = require('../src/auth')({tokenFileName: 'test_pocket_token'})
+const auth = require('../src/auth')({tokenFilePath: 'test_token'})
 
 beforeAll(async () => {
   await fs.unlink(auth.accessTokenPath)
