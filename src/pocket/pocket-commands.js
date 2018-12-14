@@ -102,21 +102,37 @@ const listCommands = {
   }
 }
 
-const parseAuth = () => {
+const login = () => {
   return {
     name: 'pocket-auth',
     execute: async () => {
-      await pocketAuth()
-      return {lines: [green('User autheticated succesfully')]}
+      await pocketAuth.login()
+      return {lines: [green('User logged in')]}
     }
   }
 }
 
-commands['auth'] = {
-  name: 'authenticate',
-  aliases: ['auth', 'login'],
-  description: 'Authenticate to Pocket',
-  parse: parseAuth
+const logout = () => {
+  return {
+    name: 'pocket-auth',
+    execute: async () => {
+      pocketAuth.logout()
+      return {lines: [green('User logged out')]}
+    }
+  }
+}
+
+commands['login'] = {
+  name: 'login',
+  aliases: ['signin', 'auth'],
+  description: 'Login to Pocket',
+  parse: login
+}
+commands['logout'] = {
+  name: 'logout',
+  aliases: ['signout'],
+  description: 'Logout from Pocket',
+  parse: logout
 }
 commands['list'] = {
   name: 'list',

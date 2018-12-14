@@ -26,6 +26,14 @@ const auth = config => {
     get: () => {
       const token = readToken()
       return token ? {access_token: readToken()} : null
+    },
+
+    clear: () => {
+      try {
+        fs.unlinkSync(accessTokenPath)
+      } catch(e) {
+        //
+      }
     }
   }
 

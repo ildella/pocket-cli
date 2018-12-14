@@ -1,6 +1,6 @@
 // const tracer = require('../logger')()
-const auth = require('../auth')()
-const {yellow} = require('colorette')
+// const auth = require('../auth')()
+const {yellow, red} = require('colorette')
 
 const commands = {}
 
@@ -8,17 +8,30 @@ const isValidString = string => {
   return typeof(string) == 'string' && string.trim().length > 0 ? string.trim() : false
 }
 
+const handleError = name => {
+  switch (name) {
+  case 'auth':
+    return [yellow(`User not authenticated. Please type '${commands.login.name}'' to connect your Pocket account`)]
+  case 'update':
+    return [yellow('Please update the app')]
+  default:
+    return [red('big error!')]
+  }
+}
+
 const defaultCommand = 'list'
 const interpreter = {
 
   processInput: async string => {
-    const account = auth.get()
-    const action = interpreter.getAction(string)
-    const block = account === null && action.command != commands.auth
-    if (block) return {lines: [yellow('No account found. Please type "auth" to connect to your Pocket account')]}
-    if (action === null) return []
-    const query = action.parse()
-    return await query.execute()
+    try {
+      const action = interpreter.getAction(string)
+      if (action === null) return []
+      const query = action.parse()
+      return await query.execute()
+    } catch(e) {
+      // tracer.warn(e)
+      return {lines: handleError(e.name)}
+    }
   },
 
   getAction: inputText => {

@@ -8,14 +8,21 @@ const task = process.env.TASK || 'pocket-proxy-server-dev'
 const redirectURI = `http://localhost:${port}/oauth/pocket/callback`
 
 const open = require('../cli/open')
+const auth = require('../auth')()
 const client = require('./pocket-cli-http')({taskName: task})
 
-const start = async () => {
+const pocketAuth = {}
+
+pocketAuth.login = async () => {
   // TODO should return the authorizeUrl
   const requestToken = await client.requestToken(redirectURI)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
   await simpleServer(requestToken)
   const exec = execSync(`${open.get()} "${authorizeUrl}"`)
+}
+
+pocketAuth.logout = () => {
+  auth.clear()
 }
 
 const authorize = async requestToken => {
@@ -50,4 +57,4 @@ const simpleServer = async requestToken => {
   // console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
 }
 
-module.exports = start
+module.exports = pocketAuth

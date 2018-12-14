@@ -57,11 +57,11 @@ const build = config => {
     if (response) {
       const config = response.config
       const message = `${response.status} ${config.method} ${config.url}`
-      // tracer.warn(message)
-    } else {
-      // tracer.error('Network Error')
+      const e = new Error(message)
+      e.name = response.status === 401 ? 'auth' : 'api-error'
+      throw e
     }
-    return response
+    throw new Error('Network Error')
   })
 
   return pocket(client, authJson)
