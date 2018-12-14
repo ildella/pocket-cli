@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const start = async () => {
-  const pocketAuth = require('../src/pocket/pocket-auth')
+  const pocketAuth = require('../src/pocket/simple-server')
   await pocketAuth()
 }
 

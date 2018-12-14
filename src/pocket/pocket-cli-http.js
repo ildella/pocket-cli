@@ -15,6 +15,10 @@ const pocket = (client, authJson) => {
     return response.data.code
   }
 
+  pocket.authorize = requestToken => {
+    return client.post('/oauth/authorize', {code: requestToken})
+  }
+
   pocket.retrieve = async search => {
     const query = Object.assign(authJson, search)
     return client.post('/get', query)
