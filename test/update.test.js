@@ -2,7 +2,7 @@ const update = require('../src/npm-update')
 
 test('last version', async () => {
   const response = await update.lastVersion()
-  expect(response).toBe('0.6.0')
+  expect(response).toBeDefined()
 })
 
 test('check', async () => {
@@ -17,7 +17,7 @@ test('mock check', async () => {
 })
 
 test('mock check 2', async () => {
-  const response = await update.check('0.7.0-pre')
+  const response = await update.check('0.25.0-pre')
   expect(response.need).toBeFalsy()
-  expect(response.actual).toBe('0.7.0-pre')
+  expect(response.actual).toBe('0.25.0-pre')
 })
