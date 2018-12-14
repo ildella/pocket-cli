@@ -15,3 +15,9 @@ test('mock check', async () => {
   expect(response.need).toBeTruthy()
   expect(response.actual).toBe('0.4.2')
 })
+
+test('mock check 2', async () => {
+  const response = await update.check('0.7.0-pre')
+  expect(response.need).toBeFalsy()
+  expect(response.actual).toBe('0.7.0-pre')
+})
