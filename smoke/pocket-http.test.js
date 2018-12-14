@@ -42,8 +42,6 @@ test('unauthorized', async () => {
     cexpect(err.message).to.contain('401')
   }
 
-  // expect.assertions(1)
-  // await expect(pocket.retrieve(search)).rejects.toEqual(['auth: 401 post https://wt-c7bbe7e68d36c0caa6436b2be9c7052a-0.sandbox.auth0-extend.com/pocket-proxy-server-dev/get'])
 })
 
 test('requestToken', async () => {
