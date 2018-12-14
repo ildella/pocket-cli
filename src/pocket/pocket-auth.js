@@ -11,6 +11,7 @@ const open = require('../cli/open')
 const client = require('./pocket-cli-http')({taskName: task})
 
 const start = async () => {
+  // TODO should return the authorizeUrl
   const requestToken = await client.requestToken(redirectURI)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
   await simpleServer(requestToken)
@@ -18,8 +19,9 @@ const start = async () => {
 }
 
 const authorize = async requestToken => {
+  // TODO authorize should return the code, not the whole response
   const response = await client.authorize(requestToken)
-  //TODO: use auth.write instead of direct fs write
+  // TODO: use auth.write instead of direct fs write
   fs.writeFileSync(`${homedir}/.config/pocket_access_token`, `${response.data.access_token}\n`)
   return response.data.username
 }
