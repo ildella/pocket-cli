@@ -57,4 +57,4 @@ Use TAB to autocomplete
 
 ## Author
 
-Get in touch [on Twitter](https://twitter.com/ildella)
+Built by Daniele Dellafiore. Get in touch [on Twitter](https://twitter.com/ildella)
