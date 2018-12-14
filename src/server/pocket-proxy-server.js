@@ -57,7 +57,7 @@ const pocketApi = require('./pocket-http')
 
 app.all('/*', async (req, res) => {
   const payload = Object.assign({consumer_key: consumerKey}, req.body)
-  const response = await pocketApi.post('/get', payload)
+  const response = await pocketApi.post(req.url, payload)
   // tracer.info(response.status, typeof response.status)
   // tracer.info(response.data)
   res.status(response.status).json(response.data)

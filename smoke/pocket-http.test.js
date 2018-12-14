@@ -32,3 +32,10 @@ test('unauthorized', async () => {
   // expect(response.headers).toBe()
   // expect(response.config).toBe()
 })
+
+test('requestToken', async () => {
+  const pocket = require('../src/pocket/pocket-cli-http')()
+  const token = await pocket.requestToken('http://localhost:4444/callback')
+  expect(token).toBeDefined()
+  expect(token).toHaveLength(30)
+})
