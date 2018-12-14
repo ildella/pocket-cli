@@ -8,12 +8,14 @@
     "start": "wt serve pocket-proxy-server.js",
     "create": "wt create pocket-proxy-server.js -b --secrets-file .authproxy.env",
     "update": "wt update pocket-cli-proxy-server pocket-proxy-server.js -b",
-    "update:watch": "wt update pocket-cli-proxy-server pocket-proxy-server.js -b -w"
+    "dev": "wt create pocket-proxy-server.js -b --secrets-file .authproxy.env --name pocket-proxy-server-dev",
+    "update:dev": "wt update pocket-proxy-server-dev pocket-proxy-server.js -b -w"
   },
   "dependencies": {
     "axios": "0.18.0",
     "dotenv": "6.2.0",
     "express": "4.16.4",
+    "http-proxy": "^1.17.0",
     "tracer": "0.9.6",
     "webtask-tools": "3.4.0"
   }

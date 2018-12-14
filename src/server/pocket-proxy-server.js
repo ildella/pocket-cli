@@ -1,13 +1,7 @@
 const webtask = require('webtask-tools')
+const tracer = require('../logger')()
 require('dotenv').config()
 const secrets = module.webtask ? module.webtask.secrets : process.env
-const tracer = require('tracer').colorConsole({
-  level: secrets.LOG_LEVEL || 'debug',
-  dateformat: 'HH:MM:ss',
-  transport: [
-    data => { console.log(data.output) }
-  ]
-})
 process.on('unhandledRejection', (reason, p) => {
   const response = reason.response
   if (response) {
@@ -54,7 +48,23 @@ app.post('/get', async (req, res) => {
   const payload = Object.assign({consumer_key: consumerKey}, req.body)
   // console.log(payload)
   const response = await pocketApi.post('/get', payload)
-  res.json(response.data)
+  tracer.info(response.status, typeof response.status)
+  tracer.info(response.data)
+  // tracer.info(response.headers)
+  // tracer.info(response.config)
+  // tracer.info(response)
+  res.status(response.status).json(response.data)
+  // res.set(response.headers)
+  // res.json(response.data)
 })
+
+// const httpProxy = require('http-proxy')
+// const apiProxy = httpProxy.createProxyServer()
+// const serverOne = 'https://getpocket.com/v3'
+
+// app.all('/*', (req, res) => {
+//   tracer.info('redirecting to Pocket')
+//   apiProxy.web(req, res, {target: serverOne})
+// })
 
 module.exports = webtask.fromExpress(app)

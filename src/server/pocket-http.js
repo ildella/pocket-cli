@@ -1,3 +1,4 @@
+const tracer = require('../logger')()
 const axios = require('axios')
 
 const client = axios.create({
@@ -15,12 +16,13 @@ client.interceptors.response.use(response => {
   if (response) {
     const config = response.config
     const message = `${response.status} ${config.method} ${config.url}`
-    console.error(message) //TODO use emit
+    tracer.warn('ignoring this "error" from Pocket API') //TODO use emit
+    tracer.warn(message) //TODO use emit
     // console.error(config)
   } else {
-    console.error('Network Error')
+    tracer.error('Network Error')
   }
-  return {error: error, source: 'axios interceptor'}
+  return response
 })
 
 module.exports = client
