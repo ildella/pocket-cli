@@ -1,3 +1,10 @@
+const cexpect = require('chai').expect
+test('same instance', () => {
+  const p1 = require('../src/pocket/pocket-cli-http')()
+  const p2 = require('../src/pocket/pocket-cli-http')()
+  expect(p1).not.toBe(p2)
+})
+
 test('read from pocket API', async () => {
   const auth = require('../src/auth')()
   const authJson = auth.get()
@@ -26,11 +33,17 @@ test('unauthorized', async () => {
     offset: 0,
     since: 0
   }
-  const response = await pocket.retrieve(search)
-  expect(response.status).toBe(401)
-  expect(response.data).toBe('401 Unauthorized')
-  // expect(response.headers).toBe()
-  // expect(response.config).toBe()
+
+  try {
+    await pocket.retrieve(search)
+  } catch (err) {
+    cexpect(err).to.be.an.instanceof(Error)
+    cexpect(err.message).to.contain('auth')
+    cexpect(err.message).to.contain('401')
+  }
+
+  // expect.assertions(1)
+  // await expect(pocket.retrieve(search)).rejects.toEqual(['auth: 401 post https://wt-c7bbe7e68d36c0caa6436b2be9c7052a-0.sandbox.auth0-extend.com/pocket-proxy-server-dev/get'])
 })
 
 test('requestToken', async () => {

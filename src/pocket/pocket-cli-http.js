@@ -1,6 +1,5 @@
 const axios = require('axios')
 const containerName = 'wt-c7bbe7e68d36c0caa6436b2be9c7052a-0'
-// const tracer = require('../logger')()
 
 const pocket = (client, authJson) => {
 
@@ -57,11 +56,11 @@ const build = config => {
     if (response) {
       const config = response.config
       const message = `${response.status} ${config.method} ${config.url}`
-      const e = new Error(message)
-      e.name = response.status === 401 ? 'auth' : 'api-error'
-      throw e
+      const err = new Error(message)
+      err.name = response.status === 401 ? 'auth' : 'api-error'
+      throw err
     }
-    throw new Error('Network Error')
+    throw new Error('Network Error', 'network-error')
   })
 
   return pocket(client, authJson)
