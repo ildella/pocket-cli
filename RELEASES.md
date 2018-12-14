@@ -1,8 +1,8 @@
 ## 0.7.0 -> In dev...
 
   * Login with proper user flow for first usage
-  * Logout 
-  * Update: Check versions
+  * Logout
+  * Update: Check for updates
 
 ## 0.6.0 - Dec 13, 2018
 

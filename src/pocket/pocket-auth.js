@@ -47,7 +47,7 @@ const simpleServer = async requestToken => {
           console.error(err)
           process.exit(1)
         }
-        console.log('Server closed with no errors. Shutting down connections')
+        // console.log('Server closed with no errors. Shutting down connections')
       })
     }
     res.writeHead(400, {'Content-Type': 'text/plain'})
