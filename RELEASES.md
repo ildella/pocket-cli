@@ -1,7 +1,8 @@
 ## 0.7.0 -> In dev...
 
-  * New Proxy and Auth code to better handle authorization
-  * Check new versions, suggest updates, minimum required version from Proxy
+  * Login with proper user flow for first usage
+  * Logout 
+  * Update: Check versions
 
 ## 0.6.0 - Dec 13, 2018
 
