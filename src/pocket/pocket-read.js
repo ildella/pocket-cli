@@ -1,9 +1,11 @@
+const {blue, bold} = require('colorette')
 const {execSync} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
-const client = require('./pocket-cli-http')
+
+const task = process.env.TASK || 'pocket-proxy-server-dev'
 const formatter = require('../content-formatter')
-const {blue, bold} = require('colorette')
+const auth = require('../auth')()
 
 const intersection = arrays => {
   return arrays.reduce((a, b) => a.filter(c => b.includes(c)))
@@ -165,11 +167,19 @@ pocket.toQuery = (inputs = []) => {
 }
 
 pocket.modify = async actions => {
+  const client = require('./pocket-cli-http')({
+    taskName: task,
+    auth: auth.get()
+  })
   await client.modify(actions)
   return {lines: [`applied ${actions.length} changes`]}
 }
 
 pocket.read = async search => {
+  const client = require('./pocket-cli-http')({
+    taskName: task,
+    auth: auth.get()
+  })
   const response = await client.retrieve(search)
   const data = response.data
   const articles = Object.values(data ? data.list : [])

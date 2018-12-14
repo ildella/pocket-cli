@@ -1,15 +1,15 @@
 const fs = require('fs')
 const http = require('http')
-const homedir = require('os').homedir()
-const port = process.env.CALLBACK_PORT || 3300
-
-const client = require('./pocket-cli-http')({
-  taskName: 'pocket-proxy-server-dev'
-})
-
 const {execSync} = require('child_process')
+const homedir = require('os').homedir()
+
+const port = process.env.CALLBACK_PORT || 3300
+const task = process.env.TASK || 'pocket-proxy-server-dev'
 const redirectURI = `http://localhost:${port}/oauth/pocket/callback`
+
 const open = require('../cli/open')
+const client = require('./pocket-cli-http')({taskName: task})
+
 const start = async () => {
   const requestToken = await client.requestToken(redirectURI)
   const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
@@ -19,12 +19,12 @@ const start = async () => {
 
 const authorize = async requestToken => {
   const response = await client.authorize(requestToken)
+  //TODO: use auth.write instead of direct fs write
   fs.writeFileSync(`${homedir}/.config/pocket_access_token`, `${response.data.access_token}\n`)
   return response.data.username
 }
 
 const simpleServer = async requestToken => {
-
   const server = http.createServer(async (req, res) => {
     if (req.url === '/' && req.method === 'GET') {
       res.end('up and running\n')
@@ -48,5 +48,4 @@ const simpleServer = async requestToken => {
   // console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
 }
 
-// module.exports = simpleServer
 module.exports = start

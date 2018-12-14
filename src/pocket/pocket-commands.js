@@ -106,7 +106,7 @@ const parseAuth = () => {
   return {
     name: 'pocket-auth',
     execute: async () => {
-      await pocketAuth.start()
+      await pocketAuth()
       return {lines: [green('User autheticated succesfully')]}
     }
   }
