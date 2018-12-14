@@ -1,5 +1,4 @@
 // const tracer = require('../logger')()
-// const auth = require('../auth')()
 const {yellow, red} = require('colorette')
 
 const commands = {}
