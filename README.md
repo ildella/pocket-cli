@@ -1,6 +1,6 @@
 # Pocket CLI 
 
-Interactive terminal application for [Pocket](https://getpocket.com)
+Pocket-CLI is an interactive textual application to search and manage your [Pocket](https://getpocket.com) articles from the terminal.
 
 <p align="center">
 <img src="screens/screen1.png" alt="pocket-cli" />
