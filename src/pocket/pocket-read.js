@@ -188,6 +188,7 @@ pocket.read = async search => {
     const url = article.resolved_url || article.given_url || ''
     const shortUrl = url.replace('https://', '').replace('http://', '')
     const isArticle = article.is_article === 1
+    const isArchived = article.status == 1
     const excerpt = article.excerpt || ''
     const newFields = {
       id: id,
@@ -196,6 +197,7 @@ pocket.read = async search => {
       url: url,
       shortUrl: shortUrl,
       isArticle: isArticle,
+      isArchived: isArchived,
       excerpt: excerpt
     }
     return Object.assign({}, article, newFields)
