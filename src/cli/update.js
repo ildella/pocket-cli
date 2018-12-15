@@ -1,9 +1,9 @@
-const fs = require('fs')
-const readline = require('readline')
-const inputStream = fs.createReadStream('RELEASES.md')
-const rl = readline.createInterface({input: inputStream})
-const output = []
-rl.on('line', line => { output.push(line) })
+// const fs = require('fs')
+// const readline = require('readline')
+// const inputStream = fs.createReadStream('RELEASES.md')
+// const rl = readline.createInterface({input: inputStream})
+// const output = []
+// rl.on('line', line => { output.push(line) })
 
 const commands = require('./interpreter').commands
 const update = require('../npm-update')
@@ -15,13 +15,13 @@ commands['update'] = {
   parse: options => {
     const subcommand = options && options.length > 0 ? options[0] : null
     switch (subcommand) {
-    case 'whatsnew':
-      return {
-        name: 'update-release',
-        execute: async () => {
-          return {lines: output}
-        }
-      }
+    // case 'whatsnew':
+    //   return {
+    //     name: 'update-release',
+    //     execute: async () => {
+    //       return {lines: output}
+    //     }
+    //   }
     default:
       return {
         name: 'update',
