@@ -52,4 +52,5 @@ rules:
   sonarjs/cognitive-complexity: [warn, 6]
   sonarjs/no-identical-functions: warn
   sonarjs/prefer-immediate-return: warn
+  sonarjs/no-small-switch: [warn, 3]
   space-before-function-paren: warn
