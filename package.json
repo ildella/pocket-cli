@@ -52,7 +52,8 @@
     "test:unit": "node_modules/jest/bin/jest.js --config=jest.ci.js --watch",
     "deps": "npm ls --prod=true --depth=3",
     "eslint": "node_modules/eslint/bin/eslint.js src",
-    "snap:build": "snapcraft",
+    "snap": "snapcraft clean && snapcraft",
+    "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
   }
 }
