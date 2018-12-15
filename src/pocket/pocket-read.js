@@ -1,5 +1,5 @@
 const {blue, bold} = require('colorette')
-const {execSync} = require('child_process')
+const {exec, execSync} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
@@ -87,17 +87,15 @@ pocket.expand = indexes => {
 const open = require('../cli/open')
 
 pocket.open = indexes => {
-  const index = indexes[0]
-  const selected = pocket.articles[Number(index) - 1]
+  const selected = indexes.map(index => pocket.articles[Number(index) - 1])
   return {
     name: 'pocket-open',
     indexes: indexes,
-    index: index,
     execute: () => {
-      const exec = execSync(`${open.get()} "${selected.url}"`)
-      const output = []
-      output.push(blue(selected.url))
-      return {lines: output}
+      selected.forEach(article => {
+        exec(`${open.get()} "${article.url}"`)
+      })
+      return {lines: []}
     }
   }
 }
