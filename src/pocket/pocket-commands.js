@@ -136,7 +136,7 @@ commands['logout'] = {
 }
 commands['list'] = {
   name: 'list',
-  aliases: ['search', 'find', 's', 'l', 'ls'],
+  aliases: ['ls', 'l', 'search', 's', 'find'],
   description: 'Search for the given keywords. eg: list bitcoin',
   submenu: listCommands,
   parse: pocket.toQuery

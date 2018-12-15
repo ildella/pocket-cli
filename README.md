@@ -39,7 +39,7 @@ Some example command
 
 ```
 $ pocket-cli
-Pocket> auth // starts Oauth with Pocket API
+Pocket> login // Authenticate with Pocket to get access to your articles
 Pocket> ? // prints help
 Pocket> list // last 8 articles
 Pocket> unread // last 8 unread articles
