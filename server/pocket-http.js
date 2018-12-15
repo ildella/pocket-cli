@@ -1,4 +1,4 @@
-const tracer = require('../logger')()
+const tracer = require('../src/logger')()
 const axios = require('axios')
 
 const client = axios.create({
