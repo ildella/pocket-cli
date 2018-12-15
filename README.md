@@ -40,13 +40,15 @@ Some example command
 ```
 $ pocket-cli
 Pocket> auth // starts Oauth with Pocket API
+Pocket> ? // prints help
 Pocket> list // last 8 articles
 Pocket> unread // last 8 unread articles
 Pocket> bitcoin // search for articles with 'bitcoin'
 Pocket> archive 1 2 3 // archive article 1, 2 and 3 from the last search
 Pocket> a 1 2 3 // shortcut for archive
-Pocket> o 1 // open first result in default browser
+Pocket> o 1 2 3 // open selected indexes in browser
 Pocket> 2 <ENTER> <ENTER> // open second result (press enter twice)
+Pocket> update whatsnew // prints release notes
 ```
 
 Use TAB to autocomplete
