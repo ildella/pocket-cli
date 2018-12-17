@@ -1,12 +1,10 @@
-// const fs = require('fs')
-// const readline = require('readline')
-// const inputStream = fs.createReadStream('RELEASES.md')
-// const rl = readline.createInterface({input: inputStream})
-// const output = []
-// rl.on('line', line => { output.push(line) })
+const axios = require('axios')
+const releaseNotesUrl = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/RELEASES.md'
 
 const commands = require('./interpreter').commands
 const update = require('../npm-update')
+
+const output = []
 
 commands['update'] = {
   name: 'update',
@@ -15,13 +13,15 @@ commands['update'] = {
   parse: options => {
     const subcommand = options && options.length > 0 ? options[0] : null
     switch (subcommand) {
-    // case 'whatsnew':
-    //   return {
-    //     name: 'update-release',
-    //     execute: async () => {
-    //       return {lines: output}
-    //     }
-    //   }
+    case 'whatsnew':
+      return {
+        name: 'update-release',
+        execute: async () => {
+          const response = await axios(releaseNotesUrl)
+          console.log(response.data)
+          return {lines: output}
+        }
+      }
     default:
       return {
         name: 'update',
