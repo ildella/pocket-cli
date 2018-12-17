@@ -1,6 +1,6 @@
 {
   "name": "pocket-cli",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Interactive terminal application for Pocket",
   "main": "src/module.js",
   "bin": {
