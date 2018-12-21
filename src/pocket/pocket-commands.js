@@ -144,6 +144,11 @@ commands['list'] = {
   name: 'list',
   aliases: ['ls', 'l', 'search', 's', 'find'],
   description: 'Search for the given keywords. eg: list bitcoin',
+  guide:
+    `
+      List is the default command. 
+      This means that if no other command is detected, I search for the input text
+    `,
   submenu: listCommands,
   parse: pocket.toQuery
 }

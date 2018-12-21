@@ -6,7 +6,15 @@ const output = []
 const parse = params => {
   return {
     name: 'help',
-    execute: () => { return {lines: output} }
+    execute: () => {
+      if (params) {
+        const command = commands[params[0]]
+        if (command) {
+          return {lines: [command.guide]}
+        }
+      }
+      return {lines: output}
+    }
   }
 }
 
