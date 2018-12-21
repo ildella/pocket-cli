@@ -1,4 +1,4 @@
-const {blue, yellow, bold} = require('colorette')
+const {green, blue, yellow, bold} = require('colorette')
 const {exec} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
@@ -237,8 +237,9 @@ pocket.render = () => {
 pocket.toHumanText = () => {
   const last = pocket.queries.last()
   const date = DateTime.fromMillis(last.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
-  const searchString = last.search || '*'
-  return `Search for "${searchString}" in "${last.state}" documents, order by "${last.sort}" starting ${date}`
+  const searchString = green(last.search || '*')
+  const orderBy = green(last.sort)
+  return `Search for ${searchString} in "${last.state}" documents, order by ${orderBy} starting ${date}`
 }
 
 module.exports = pocket
