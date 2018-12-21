@@ -174,8 +174,10 @@ pocket.modify = async actions => {
     auth: auth.get()
   })
   const response = await client.modify(actions)
-  console.log(response.data)
-  return {lines: [`applied ${actions.length} changes`]}
+  const results = response.data.action_results.map(result => {
+    return result ? 'success' : 'failed'
+  })
+  return {lines: [`${results}`]}
 }
 
 pocket.read = async search => {

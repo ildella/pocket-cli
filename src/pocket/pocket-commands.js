@@ -44,6 +44,12 @@ const listCommands = {
     description: 'Favorite article',
     parse: pocket.favorite
   },
+  tag: {
+    name: 'tag',
+    aliases: ['t'],
+    description: 'tag article',
+    parse: pocket.tag
+  },
   readd: {
     name: 'readd',
     aliases: ['unarchive'],
