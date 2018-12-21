@@ -1,4 +1,4 @@
-const {green, blue, yellow, bold} = require('colorette')
+const {cyan, green, blue, yellow, bold} = require('colorette')
 const {exec} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
@@ -214,14 +214,14 @@ pocket.read = async search => {
   return pocket.render()
 }
 
-const listGuide = blue('Type 1-8 to select or "archive 1" to archive. TAB to show commands')
+const indexes = cyan('1-8')
+const command1 = cyan('open 1')
+const command2 = cyan('archive 2')
+const listGuide = blue(`Type ${indexes} to select or ry commands like ${command1} and ${command2}. Press TAB to show commands`)
 const noResultsGuide = yellow('No results found')
 
 pocket.render = () => {
   const output = []
-  const leftMargin = ' '.repeat(4)
-  output.push('')
-  output.push(`${leftMargin}${blue(bold(pocket.toHumanText()))}`)
   output.push('')
   let index = 0
   for (const entry of pocket.articles) {
@@ -229,6 +229,8 @@ pocket.render = () => {
     output.push(formatter(entry, index))
   }
   const guide = pocket.articles.length > 0 ? listGuide : noResultsGuide
+  const leftMargin = ' '.repeat(4)
+  output.push(`${leftMargin}${blue(pocket.toHumanText())}`)
   output.push(`${leftMargin}${guide}`)
   output.push('')
   return {lines: output}
@@ -239,7 +241,8 @@ pocket.toHumanText = () => {
   const date = DateTime.fromMillis(last.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
   const searchString = green(last.search || '*')
   const orderBy = green(last.sort)
-  return `Search for ${searchString} in "${last.state}" documents, order by ${orderBy} starting ${date}`
+  const state = green(last.state)
+  return `Search for ${searchString} in ${state} documents, order by ${orderBy} starting ${date}`
 }
 
 module.exports = pocket
