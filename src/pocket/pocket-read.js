@@ -1,5 +1,5 @@
-const {blue, bold} = require('colorette')
-const {exec, execSync} = require('child_process')
+const {blue, yellow, bold} = require('colorette')
+const {exec} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
@@ -214,9 +214,12 @@ pocket.read = async search => {
   return pocket.render()
 }
 
+const listGuide = blue('Type 1-8 to select or "archive 1" to archive. TAB to show commands')
+const noResultsGuide = yellow('No results found')
+
 pocket.render = () => {
   const output = []
-  const leftMargin = ' '.repeat(5)
+  const leftMargin = ' '.repeat(4)
   output.push('')
   output.push(`${leftMargin}${blue(bold(pocket.toHumanText()))}`)
   output.push('')
@@ -225,7 +228,8 @@ pocket.render = () => {
     index++
     output.push(formatter(entry, index))
   }
-  output.push(blue(' Type 1-8 to select or "archive 1" to archive. TAB to show commands'))
+  const guide = pocket.articles.length > 0 ? listGuide : noResultsGuide
+  output.push(`${leftMargin}${guide}`)
   output.push('')
   return {lines: output}
 }
