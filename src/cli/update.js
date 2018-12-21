@@ -1,5 +1,5 @@
 const axios = require('axios')
-const releaseNotesUrl = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/RELEASES.md'
+const url = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/RELEASES.md'
 
 const commands = require('./interpreter').commands
 const update = require('../npm-update')
@@ -17,7 +17,7 @@ commands['update'] = {
       return {
         name: 'update-release',
         execute: async () => {
-          const response = await axios(releaseNotesUrl)
+          const response = await axios(url)
           console.log(response.data)
           return {lines: output}
         }

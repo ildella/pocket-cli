@@ -10,7 +10,7 @@ const isValidString = string => {
 const handleError = name => {
   switch (name) {
   case 'auth':
-    return [yellow(`User not authenticated. Please type '${commands.login.name}'' to connect your Pocket account`)]
+    return [yellow(`User not authenticated. Please type '${commands.login.name}' to connect your Pocket account`)]
   case 'update':
     return [yellow('Please update the app')]
   default:
