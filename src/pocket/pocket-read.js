@@ -62,6 +62,10 @@ pocket.readd = indexes => {
   return pocket.modifyQuery('readd', indexes)
 }
 
+pocket.tag = indexes => {
+  return pocket.modifyQuery('tags_add', indexes)
+}
+
 pocket.print = () => {
   return {
     name: 'pocket-print',
@@ -126,7 +130,7 @@ pocket.modifyQuery = (action, ...index) => {
     return {
       action: action,
       item_id: article.item_id,
-      time: DateTime.local().millisecond * 1000
+      time: DateTime.local().ts / 1000
     }
   })
   pocket.actions.push({
@@ -169,7 +173,8 @@ pocket.modify = async actions => {
     taskName: task,
     auth: auth.get()
   })
-  await client.modify(actions)
+  const response = await client.modify(actions)
+  console.log(response.data)
   return {lines: [`applied ${actions.length} changes`]}
 }
 
