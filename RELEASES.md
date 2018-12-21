@@ -1,7 +1,9 @@
-## 0.8.0 -> ...next
+## 0.7.7 -> Dec 21, 2018
 
   * More detailed help and a new 'guide' command
   * Fix: action time is wrong, this causes'readd' command to malfunction
+  * Improved UI: show clear "no results found" message whe... appropriate
+  * Improved UI: more clear search and actions messages in results screen
 
 ## 0.7.3 -> Dec 15, 2018
 

@@ -6,18 +6,18 @@ require('../src/cli/help')
 
 test('read from pocket API', async () => {
   const output = await interpreter.processInput('bitcoin')
-  expect(output.lines).toHaveLength(13)
+  expect(output.lines).toHaveLength(12)
   await interpreter.processInput('n')
 })
 
 test('modify with pocket API - archive/readd', async () => {
   const list = await interpreter.processInput('bitcoin')
   const output = await interpreter.processInput('a 2')
-  expect(output.lines).toEqual(['applied 1 changes'])
+  expect(output.lines).toEqual(['success'])
 })
 
 test('multiple archive', async () => {
   const list = await interpreter.processInput('bitcoin')
   const output = await interpreter.processInput('a 2 3')
-  expect(output.lines).toEqual(['applied 2 changes'])
+  expect(output.lines).toEqual(['success,success'])
 })
