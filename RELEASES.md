@@ -1,3 +1,8 @@
+## 0.8.0 -> ...next
+
+  * More detailed help and a new 'guide' command
+  * Fix: action time is wrong, this causes'readd' command to malfunction
+
 ## 0.7.3 -> Dec 15, 2018
 
   * show (A) before archived articles title
