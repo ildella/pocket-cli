@@ -1,4 +1,9 @@
-## 0.7.7 -> Dec 21, 2018
+## 0.7.9 -> Dec 23, 2018
+
+  * fix/loader: the loader symbol does not disappear after search is finished
+  * help text after search is in gray + typo fix
+
+## 0.7.8 -> Dec 21, 2018
 
   * More detailed help and a new 'guide' command
   * Fix: action time is wrong, this causes'readd' command to malfunction
