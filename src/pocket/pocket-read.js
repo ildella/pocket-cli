@@ -1,4 +1,4 @@
-const {cyan, green, blue, yellow, bold} = require('colorette')
+const {gray, cyan, green, blue, yellow, bold} = require('colorette')
 const {exec} = require('child_process')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
@@ -217,7 +217,7 @@ pocket.read = async search => {
 const indexes = cyan('1-8')
 const command1 = cyan('open 1')
 const command2 = cyan('archive 2')
-const listGuide = blue(`Type ${indexes} to select or ry commands like ${command1} and ${command2}. Press TAB to show commands`)
+const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
 const noResultsGuide = yellow('No results found')
 
 pocket.render = () => {
