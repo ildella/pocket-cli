@@ -11,10 +11,6 @@ const options = {
   '5': 'delete',
 }
 
-const parseCommand = actionIndex => {
-  return options[actionIndex]
-}
-
 const interactiveOptions = Object.keys(options)
   .reduce(
     (previousValue, currentValue, currentIndex) => {
@@ -91,15 +87,18 @@ const listCommands = {
     type: 'interactive', //TODO: better check type or keep using naming convention?
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-    parseCommand: parseCommand,
+    parseCommand: actionIndex => {
+      return options[actionIndex]
+    },
     parse: spaceSeparatedInput => {
-      const output = [interactiveOptions]
+      // TODO: understand difference btw this and actionIndex up there
+      // maybe we can avoid parseCommand or reuse it here, but not have both
       return {
         name: 'interactive-query',
-        index: spaceSeparatedInput[0],
+        // index: spaceSeparatedInput[0],
         execute: () => {
           return {
-            lines: output,
+            lines: [interactiveOptions],
             prompt: yellow('select: ')
           }
         }
