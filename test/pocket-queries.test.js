@@ -52,6 +52,7 @@ test('Modify query', async () => {
   const query = modify('archive', '2')
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(1)
+  expect(query.actions).toBe('archive')
   expect(query.actions[0].action).toBe('archive')
   expect(query.actions[0].item_id).toBe('a2')
 })

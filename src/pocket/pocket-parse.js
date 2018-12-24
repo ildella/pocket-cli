@@ -153,6 +153,7 @@ const pocketParse = {
       name: 'pocket-list',
       search: search,
       execute: async () => {
+        // TOFIX: await should not stay here... 
         const parsedArticles = await pocketExecute.retrieve(search)
         // TOFIX: the horror
         articles = articles.concat(parsedArticles)
@@ -170,6 +171,7 @@ const pocketParse = {
 
 }
 
+const actionsHistory = []
 const modify = (action, ...index) => {
   const matches = index.flat().map(i => articles[i - 1]).filter(Boolean)
   const actions = matches.map(article => {
@@ -179,7 +181,7 @@ const modify = (action, ...index) => {
       time: DateTime.local().ts / 1000
     }
   })
-  actions.push({
+  actionsHistory.push({
     timestamp: DateTime.local(),
     actions: actions
   })
