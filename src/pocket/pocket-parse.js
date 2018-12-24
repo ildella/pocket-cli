@@ -1,4 +1,4 @@
-const {blue} = require('colorette')
+const {gray, cyan, green, blue, yellow, bold} = require('colorette')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
@@ -35,8 +35,33 @@ const history = function (name) {
 }
 
 const queries = history('queries')
-const articles = []
-// const actions = []
+let articles = []
+
+const indexes = cyan('1-8')
+const command1 = cyan('open 1')
+const command2 = cyan('archive 2')
+const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
+const noResultsGuide = yellow('No results found')
+
+const formatter = require('../content-formatter')
+
+const render = articles => {
+  const output = []
+  let index = 0
+  for (const entry of articles) {
+    index++
+    output.push(formatter(entry, index))
+  }
+  return output
+}
+
+const toHumanText = query => {
+  const date = DateTime.fromMillis(query.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
+  const searchString = green(query.search || '*')
+  const orderBy = green(query.sort)
+  const state = green(query.state)
+  return `Search for ${searchString} in ${state} documents, order by ${orderBy} starting ${date}`
+}
 
 const pocketParse = {
 
@@ -80,13 +105,10 @@ const pocketParse = {
 
   open: indexes => {
     const selected = indexes.map(index => articles[Number(index) - 1])
-    console.log(articles)
-    console.log(indexes)
-    console.log(selected)
     return {
       name: 'pocket-open',
       indexes: indexes,
-      execute: open(selected)
+      execute: () => { return open(selected) }
     }
   },
 
@@ -130,7 +152,19 @@ const pocketParse = {
     return {
       name: 'pocket-list',
       search: search,
-      execute: () => { return pocketExecute.retrieve(search) }
+      execute: async () => {
+        const parsedArticles = await pocketExecute.retrieve(search)
+        // TOFIX: the horror
+        articles = articles.concat(parsedArticles)
+        const renderedArticles = render(parsedArticles)
+        const output = [''].concat(renderedArticles)
+        const guide = articles.length > 0 ? listGuide : noResultsGuide
+        const leftMargin = ' '.repeat(4)
+        output.push(`${leftMargin}${blue(toHumanText(search))}`)
+        output.push(`${leftMargin}${guide}`)
+        output.push('')
+        return {lines: output}
+      }
     }
   }
 
