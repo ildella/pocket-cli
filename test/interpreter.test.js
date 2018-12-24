@@ -5,8 +5,9 @@ require('../src/cli/version')
 const commands = interpreter.commands
 
 test('undefined', () => {
-  expect(interpreter.getAction()).toBeNull()
-  expect(interpreter.getAction('')).toBeNull()
+  const nullAction = interpreter.getAction()
+  expect(nullAction.command.name).toBe('null')
+  // expect(nullAction).toBe()
 })
 
 test('quit', async () => {
