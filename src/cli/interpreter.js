@@ -82,11 +82,9 @@ const interpreter = {
   processInput: async string => {
     try {
       const action = interpreter.getAction(string)
-      if (action === null) return []
       const query = action.parse()
       return await query.execute()
     } catch(e) {
-      // tracer.warn(e)
       return {lines: handleError(e.name)}
     }
   },
