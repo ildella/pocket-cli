@@ -1,6 +1,6 @@
 const {commands} = require('../cli/interpreter')
 const pocketAuth = require('./pocket-auth')
-const pocket = require('./pocket-read')
+const pocket = require('./pocket-parse')
 const {green, yellow} = require('colorette')
 
 const options = {
@@ -52,12 +52,12 @@ const listCommands = {
     description: 'Un-archive article / Mark as unread',
     parse: pocket.readd
   },
-  print: {
-    name: 'print',
-    aliases: ['p'],
-    description: 'print last search results',
-    parse: pocket.print
-  },
+  // print: {
+  //   name: 'print',
+  //   aliases: ['p'],
+  //   description: 'print last search results',
+  //   parse: pocket.print
+  // },
   next: {
     name: 'next',
     aliases: ['n'],
@@ -154,5 +154,5 @@ commands['list'] = {
     oldest / newest    list starting from oldest / newest
   `,
   submenu: listCommands,
-  parse: pocket.toQuery
+  parse: pocket.retrieve
 }

@@ -44,6 +44,13 @@ test('favorite multiple items', async () => {
   expect(archiveMultiple.input).toEqual(['1', '2', '3'])
 })
 
+test('favorite without parameter', async () => {
+  const archiveMultiple = interpreter.getAction('fav')
+  expect(archiveMultiple.command).toBe(commands.favorite)
+  expect(archiveMultiple.input).toEqual([])
+  expect(archiveMultiple.parse()).toEqual()
+})
+
 test('open', async () => {
   const action = interpreter.getAction('open 1')
   expect(action.command).toBe(commands.open)

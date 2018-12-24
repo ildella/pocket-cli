@@ -1,5 +1,5 @@
 // require('dotenv').config()
-const pocket = require('../src/pocket/pocket-read')
+const pocket = require('../src/pocket/pocket-parse')
 
 pocket.client = {
   read: () => { return [] },
@@ -7,8 +7,8 @@ pocket.client = {
   add: () => { return [] }
 }
 
-test('toQuery defaults', async () => {
-  const output = pocket.toQuery()
+test('retrieve defaults', async () => {
+  const output = pocket.retrieve()
   expect(output.name).toBe('pocket-read')
   expect(output.search.count).toEqual(8)
   expect(output.search.detailType).toEqual('complete')
@@ -19,23 +19,23 @@ test('toQuery defaults', async () => {
 })
 
 test('search params', async () => {
-  const output = pocket.toQuery(['bitcoin', 'block'])
+  const output = pocket.retrieve(['bitcoin', 'block'])
   expect(output.search.search).toEqual('bitcoin block')
 })
 
 test('reserverd - unread', async () => {
-  const output = pocket.toQuery(['unread', 'nodejs'])
+  const output = pocket.retrieve(['unread', 'nodejs'])
   expect(output.search.state).toEqual('unread')
   expect(output.search.search).toEqual('nodejs')
 })
 
 test('json query to human readable text', async () => {
-  pocket.toQuery(['unread', 'nodejs', 'oldest'])
+  pocket.retrieve(['unread', 'nodejs', 'oldest'])
   expect(pocket.toHumanText()).toContain('nodejs')
   expect(pocket.toHumanText()).toContain('unread')
   expect(pocket.toHumanText()).toContain('oldest')
   // expect(pocket.toHumanText()).toBe('Search for nodejs in unread documents, order by oldest starting January 1, 1970')
-  await pocket.toQuery(['bitcoin', 'site'])
+  await pocket.retrieve(['bitcoin', 'site'])
   expect(pocket.toHumanText()).toContain('bitcoin')
   expect(pocket.toHumanText()).toContain('site')
   expect(pocket.toHumanText()).toContain('all')
