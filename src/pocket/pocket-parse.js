@@ -186,7 +186,8 @@ const modify = (action, ...index) => {
     actions: actions
   })
   return {
-    name: 'pocket-modify',
+    // name: `pocket-modify-${action}`,
+    name: `pocket-modify`,
     actions: actions,
     execute: () => { return pocketExecute.modify(actions) }
   }
