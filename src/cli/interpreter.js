@@ -29,7 +29,7 @@ const handleError = name => {
 
 const createAction = inputText => {
   if (interpreter.question) {
-    return createAnswer(inputText)
+    return createAnswer(interpreter.question, inputText)
   }
 
   const validString = isValidString(inputText)
@@ -45,10 +45,10 @@ const createAction = inputText => {
   return createBasicAction(validString.split(' '))
 }
 
-const createAnswer = inputText => {
+const createAnswer = (question, inputText) => {
   const commandIndex = Number(inputText ? inputText : '1')
-  const command = commands[interpreter.question.command.parseCommand(commandIndex)]
-  const selectionIndex = interpreter.question.input
+  const command = commands[question.command.parseCommand(commandIndex)]
+  const selectionIndex = question.input
   return {
     command: command,
     input: selectionIndex,
