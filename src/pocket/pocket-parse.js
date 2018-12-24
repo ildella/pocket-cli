@@ -80,6 +80,9 @@ const pocketParse = {
 
   open: indexes => {
     const selected = indexes.map(index => articles[Number(index) - 1])
+    console.log(articles)
+    console.log(indexes)
+    console.log(selected)
     return {
       name: 'pocket-open',
       indexes: indexes,
@@ -105,7 +108,32 @@ const pocketParse = {
       query: last,
       execute: () => { return pocketExecute.retrieve(last) }
     }
+  },
+
+  list: (inputs = []) => {
+    const reservedState = intersection([states, inputs])
+    const reservedOrder = intersection([orders, inputs])
+    const state = reservedState.length > 0 ? reservedState[0] : 'all'
+    const order = reservedOrder.length > 0 ? reservedOrder[0] : 'newest'
+    const params = reverseIntersection([inputs, states, orders])
+    const search = {
+      count: 8,
+      offset: 0,
+      detailType: 'complete',
+      sort: order,
+      state: state,
+      search: params.toString().replace(',', ' '),
+      // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
+      since: 0
+    }
+    queries.push(search)
+    return {
+      name: 'pocket-list',
+      search: search,
+      execute: () => { return pocketExecute.retrieve(search) }
+    }
   }
+
 }
 
 const modify = (action, ...index) => {
@@ -128,28 +156,5 @@ const modify = (action, ...index) => {
   }
 }
 
-const retrieve = (inputs = []) => {
-  const reservedState = intersection([states, inputs])
-  const reservedOrder = intersection([orders, inputs])
-  const state = reservedState.length > 0 ? reservedState[0] : 'all'
-  const order = reservedOrder.length > 0 ? reservedOrder[0] : 'newest'
-  const params = reverseIntersection([inputs, states, orders])
-  const search = {
-    count: 8,
-    offset: 0,
-    detailType: 'complete',
-    sort: order,
-    state: state,
-    search: params.toString().replace(',', ' '),
-    // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
-    since: 0
-  }
-  queries.push(search)
-  return {
-    name: 'pocket-read',
-    search: search,
-    execute: () => { return pocketExecute.retrieve(search) }
-  }
-}
-
 module.exports = pocketParse
+module.exports.modify = modify

@@ -84,7 +84,7 @@ const pocket = {
     const output = [''].concat(renderedArticles)
     const guide = articles.length > 0 ? listGuide : noResultsGuide
     const leftMargin = ' '.repeat(4)
-    output.push(`${leftMargin}${blue(toHumanText())}`)
+    output.push(`${leftMargin}${blue(toHumanText(search))}`)
     output.push(`${leftMargin}${guide}`)
     output.push('')
     return {lines: output}

@@ -85,6 +85,7 @@ const interpreter = {
       const query = action.parse()
       return await query.execute()
     } catch(e) {
+      console.log(e)
       return {lines: handleError(e.name)}
     }
   },

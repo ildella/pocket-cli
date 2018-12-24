@@ -154,5 +154,5 @@ commands['list'] = {
     oldest / newest    list starting from oldest / newest
   `,
   submenu: listCommands,
-  parse: pocket.retrieve
+  parse: pocket.list
 }

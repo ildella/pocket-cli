@@ -19,7 +19,7 @@ test('aliases and reserved words', async () => {
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs', 'unread'])
   const query = await action.parse()
-  expect(query.name).toEqual('pocket-read')
+  expect(query.name).toEqual('pocket-list')
   expect(query.execute).toBeDefined()
 })
 
@@ -68,13 +68,13 @@ test('expand', async () => {
   expect(query.indexes).toEqual(['3'])
 })
 
-test('print', async () => {
-  interpreter.getAction('list').parse()
-  const action = interpreter.getAction('print')
-  expect(action.command).toBe(commands.print)
-  const query = action.parse()
-  expect(query.name).toBe('pocket-print')
-})
+// test('print', async () => {
+//   interpreter.getAction('list').parse()
+//   const action = interpreter.getAction('print')
+//   expect(action.command).toBe(commands.print)
+//   const query = action.parse()
+//   expect(query.name).toBe('pocket-print')
+// })
 
 test('interactive', async () => {
   interpreter.getAction('list').parse()
