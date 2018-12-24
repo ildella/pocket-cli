@@ -14,7 +14,7 @@ const handleError = name => {
   case 'update':
     return [yellow('Please update the app')]
   default:
-    return [red('big error!')]
+    return [red(`big error: ${name}`)]
   }
 }
 
@@ -35,14 +35,15 @@ const interpreter = {
 
   getAction: inputText => {
     if (interpreter.question) {
-      const answerIndex = Number(inputText ? inputText : '1')
-      const command = commands[interpreter.question.command.parseCommand(answerIndex)]
-      const input = [interpreter.question.input]
+      const commandIndex = Number(inputText ? inputText : '1')
+      const command = commands[interpreter.question.command.parseCommand(commandIndex)]
+      const selectionIndex = interpreter.question.input
+      console.log(commandIndex, selectionIndex)
       interpreter.question = undefined
       return {
         command: command,
-        input: input,
-        parse: () => { return command.parse(input) }
+        input: selectionIndex,
+        parse: () => { return command.parse(selectionIndex) }
       }
     }
 

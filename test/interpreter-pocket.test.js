@@ -78,7 +78,8 @@ test('interactive', async () => {
   expect(action.input).toEqual(['1'])
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
-  expect(query.index).toBe('1')
+  // not really needed..
+  // expect(query.index).toBe('1')
   const output = query.execute()
   expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
 
@@ -87,8 +88,8 @@ test('interactive', async () => {
   expect(interpreter.question).toBeUndefined()
   const answerQuery = answerAction.parse()
   expect(answerQuery.name).toBe('pocket-expand')
-  expect(answerQuery.index).toEqual(['1'])
-  
+  expect(answerQuery.index).toEqual('1')
+
   const nextAction = interpreter.getAction('something')
   expect(interpreter.question).toBeUndefined()
   expect(nextAction.command).toBe(commands.list)
