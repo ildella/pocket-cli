@@ -58,6 +58,7 @@ const createBasicAction = spaceSeparatedInput => {
   return getAction(command, input)
 }
 
+let availableCommands = commands
 const interpreter = inputText => {
   const action = createAction(inputText)
   const command = action.command
@@ -68,9 +69,12 @@ const interpreter = inputText => {
     interpreter.question = undefined
   }
   // TODO: also this does not work properly
-  Object.assign(commands, command.submenu)
+  availableCommands = Object.assign({}, commands, command.submenu)
+  console.log(availableCommands)
+  // Object.assign(commands, command.submenu)
   return action
 }
 
 module.exports = interpreter
 module.exports.commands = commands
+module.exports.availableCommands = availableCommands

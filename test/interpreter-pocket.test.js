@@ -25,7 +25,7 @@ test('aliases and reserved words', async () => {
   const action = interpreter('search nodejs unread')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs', 'unread'])
-  const query = await action.parse()
+  const query = action.parse()
   expect(query.name).toEqual('pocket-list')
   // expect(query.execute).toBeDefined()
 })
