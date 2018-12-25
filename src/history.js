@@ -10,9 +10,7 @@ const history = function (name) {
         item: item
       })
     },
-    // get: index => history.items[Number(index) - 1].item,
     get: index => Object.assign({}, history.items[Number(index) - 1].item),
-    // last: () => history.items[history.items.length - 1].item,
     last: () => history.get(history.items.length),
     hasIndex: index => history.items.length < index,
     pushAll: items => history.items = items // TOFIX: the horror
