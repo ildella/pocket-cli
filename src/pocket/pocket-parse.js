@@ -14,15 +14,6 @@ const actionsHistory = []
 const queries = history('queries')
 let lastRetrievedArticles = []
 
-const indexes = cyan('1-8')
-const command1 = cyan('open 1')
-const command2 = cyan('archive 2')
-const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
-const noResultsGuide = yellow('No results found')
-
-const formatter = require('../articles-formatter')
-const {toHumanText} = require('../articles-formatter')
-
 const pocketParse = {
 
   archive: indexes => {
@@ -120,18 +111,25 @@ const pocketParse = {
       execute: () => { return retrieve(search) },
       render: articles => { return render(search, articles) }
     }
-  }
-}
+  },
 
-const render = (search, articles) => {
-  const renderedArticles = formatter(articles)
-  const output = [''].concat(renderedArticles)
-  const guide = articles.length > 0 ? listGuide : noResultsGuide
-  const leftMargin = ' '.repeat(5)
-  output.push(`${leftMargin}${blue(toHumanText(search))}`)
-  output.push(`${leftMargin}${guide}`)
-  output.push('')
-  return {lines: output}
+  select: index => {
+    const article = lastRetrievedArticles[Number(index) - 1]
+    const opts = options(article.isArchived)
+    return {
+      name: 'selection-query',
+      execute: () => {
+        return {
+          lines: [formatOptions(opts)],
+          prompt: yellow('select: ')
+        }
+      },
+      getCommand: actionIndex => {
+        return opts[actionIndex]
+      }
+    }
+  }
+
 }
 
 const retrieve = async search => {
@@ -142,7 +140,7 @@ const retrieve = async search => {
 }
 
 const modify = (action, ...index) => {
-  const matches = index.flat().map(i => lastRetrievedArticles[i - 1]).filter(Boolean)
+  const matches = index.flat().map(i => lastRetrievedArticles[Number(i) - 1]).filter(Boolean)
   const actions = matches.map(article => {
     return {
       action: action,
@@ -162,7 +160,25 @@ const modify = (action, ...index) => {
   }
 }
 
-const {commands} = require('../cli/interpreter')
+const indexes = cyan('1-8')
+const command1 = cyan('open 1')
+const command2 = cyan('archive 2')
+const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
+const noResultsGuide = yellow('No results found')
+
+const formatter = require('../articles-formatter')
+const {toHumanText} = require('../articles-formatter')
+
+const render = (search, articles) => {
+  const renderedArticles = formatter(articles)
+  const output = [''].concat(renderedArticles)
+  const guide = articles.length > 0 ? listGuide : noResultsGuide
+  const leftMargin = ' '.repeat(5)
+  output.push(`${leftMargin}${blue(toHumanText(search))}`)
+  output.push(`${leftMargin}${guide}`)
+  output.push('')
+  return {lines: output}
+}
 
 const options = isArchived => {
   return {
@@ -185,29 +201,6 @@ const formatOptions = options => Object.keys(options)
     }
     , ''
   ).trim()
-
-commands['selection'] = {
-  type: 'interactive',
-  name: 'selection',
-  aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
-  description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-  parse: index => {
-    const article = lastRetrievedArticles[Number(index) - 1]
-    const opts = options(article.isArchived)
-    return {
-      name: 'selection-query',
-      execute: () => {
-        return {
-          lines: [formatOptions(opts)],
-          prompt: yellow('select: ')
-        }
-      },
-      getCommand: actionIndex => {
-        return opts[actionIndex]
-      }
-    }
-  }
-}
 
 module.exports = pocketParse
 module.exports.modify = modify

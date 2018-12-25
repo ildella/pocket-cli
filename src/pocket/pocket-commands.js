@@ -63,6 +63,13 @@ const listCommands = {
     aliases: ['o'],
     description: 'open the URL in the browser',
     parse: pocketParse.open
+  },
+  select: {
+    type: 'interactive',
+    name: 'select',
+    aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
+    description: 'interactive action on a listed item (eg: archive, fav, tag...)',
+    parse: () => pocketParse.select
   }
 }
 

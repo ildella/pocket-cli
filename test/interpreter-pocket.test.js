@@ -87,7 +87,7 @@ test('interactive', async () => {
 
   expect(action.parse).toBeDefined()
   expect(action.input).toEqual(['1'])
-  expect(action.command).toBe(commands.selection)
+  expect(action.command).toBe(commands.select)
   // const query = action.parse()
   // expect(query.name).toBe('selection-query')
   // const output = query.execute()

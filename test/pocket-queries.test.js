@@ -43,6 +43,7 @@ test('json query to human readable text', async () => {
   // console.log(pocket.toHumanText())
 })
 
+// TODO same thing as in interpreter-pocket: we need a local storage
 // const article1 = {item_id: 'a1'}
 // const article2 = {item_id: 'a2'}
 // const article3 = {item_id: 'a3'}
