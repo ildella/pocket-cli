@@ -118,7 +118,7 @@ const pocketParse = {
     const article = localArticles.get(index)
     const opts = options(article.isArchived)
     return {
-      name: 'selection-query',
+      name: 'select-query',
       execute: () => {
         return {
           lines: [formatOptions(opts)],

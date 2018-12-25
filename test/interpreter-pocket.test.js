@@ -83,32 +83,29 @@ test('expand', async () => {
 // })
 
 test('interactive', async () => {
-  // interpreter('list').parse()
-  
-  // TODO pocketParse.store(mock list of articles...)
-  // or pocketLocal.store...
+  interpreter('list').parse()
 
   const action = interpreter('1')
-  expect(interpreter.question).toBe(action)
-
-  expect(action.parse).toBeDefined()
-  expect(action.input).toEqual(['1'])
   expect(action.command).toBe(commands.select)
+  expect(action.input).toEqual(['1'])
+  expect(action.parse).toBeDefined()
+  expect(interpreter.question).toBe(action)
+  
   const query = action.parse()
-  expect(query.name).toBe('select')
-  // const output = query.execute()
-  // expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
+  expect(query.name).toBe('select-query')
+  const output = await query.execute()
+  expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
 
-  // const answerAction = interpreter('2')
-  // expect(answerAction.command).toBe(commands.expand)
-  // expect(interpreter.question).toBeUndefined()
-  // const answerQuery = answerAction.parse()
-  // expect(answerQuery.name).toBe('pocket-expand')
-  // expect(answerQuery.index).toEqual('1')
+  const answerAction = interpreter('2')
+  expect(answerAction.command).toBe(commands.expand)
+  expect(interpreter.question).toBeUndefined()
+  const answerQuery = answerAction.parse()
+  expect(answerQuery.name).toBe('pocket-expand')
+  expect(answerQuery.index).toEqual('1')
 
-  // const nextAction = interpreter('something')
-  // expect(interpreter.question).toBeUndefined()
-  // expect(nextAction.command).toBe(commands.list)
-  // expect(nextAction.input).toEqual(['something'])
+  const nextAction = interpreter('something')
+  expect(nextAction.command).toBe(commands.list)
+  expect(nextAction.input).toEqual(['something'])
+  expect(interpreter.question).toBeUndefined()
 
 })
