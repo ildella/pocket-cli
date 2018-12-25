@@ -121,7 +121,7 @@ const pocketParse = {
       name: 'select-query',
       execute: () => {
         return {
-          lines: [formatOptions(opts)],
+          lines: [toSingleLine(opts)],
           prompt: yellow('select: ')
         }
       },
@@ -169,6 +169,7 @@ const noResultsGuide = yellow('No results found')
 
 const formatter = require('../articles-formatter')
 const {toHumanText} = require('../articles-formatter')
+const {toSingleLine} = require('../commons-formatter')
 
 const render = (search, articles) => {
   const renderedArticles = formatter(articles)
@@ -190,18 +191,6 @@ const options = isArchived => {
     '5': 'delete',
   }
 }
-
-const capFirst = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`
-
-const formatOptions = options => Object.keys(options)
-  .reduce(
-    (previousValue, currentValue, currentIndex) => {
-      const label = options[currentValue]
-      const defaultText = currentIndex === 0 ? ' (default)' : ''
-      return `${previousValue}  ${currentValue}. ${capFirst(label)}${defaultText}`
-    }
-    , ''
-  ).trim()
 
 module.exports = pocketParse
 module.exports.modify = modify

@@ -74,6 +74,12 @@ test('expand', async () => {
   expect(query.indexes).toEqual(['3'])
 })
 
+test('next and previous', async () => {
+  interpreter('list').parse()
+  const next = interpreter('next')
+  expect(next.command).toBe(commands.next)
+})
+
 // test('print', async () => {
 //   interpreter('list').parse()
 //   const action = interpreter('print')

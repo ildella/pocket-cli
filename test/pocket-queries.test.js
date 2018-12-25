@@ -48,54 +48,57 @@ test('json query to human readable text', async () => {
 // const article2 = {item_id: 'a2'}
 // const article3 = {item_id: 'a3'}
 // pocket.articles = [article1, article2, article3]
+const localArticles = require('../src/pocket/pocket-articles')
+const mockArticles = require('./mock.articles')
+localArticles.store(mockArticles)
 
-// test('Modify query', async () => {
-//   const query = modify('archive', '2')
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(1)
-//   expect(query.actions).toBe('archive')
-//   expect(query.actions[0].action).toBe('archive')
-//   expect(query.actions[0].item_id).toBe('a2')
-// })
+test('Modify query', async () => {
+  const query = modify('archive', '2')
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(1)
+  // expect(query.actions).toBe('archive')
+  expect(query.actions[0].action).toBe('archive')
+  expect(query.actions[0].item_id).toBe('m2')
+})
 
 // test('Modify query - no matching index', async () => {
-//   const query = modify('archive', 'ddd')
+//   const query = modify('archive', '')
 //   expect(query.name).toEqual('pocket-modify')
 //   expect(query.actions).toHaveLength(0)
 // })
 
-// test('Modify query - no index', async () => {
-//   const query = modify('archive')
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(0)
-// })
+test('Modify query - no index', async () => {
+  const query = modify('archive')
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(0)
+})
 
-// test('Modify query with multiple indexes', async () => {
-//   const query = modify('archive', ['1', '3', '4'])
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(2)
-//   expect(query.actions[0].action).toBe('archive')
-//   expect(query.actions[0].item_id).toBe('a1')
-//   expect(query.actions[1].action).toBe('archive')
-//   expect(query.actions[1].item_id).toBe('a3')
-// })
+test('Modify query with multiple indexes', async () => {
+  const query = modify('archive', ['1', '3', '4'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(3)
+  expect(query.actions[0].action).toBe('archive')
+  expect(query.actions[0].item_id).toBe('m1')
+  expect(query.actions[1].action).toBe('archive')
+  expect(query.actions[1].item_id).toBe('m3')
+})
 
-// test('Favorite multiple items', async () => {
-//   const query = modify('fav', ['1', '2', '4'])
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(2)
-//   expect(query.actions[0].action).toBe('fav')
-//   expect(query.actions[0].item_id).toBe('a1')
-//   expect(query.actions[1].action).toBe('fav')
-//   expect(query.actions[1].item_id).toBe('a2')
-// })
+test('Favorite multiple items', async () => {
+  const query = modify('fav', ['1', '2', '4'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(3)
+  expect(query.actions[0].action).toBe('fav')
+  expect(query.actions[0].item_id).toBe('m1')
+  expect(query.actions[1].action).toBe('fav')
+  expect(query.actions[1].item_id).toBe('m2')
+})
 
-// test('Readd multiple items', async () => {
-//   const query = modify('readd', ['1', '2', '4'])
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(2)
-//   expect(query.actions[0].action).toBe('readd')
-//   expect(query.actions[0].item_id).toBe('a1')
-//   expect(query.actions[1].action).toBe('readd')
-//   expect(query.actions[1].item_id).toBe('a2')
-// })
+test('Readd multiple items', async () => {
+  const query = modify('readd', ['1', '2', '4'])
+  expect(query.name).toEqual('pocket-modify')
+  expect(query.actions).toHaveLength(3)
+  expect(query.actions[0].action).toBe('readd')
+  expect(query.actions[0].item_id).toBe('m1')
+  expect(query.actions[1].action).toBe('readd')
+  expect(query.actions[1].item_id).toBe('m2')
+})
