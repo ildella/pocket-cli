@@ -153,14 +153,14 @@ const pocketParse = {
       name: 'pocket-list',
       search: search,
       execute: async () => {
-        // TOFIX: await should not stay here... 
+        // TOFIX: await should not stay here...
         const parsedArticles = await pocketExecute.retrieve(search)
         // TOFIX: the horror
         articles = articles.concat(parsedArticles)
         const renderedArticles = render(parsedArticles)
         const output = [''].concat(renderedArticles)
         const guide = articles.length > 0 ? listGuide : noResultsGuide
-        const leftMargin = ' '.repeat(4)
+        const leftMargin = ' '.repeat(5)
         output.push(`${leftMargin}${blue(toHumanText(search))}`)
         output.push(`${leftMargin}${guide}`)
         output.push('')
