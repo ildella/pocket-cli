@@ -1,6 +1,3 @@
-// const tracer = require('../logger')()
-const {yellow, red} = require('colorette')
-
 const commands = {}
 
 commands['null'] = {
@@ -14,17 +11,6 @@ commands['null'] = {
 
 const isValidString = string => {
   return typeof(string) == 'string' && string.trim().length > 0 ? string.trim() : false
-}
-
-const handleError = name => {
-  switch (name) {
-  case 'auth':
-    return [yellow(`User not authenticated. Please type '${commands.login.name}' to connect your Pocket account`)]
-  case 'update':
-    return [yellow('Please update the app')]
-  default:
-    return [red(`big error: ${name}`)]
-  }
 }
 
 const createAction = inputText => {
@@ -77,18 +63,8 @@ const createBasicAction = spaceSeparatedInput => {
 }
 
 const defaultCommand = 'list'
-const interpreter = {
 
-  processInput: async string => {
-    try {
-      const action = interpreter.getAction(string)
-      const query = action.parse()
-      return await query.execute()
-    } catch(e) {
-      console.log(e)
-      return {lines: handleError(e.name)}
-    }
-  },
+const interpreter = {
 
   getAction: inputText => {
     const action = createAction(inputText)

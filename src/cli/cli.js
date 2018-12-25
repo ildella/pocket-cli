@@ -1,11 +1,12 @@
 const readline = require('readline')
 const {blue} = require('colorette')
-const interpreter = require('./interpreter')
+const {commands} = require('./interpreter')
+const cliProcessor = require('./cli-processor')
 
 const cli = {}
 
 const completer = line => {
-  const completions = Object.keys(interpreter.commands)
+  const completions = Object.keys(commands)
   const hits = completions.filter(c => c.startsWith(line))
   return [hits.length ? hits : completions, line]
 }
@@ -26,7 +27,7 @@ cli.init = () => {
   ui.prompt()
   ui.on('line', async string => {
     // ui.completer(string)
-    interpreter.processInput(string)
+    cliProcessor.processInput(string)
       .then(response => {
         loader.stop()
         for (const line of response.lines || []) {

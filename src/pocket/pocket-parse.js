@@ -1,41 +1,18 @@
-const {gray, cyan, green, blue, yellow, bold} = require('colorette')
+const {gray, cyan, blue, yellow} = require('colorette')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
 const pocketExecute = require('./pocket-execute')
 const {open} = require('./commons-execute')
-
-const intersection = arrays => {
-  return arrays.reduce((a, b) => a.filter(c => b.includes(c)))
-}
-
-const reverseIntersection = arrays => {
-  return arrays.reduce((a, b) => a.filter(c => !b.includes(c)))
-}
+const history = require('../history')
+const {intersection, reverseIntersection} = require('../arrays-utils')
 
 const states = ['unread', 'archive']
 const orders = ['newest', 'oldest', 'title', 'site']
 
-const history = function (name) {
-  const history = {
-    name: name,
-    items: [],
-    push: item => {
-      history.items.push({
-        timestamp: DateTime.local(),
-        item: item
-      })
-    },
-    get: index => history.items[Number(index) - 1].item,
-    last: () => history.items[history.items.length - 1].item,
-    hasIndex: index => history.items.length < index,
-    pushAll: items => history.items = items // the horror
-  }
-  return history
-}
-
+const actionsHistory = []
 const queries = history('queries')
-let articles = []
+let lastRetrievedArticles = []
 
 const indexes = cyan('1-8')
 const command1 = cyan('open 1')
@@ -43,25 +20,8 @@ const command2 = cyan('archive 2')
 const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
 const noResultsGuide = yellow('No results found')
 
-const formatter = require('../content-formatter')
-
-const render = articles => {
-  const output = []
-  let index = 0
-  for (const entry of articles) {
-    index++
-    output.push(formatter(entry, index))
-  }
-  return output
-}
-
-const toHumanText = query => {
-  const date = DateTime.fromMillis(query.since * 1000).toLocaleString({month: 'long', day: 'numeric', year: 'numeric'})
-  const searchString = green(query.search || '*')
-  const orderBy = green(query.sort)
-  const state = green(query.state)
-  return `Search for ${searchString} in ${state} documents, order by ${orderBy} starting ${date}`
-}
+const formatter = require('../articles-formatter')
+const {toHumanText} = require('../articles-formatter')
 
 const pocketParse = {
 
@@ -90,7 +50,7 @@ const pocketParse = {
 
   expand: indexes => {
     const index = indexes[0]
-    const selected = articles[Number(index) - 1]
+    const selected = lastRetrievedArticles[Number(index) - 1]
     return {
       name: 'pocket-expand',
       indexes: indexes,
@@ -104,7 +64,7 @@ const pocketParse = {
   },
 
   open: indexes => {
-    const selected = indexes.map(index => articles[Number(index) - 1])
+    const selected = indexes.map(index => lastRetrievedArticles[Number(index) - 1])
     return {
       name: 'pocket-open',
       indexes: indexes,
@@ -113,22 +73,24 @@ const pocketParse = {
   },
 
   next: () => {
-    const last = queries.last()
-    last.offset = last.offset + last.count
+    const search = queries.last()
+    search.offset = search.offset + search.count
     return {
       name: 'pocket-next',
-      query: last,
-      execute: () => { return pocketExecute.retrieve(last) }
+      search: search,
+      execute: () => { return retrieve(search) },
+      render: articles => { return render(search, articles) }
     }
   },
 
   previous: () => {
-    const last = queries.last()
-    last.offset = last.offset - last.count
+    const search = queries.last()
+    search.offset = search.offset - search.count
     return {
       name: 'pocket-next',
-      query: last,
-      execute: () => { return pocketExecute.retrieve(last) }
+      search: search,
+      execute: () => { return retrieve(search) },
+      render: articles => { return render(search, articles) }
     }
   },
 
@@ -148,32 +110,35 @@ const pocketParse = {
       // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
       since: 0
     }
-    queries.push(search)
     return {
       name: 'pocket-list',
       search: search,
-      execute: async () => {
-        // TOFIX: await should not stay here...
-        const parsedArticles = await pocketExecute.retrieve(search)
-        // TOFIX: the horror
-        articles = articles.concat(parsedArticles)
-        const renderedArticles = render(parsedArticles)
-        const output = [''].concat(renderedArticles)
-        const guide = articles.length > 0 ? listGuide : noResultsGuide
-        const leftMargin = ' '.repeat(5)
-        output.push(`${leftMargin}${blue(toHumanText(search))}`)
-        output.push(`${leftMargin}${guide}`)
-        output.push('')
-        return {lines: output}
-      }
+      execute: () => { return retrieve(search) },
+      render: articles => { return render(search, articles) }
     }
   }
-
 }
 
-const actionsHistory = []
+const render = (search, articles) => {
+  const renderedArticles = formatter(articles)
+  const output = [''].concat(renderedArticles)
+  const guide = articles.length > 0 ? listGuide : noResultsGuide
+  const leftMargin = ' '.repeat(5)
+  output.push(`${leftMargin}${blue(toHumanText(search))}`)
+  output.push(`${leftMargin}${guide}`)
+  output.push('')
+  return {lines: output}
+}
+
+const retrieve = async search => {
+  queries.push(search)
+  const retrievedArticles = await pocketExecute.retrieve(search)
+  lastRetrievedArticles = retrievedArticles
+  return retrievedArticles
+}
+
 const modify = (action, ...index) => {
-  const matches = index.flat().map(i => articles[i - 1]).filter(Boolean)
+  const matches = index.flat().map(i => lastRetrievedArticles[i - 1]).filter(Boolean)
   const actions = matches.map(article => {
     return {
       action: action,
@@ -187,7 +152,7 @@ const modify = (action, ...index) => {
   })
   return {
     // name: `pocket-modify-${action}`,
-    name: `pocket-modify`,
+    name: 'pocket-modify',
     actions: actions,
     execute: () => { return pocketExecute.modify(actions) }
   }

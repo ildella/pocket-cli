@@ -34,8 +34,6 @@ test('archive multiple items', async () => {
   const archiveMultiple = interpreter.getAction('a 1 2 3')
   expect(archiveMultiple.command).toBe(commands.archive)
   expect(archiveMultiple.input).toEqual(['1', '2', '3'])
-  // const query = archiveMultiple.parse()
-  // expect(query).toEqual()
 })
 
 test('favorite multiple items', async () => {
@@ -48,7 +46,8 @@ test('favorite without parameter', async () => {
   const archiveMultiple = interpreter.getAction('fav')
   expect(archiveMultiple.command).toBe(commands.favorite)
   expect(archiveMultiple.input).toEqual([])
-  // expect(archiveMultiple.parse()).toEqual()
+  // const parse = archiveMultiple.parse()
+  // expect(parse).toEqual()
 })
 
 test('open', async () => {
@@ -85,8 +84,6 @@ test('interactive', async () => {
   expect(action.input).toEqual(['1'])
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
-  // not really needed..
-  // expect(query.index).toBe('1')
   const output = query.execute()
   expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
 
