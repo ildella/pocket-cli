@@ -60,7 +60,7 @@ const createBasicAction = spaceSeparatedInput => {
 
 const history = require('../history')
 const availableCommands = history('commands')
-availableCommands.addAll(Object.entries(commands))
+// availableCommands.addAll(Object.entries(commands))
 
 const interpreter = inputText => {
   const action = createAction(inputText)
@@ -71,7 +71,7 @@ const interpreter = inputText => {
   } else {
     interpreter.question = undefined
   }
-  // availableCommands.addAll(Object.entries(Object.assign({}, commands, command.submenu)))
+  availableCommands.addAll(Object.entries(Object.assign({}, commands, command.submenu)))
   // console.log(availableCommands)
   return action
 }
