@@ -1,5 +1,6 @@
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
+require('../src/pocket/pocket-parse')
 const commands = interpreter.commands
 
 test('list with search parameters', async () => {
@@ -81,9 +82,9 @@ test('interactive', async () => {
   const action = interpreter('1')
   expect(interpreter.question).toBe(action)
 
-  expect(action.input).toEqual(['1'])
   expect(action.parse).toBeDefined()
-  expect(action.command).toBe(commands.interactive)
+  expect(action.input).toEqual(['1'])
+  expect(action.command).toBe(commands.selection)
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
   const output = query.execute()
