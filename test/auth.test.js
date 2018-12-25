@@ -1,7 +1,7 @@
 const fs = require('fs').promises
 const auth = require('../src/auth')({tokenFilePath: 'test_token'})
 
-beforeAll(async () => {
+afterAll(async () => {
   try {
     await fs.unlink(auth.accessTokenPath)
   } catch(e) {
