@@ -28,6 +28,7 @@ const history = function (name) {
       return inMemory.length >= index
     },
     addAll: newItems => {
+      if (!Array.isArray(newItems)) { throw new Error()}
       inMemory = []
       newItems.forEach(item => history.add(item))
     },

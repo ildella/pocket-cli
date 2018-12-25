@@ -1,5 +1,6 @@
 module.exports = [
-  {item_id: '2412335750',
+  {
+    item_id: '2412335750',
     resolved_id: '2412335762',
     given_url: 'https://example.com/path/to/article',
     given_title: 'Soemthing/important: the best article on the topic',
@@ -20,6 +21,12 @@ module.exports = [
     has_image: '1',
     word_count: '709',
     lang: 'en',
-    time_to_read: 3,}
-
+    time_to_read: 3,
+  },
+  {
+    item_id: '2412335750'
+  },
+  {
+    item_id: '2412335750'
+  }
 ]

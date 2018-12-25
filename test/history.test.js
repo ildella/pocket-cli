@@ -17,6 +17,6 @@ test('add and get', () => {
 })
 
 test('addAll', () => {
-  h.addAll({a: 1}, {a: 2})
+  h.addAll([{a: 1}, {a: 2}])
   expect(h.size()).toBe(2)
 })

@@ -1,7 +1,13 @@
 const interpreter = require('../src/cli/interpreter')
-require('../src/pocket/pocket-commands')
-const pocketParse = require('../src/pocket/pocket-parse')
 const commands = interpreter.commands
+require('../src/pocket/pocket-commands')
+require('../src/pocket/pocket-parse')
+const localArticles = require('../src/pocket/pocket-articles')
+const mockArticles = require('./mock.articles')
+
+beforeAll(() => {
+  localArticles.store(mockArticles)
+})
 
 test('list with search parameters', async () => {
   const action = interpreter('list bitcoin yesterday')
@@ -21,7 +27,7 @@ test('aliases and reserved words', async () => {
   expect(action.input).toEqual(['nodejs', 'unread'])
   const query = await action.parse()
   expect(query.name).toEqual('pocket-list')
-  expect(query.execute).toBeDefined()
+  // expect(query.execute).toBeDefined()
 })
 
 test('archive', async () => {
@@ -88,8 +94,8 @@ test('interactive', async () => {
   expect(action.parse).toBeDefined()
   expect(action.input).toEqual(['1'])
   expect(action.command).toBe(commands.select)
-  // const query = action.parse()
-  // expect(query.name).toBe('selection-query')
+  const query = action.parse()
+  expect(query.name).toBe('select')
   // const output = query.execute()
   // expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
 
