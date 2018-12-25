@@ -4,7 +4,6 @@ require('./pocket/pocket-commands')
 require('./cli/update')
 require('./cli/version')
 require('./cli/quit')
-// require('./cli/guide')
 require('./cli/help')
 
 const app = {}

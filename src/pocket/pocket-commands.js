@@ -1,109 +1,68 @@
 const {commands} = require('../cli/interpreter')
 const pocketAuth = require('./pocket-auth')
-const pocket = require('./pocket-parse')
-const {green, yellow} = require('colorette')
-
-const options = {
-  '1': 'open',
-  '2': 'expand',
-  '3': 'favorite',
-  '4': 'archive',
-  '5': 'delete',
-}
-
-const interactiveOptions = Object.keys(options)
-  .reduce(
-    (previousValue, currentValue, currentIndex) => {
-      const command = options[currentValue]
-      const defaultText = currentIndex === 0 ? ' (default)' : ''
-      return `${previousValue}  ${currentValue}. ${command.charAt(0).toUpperCase()}${command.slice(1)}${defaultText}`
-    }
-    , ''
-  ).trim()
+const pocketParse = require('./pocket-parse')
+const {green} = require('colorette')
 
 const listCommands = {
   archive: {
     name: 'archive',
     aliases: ['a', 'read', 'r'],
     description: 'Archive article / Mark as read',
-    parse: pocket.archive
+    parse: pocketParse.archive
   },
   delete: {
     name: 'delete',
     aliases: ['d'],
     description: 'Delete article (permanently)',
-    parse: pocket.delete
+    parse: pocketParse.delete
   },
   favorite: {
     name: 'favorite',
     aliases: ['fav', 'f'],
     description: 'Favorite article',
-    parse: pocket.favorite
+    parse: pocketParse.favorite
   },
   // tag: {
   //   name: 'tag',
   //   aliases: ['t'],
   //   description: 'tag article',
-  //   parse: pocket.tag
+  //   parse: pocketParse.tag
   // },
   readd: {
     name: 'readd',
     aliases: ['unarchive'],
     description: 'Un-archive article / Mark as unread',
-    parse: pocket.readd
+    parse: pocketParse.readd
   },
   // print: {
   //   name: 'print',
   //   aliases: ['p'],
   //   description: 'print last search results',
-  //   parse: pocket.print
+  //   parse: pocketParse.print
   // },
   next: {
     name: 'next',
     aliases: ['n'],
     description: 'next set of results',
-    parse: pocket.next
+    parse: pocketParse.next
   },
   previous: {
     name: 'previous',
     aliases: ['p'],
     description: 'previous set of results',
-    parse: pocket.previous
+    parse: pocketParse.previous
   },
   expand: {
     name: 'expand',
     aliases: ['e'],
     description: 'print the whole excerpt',
-    parse: pocket.expand
+    parse: pocketParse.expand
   },
   open: {
     name: 'open',
     aliases: ['o'],
     description: 'open the URL in the browser',
-    parse: pocket.open
-  },
-  interactive: {
-    name: 'interactive-command',
-    type: 'interactive', //TODO: better check type or keep using naming convention?
-    aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
-    description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-    parse: index => {
-      console.log(`interact with ${index}`)
-      // TODO parse articles to see if archived or not, then generate options/interactiveOptions
-      return {
-        name: 'interactive-query',
-        // index: spaceSeparatedInput[0],
-        execute: () => {
-          return {
-            lines: [interactiveOptions],
-            prompt: yellow('select: ')
-          }
-        }
-      }
-    },
-    getCommand: actionIndex => {
-      return options[actionIndex]
-    }
+    parse: pocketParse.open
   }
 }
 
@@ -154,5 +113,5 @@ commands['list'] = {
     oldest / newest    list starting from oldest / newest
   `,
   submenu: listCommands,
-  parse: pocket.list
+  parse: pocketParse.list
 }

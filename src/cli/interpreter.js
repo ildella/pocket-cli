@@ -33,8 +33,8 @@ const createAction = inputText => {
 
 const createAnswer = (question, inputText) => {
   const commandIndex = Number(inputText ? inputText : '1')
-  const command = commands[question.command.getCommand(commandIndex)]
   const selectionIndex = question.input
+  const command = commands[question.parse().getCommand(commandIndex)]
   return {
     command: command,
     input: selectionIndex,
@@ -51,8 +51,8 @@ const createBasicAction = spaceSeparatedInput => {
   })
   const useDefault = candidates.length === 0
   const command = useDefault ? commands[defaultCommand] : candidates[0]
-  // TOFIX: removing the first word should be a more explicit thing
-  const isInteractive = command.name.startsWith('interactive')
+  // TOFIX: isInteractive should not be here, find new way to ask for isFirstWordACommand
+  const isInteractive = command.type === 'interactive'
   const isFirstWordACommand = (!useDefault && !isInteractive)
   const input = isFirstWordACommand ? spaceSeparatedInput.slice(1) : spaceSeparatedInput.slice(0)
   return {
@@ -69,7 +69,7 @@ const interpreter = {
   getAction: inputText => {
     const action = createAction(inputText)
     const command = action.command
-    const isInteractive = command.name.startsWith('interactive')
+    const isInteractive = command.type === 'interactive'
     if (isInteractive) {
       interpreter.question = action
     } else {

@@ -37,6 +37,10 @@ const pocketParse = {
     return modify('favorite', indexes)
   },
 
+  readd: indexes => {
+    return modify('readd', indexes)
+  },
+
   tag: indexes => {
     return modify('tags_add', indexes)
   },
@@ -155,6 +159,53 @@ const modify = (action, ...index) => {
     name: 'pocket-modify',
     actions: actions,
     execute: () => { return pocketExecute.modify(actions) }
+  }
+}
+
+const {commands} = require('../cli/interpreter')
+
+const options = isArchived => {
+  return {
+    '1': 'open',
+    '2': 'expand',
+    '3': 'favorite',
+    '4': isArchived ? 'readd' : 'archive',
+    '5': 'delete',
+  }
+}
+
+const capFirst = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`
+
+const formatOptions = options => Object.keys(options)
+  .reduce(
+    (previousValue, currentValue, currentIndex) => {
+      const label = options[currentValue]
+      const defaultText = currentIndex === 0 ? ' (default)' : ''
+      return `${previousValue}  ${currentValue}. ${capFirst(label)}${defaultText}`
+    }
+    , ''
+  ).trim()
+
+commands['selection'] = {
+  type: 'interactive',
+  name: 'selection',
+  aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
+  description: 'interactive action on a listed item (eg: archive, fav, tag...)',
+  parse: index => {
+    const article = lastRetrievedArticles[Number(index) - 1]
+    const opts = options(article.isArchived)
+    return {
+      name: 'selection-query',
+      execute: () => {
+        return {
+          lines: [formatOptions(opts)],
+          prompt: yellow('select: ')
+        }
+      },
+      getCommand: actionIndex => {
+        return opts[actionIndex]
+      }
+    }
   }
 }
 
