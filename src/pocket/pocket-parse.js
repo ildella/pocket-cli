@@ -12,7 +12,7 @@ const orders = ['newest', 'oldest', 'title', 'site']
 
 const actionsHistory = []
 const queries = history('queries')
-let lastRetrievedArticles = []
+const localArticles = require('./pocket-articles')
 
 const pocketParse = {
 
@@ -45,7 +45,7 @@ const pocketParse = {
 
   expand: indexes => {
     const index = indexes[0]
-    const selected = lastRetrievedArticles[Number(index) - 1]
+    const selected = localArticles.get(index)
     return {
       name: 'pocket-expand',
       indexes: indexes,
@@ -59,7 +59,7 @@ const pocketParse = {
   },
 
   open: indexes => {
-    const selected = indexes.map(index => lastRetrievedArticles[Number(index) - 1])
+    const selected = indexes.map(index => localArticles.get(index))
     return {
       name: 'pocket-open',
       indexes: indexes,
@@ -114,7 +114,7 @@ const pocketParse = {
   },
 
   select: index => {
-    const article = lastRetrievedArticles[Number(index) - 1]
+    const article = localArticles.get(index)
     const opts = options(article.isArchived)
     return {
       name: 'selection-query',
@@ -135,12 +135,12 @@ const pocketParse = {
 const retrieve = async search => {
   queries.push(search)
   const retrievedArticles = await pocketExecute.retrieve(search)
-  lastRetrievedArticles = retrievedArticles
+  localArticles.store(retrievedArticles)
   return retrievedArticles
 }
 
 const modify = (action, ...index) => {
-  const matches = index.flat().map(i => lastRetrievedArticles[Number(i) - 1]).filter(Boolean)
+  const matches = index.flat().map(i => localArticles.get(index)).filter(Boolean)
   const actions = matches.map(article => {
     return {
       action: action,
