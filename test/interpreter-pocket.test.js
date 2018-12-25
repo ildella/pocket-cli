@@ -1,6 +1,6 @@
 const interpreter = require('../src/cli/interpreter')
 require('../src/pocket/pocket-commands')
-require('../src/pocket/pocket-parse')
+const pocketParse = require('../src/pocket/pocket-parse')
 const commands = interpreter.commands
 
 test('list with search parameters', async () => {

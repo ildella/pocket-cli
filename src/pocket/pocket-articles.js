@@ -1,17 +1,8 @@
-let inMemory = []
+const history = require('../history')
 
-const pocketArticles = {
-  store: articles => {
-    // inMemory.clear()
-    // articles.forEach(article => inMemory.add(article))
-    inMemory = articles
-  },
+const localArticles = history('articles')
 
-  get: index => Object.assign({}, inMemory[Number(index) - 1])
-
-  // fetch: () => {
-  //   return inMemory.keys()
-  // }
+module.exports = {
+  store: articles => localArticles.addAll(articles),
+  get: index => localArticles.get(index)
 }
-
-module.exports = pocketArticles

@@ -12,6 +12,7 @@ const orders = ['newest', 'oldest', 'title', 'site']
 
 const actionsHistory = []
 const queries = history('queries')
+// const localArticles = history('articles')
 const localArticles = require('./pocket-articles')
 
 const pocketParse = {
@@ -133,14 +134,14 @@ const pocketParse = {
 }
 
 const retrieve = async search => {
-  queries.push(search)
+  queries.add(search)
   const retrievedArticles = await pocketExecute.retrieve(search)
   localArticles.store(retrievedArticles)
   return retrievedArticles
 }
 
 const modify = (action, ...index) => {
-  const matches = index.flat().map(i => localArticles.get(index)).filter(Boolean)
+  const matches = index.flat().map(i => localArticles.get(i)).filter(Boolean)
   const actions = matches.map(article => {
     return {
       action: action,
