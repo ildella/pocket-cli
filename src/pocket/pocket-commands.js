@@ -87,12 +87,9 @@ const listCommands = {
     type: 'interactive', //TODO: better check type or keep using naming convention?
     aliases: ['1', '2', '3', '4', '5', '6', '7', '8'],
     description: 'interactive action on a listed item (eg: archive, fav, tag...)',
-    parseCommand: actionIndex => {
-      return options[actionIndex]
-    },
-    parse: spaceSeparatedInput => {
-      // TODO: understand difference btw this and actionIndex up there
-      // maybe we can avoid parseCommand or reuse it here, but not have both
+    parse: index => {
+      console.log(`interact with ${index}`)
+      // TODO parse articles to see if archived or not, then generate options/interactiveOptions
       return {
         name: 'interactive-query',
         // index: spaceSeparatedInput[0],
@@ -103,6 +100,9 @@ const listCommands = {
           }
         }
       }
+    },
+    getCommand: actionIndex => {
+      return options[actionIndex]
     }
   }
 }

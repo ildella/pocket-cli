@@ -1,6 +1,6 @@
 const {exec} = require('child_process')
 
-const cliOpen = require('../cli/open')
+const cliOpen = require('./cli/open')
 
 module.exports = {
   open: selected => {

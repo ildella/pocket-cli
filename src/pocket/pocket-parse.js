@@ -2,10 +2,10 @@ const {gray, cyan, blue, yellow} = require('colorette')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
-const pocketExecute = require('./pocket-execute')
-const {open} = require('./commons-execute')
-const history = require('../history')
 const {intersection, reverseIntersection} = require('../arrays-utils')
+const history = require('../history')
+const {open} = require('../commons-execute')
+const pocketExecute = require('./pocket-execute')
 
 const states = ['unread', 'archive']
 const orders = ['newest', 'oldest', 'title', 'site']

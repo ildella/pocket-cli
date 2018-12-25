@@ -33,7 +33,7 @@ const createAction = inputText => {
 
 const createAnswer = (question, inputText) => {
   const commandIndex = Number(inputText ? inputText : '1')
-  const command = commands[question.command.parseCommand(commandIndex)]
+  const command = commands[question.command.getCommand(commandIndex)]
   const selectionIndex = question.input
   return {
     command: command,
