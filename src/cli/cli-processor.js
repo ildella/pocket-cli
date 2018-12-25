@@ -23,7 +23,7 @@ const processor = {
       const results = await query.execute()
       return query.render ? query.render(results) : results
     } catch(e) {
-      console.log(e)
+      // console.log(e)
       return {lines: handleError(e.name)}
     }
   },

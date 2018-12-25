@@ -3,19 +3,19 @@ require('../src/pocket/pocket-commands')
 const commands = interpreter.commands
 
 test('list with search parameters', async () => {
-  const action = interpreter.getAction('list bitcoin yesterday')
+  const action = interpreter('list bitcoin yesterday')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['bitcoin', 'yesterday'])
 })
 
 test('assume list as default command name', async () => {
-  const action = interpreter.getAction('nodejs')
+  const action = interpreter('nodejs')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs'])
 })
 
 test('aliases and reserved words', async () => {
-  const action = interpreter.getAction('search nodejs unread')
+  const action = interpreter('search nodejs unread')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs', 'unread'])
   const query = await action.parse()
@@ -24,26 +24,26 @@ test('aliases and reserved words', async () => {
 })
 
 test('archive', async () => {
-  expect(interpreter.getAction('archive 1').command).toBe(commands.archive)
-  expect(interpreter.getAction('a 1').command).toBe(commands.archive)
-  expect(interpreter.getAction('aa 1').command).toBe(commands.list)
-  interpreter.getAction('a 1').parse()
+  expect(interpreter('archive 1').command).toBe(commands.archive)
+  expect(interpreter('a 1').command).toBe(commands.archive)
+  expect(interpreter('aa 1').command).toBe(commands.list)
+  interpreter('a 1').parse()
 })
 
 test('archive multiple items', async () => {
-  const archiveMultiple = interpreter.getAction('a 1 2 3')
+  const archiveMultiple = interpreter('a 1 2 3')
   expect(archiveMultiple.command).toBe(commands.archive)
   expect(archiveMultiple.input).toEqual(['1', '2', '3'])
 })
 
 test('favorite multiple items', async () => {
-  const archiveMultiple = interpreter.getAction('fav 1 2 3')
+  const archiveMultiple = interpreter('fav 1 2 3')
   expect(archiveMultiple.command).toBe(commands.favorite)
   expect(archiveMultiple.input).toEqual(['1', '2', '3'])
 })
 
 test('favorite without parameter', async () => {
-  const archiveMultiple = interpreter.getAction('fav')
+  const archiveMultiple = interpreter('fav')
   expect(archiveMultiple.command).toBe(commands.favorite)
   expect(archiveMultiple.input).toEqual([])
   // const parse = archiveMultiple.parse()
@@ -51,7 +51,7 @@ test('favorite without parameter', async () => {
 })
 
 test('open', async () => {
-  const action = interpreter.getAction('open 1')
+  const action = interpreter('open 1')
   expect(action.command).toBe(commands.open)
   const query = action.parse()
   expect(query.name).toBe('pocket-open')
@@ -59,8 +59,8 @@ test('open', async () => {
 })
 
 test('expand', async () => {
-  interpreter.getAction('list').parse()
-  const action = interpreter.getAction('e 3')
+  interpreter('list').parse()
+  const action = interpreter('e 3')
   expect(action.command).toBe(commands.expand)
   const query = action.parse()
   expect(query.name).toBe('pocket-expand')
@@ -68,33 +68,35 @@ test('expand', async () => {
 })
 
 // test('print', async () => {
-//   interpreter.getAction('list').parse()
-//   const action = interpreter.getAction('print')
+//   interpreter('list').parse()
+//   const action = interpreter('print')
 //   expect(action.command).toBe(commands.print)
 //   const query = action.parse()
 //   expect(query.name).toBe('pocket-print')
 // })
 
 test('interactive', async () => {
-  interpreter.getAction('list').parse()
+  interpreter('list').parse()
 
-  const action = interpreter.getAction('1')
+  const action = interpreter('1')
   expect(interpreter.question).toBe(action)
-  expect(action.command).toBe(commands.interactive)
+
   expect(action.input).toEqual(['1'])
+  expect(action.parse).toBeDefined()
+  expect(action.command).toBe(commands.interactive)
   const query = action.parse()
   expect(query.name).toBe('interactive-query')
   const output = query.execute()
   expect(output.lines).toEqual(['1. Open (default)  2. Expand  3. Favorite  4. Archive  5. Delete'])
 
-  const answerAction = interpreter.getAction('2')
+  const answerAction = interpreter('2')
   expect(answerAction.command).toBe(commands.expand)
   expect(interpreter.question).toBeUndefined()
   const answerQuery = answerAction.parse()
   expect(answerQuery.name).toBe('pocket-expand')
   expect(answerQuery.index).toEqual('1')
 
-  const nextAction = interpreter.getAction('something')
+  const nextAction = interpreter('something')
   expect(interpreter.question).toBeUndefined()
   expect(nextAction.command).toBe(commands.list)
   expect(nextAction.input).toEqual(['something'])

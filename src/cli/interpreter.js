@@ -24,7 +24,7 @@ const getAction = (command, input) => {
 const createAction = inputText => {
   if (interpreter.question) { return createAnswer(interpreter.question, inputText) }
   const validString = isValidString(inputText)
-  if (!validString) createNullAction()
+  if (!validString) return createNullAction()
   return createBasicAction(validString.split(' '))
 }
 

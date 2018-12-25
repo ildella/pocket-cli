@@ -5,13 +5,13 @@ require('../src/cli/version')
 const commands = interpreter.commands
 
 test('undefined', () => {
-  const nullAction = interpreter.getAction()
+  const nullAction = interpreter()
   expect(nullAction.command.name).toBe('null')
   // expect(nullAction).toBe()
 })
 
 test('quit', async () => {
-  const action = interpreter.getAction('quit')
+  const action = interpreter('quit')
   expect(action.command).toBe(commands.quit)
   const query = await action.parse()
   expect(query.name).toBeDefined()
@@ -19,7 +19,7 @@ test('quit', async () => {
 })
 
 test('help', async () => {
-  const action = interpreter.getAction('help')
+  const action = interpreter('help')
   expect(action.command).toBe(commands.help)
   const query = await action.parse()
   expect(query.name).toBeDefined()
@@ -27,7 +27,7 @@ test('help', async () => {
 })
 
 test('version', async () => {
-  const action = interpreter.getAction('version')
+  const action = interpreter('version')
   expect(action.command).toBe(commands.version)
   const query = await action.parse()
   expect(query.name).toBeDefined()

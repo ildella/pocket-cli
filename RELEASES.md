@@ -1,3 +1,10 @@
+## 0.8.0 -> in dev...
+
+  * improved: When an index is selected, action 4 is now Archive or Readd according to the article status
+  * improved: help anc commands completion (with TAB) are now context aware. Shortly, they do work properly.
+  * under the hood: large refactoring, more clean codebase and support/way open to improvements
+
+
 ## 0.7.9 -> Dec 23, 2018
 
   * fix/loader: the loader symbol does not disappear after search is finished
