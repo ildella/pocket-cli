@@ -72,7 +72,6 @@ const interpreter = inputText => {
     interpreter.question = undefined
   }
   availableCommands.addAll(Object.entries(Object.assign({}, commands, command.submenu)))
-  // console.log(availableCommands)
   return action
 }
 
