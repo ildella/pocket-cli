@@ -18,7 +18,7 @@ const processor = {
 
   processInput: async string => {
     try {
-      const action = interpreter.getAction(string)
+      const action = interpreter(string)
       const query = action.parse()
       const results = await query.execute()
       return query.render ? query.render(results) : results
