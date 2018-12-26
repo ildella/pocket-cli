@@ -1,13 +1,25 @@
 const lunr = require('lunr')
-const mockDocs = require('./mock.articles.js')
+const mockDocs = require('./mock.parsed.articles.js')
 
-const builder = new lunr.Builder
-builder.ref('item_id')
-builder.field('given_title')
-builder.field('excerpt')
-// builder.field('author')
-mockDocs.forEach(doc => builder.add(doc))
+// const builder = new lunr.Builder
+// builder.ref('id')
+// builder.field('authors')
+// builder.field('title')
+// builder.field('excerpt')
+// builder.field('url')
+// mockDocs.forEach(doc => builder.add(doc))
 
 test('index 1', () => {
-  // builder.build().search()
+  const idx = lunr(function () {
+    this.ref('id')
+    this.field('authors')
+    this.field('title')
+    this.field('url')
+    this.field('excerpt')
+    mockDocs.forEach(doc => {
+      this.add(doc)
+    })
+  })
+  const results = idx.search('John')
+  expect(results.length).toBe(2)
 })
