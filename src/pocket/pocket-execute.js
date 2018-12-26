@@ -27,7 +27,6 @@ const pocket = {
     })
     const response = await client.retrieve(search)
     const data = response.data
-    // const articles = Object.values(data ? data.list : [])
     const articles = Object.values(data.list)
     const parsedArticles = articles.map(article => {
       const id = article.resolved_id || article.item_id || '<No ID>'
