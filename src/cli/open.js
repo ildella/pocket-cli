@@ -7,10 +7,7 @@ const openCommands = {
 }
 
 const open = {
-  get: input => {
-    const actual = input ? input : platform
-    return openCommands[actual]
-  }
+  get: input => openCommands[input || platform]
 }
 
 module.exports = open
