@@ -22,6 +22,11 @@ test('aliases and reserved words', async () => {
   const action = interpreter('search nodejs unread')
   expect(action.command).toBe(commands.list)
   expect(action.input).toEqual(['nodejs', 'unread'])
+})
+
+test('parse', async () => {
+  const action = interpreter('list')
   const query = action.parse()
   expect(query.name).toEqual('pocket-list')
 })
+

@@ -1,4 +1,4 @@
-const formatter = require('../src/articles-formatter')
+const formatter = require('../src/pocket/articles-formatter')
 
 test('format', () => {
   const entry = {

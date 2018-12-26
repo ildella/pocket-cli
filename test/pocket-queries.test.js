@@ -48,7 +48,7 @@ test('json query to human readable text', async () => {
 // const article2 = {item_id: 'a2'}
 // const article3 = {item_id: 'a3'}
 // pocket.articles = [article1, article2, article3]
-const localArticles = require('../src/pocket/pocket-articles')
+const localArticles = require('../src/local-articles')
 const mockArticles = require('./mock.articles')
 localArticles.store(mockArticles)
 

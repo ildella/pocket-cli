@@ -1,5 +1,5 @@
-const local1 = require('../src/pocket/pocket-articles')
-const local2 = require('../src/pocket/pocket-articles')
+const local1 = require('../src/local-articles')
+const local2 = require('../src/local-articles')
 
 test('ensure they are the same', () => {
   expect(local1).toBe(local2)
