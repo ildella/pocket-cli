@@ -3,5 +3,5 @@ module.exports = {
   notify: false,
   testEnvironment: 'node',
   testMatch: ['**/?(*.)(spec|test).js?(x)'],
-  collectCoverage: false
+  collectCoverage: true
 }
