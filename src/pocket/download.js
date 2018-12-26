@@ -8,7 +8,7 @@ module.exports = () => {
       push(null, __.nil)
       return
     }
-    const query = pocket.list()
+    const query = pocket.next()
     const response = await query.execute()
     called++
     push(null, response)

@@ -5,9 +5,9 @@
 */
 
 const {DateTime} = require('luxon')
-let inMemory = []
 
 const history = function (name) {
+  let inMemory = []
   const history = {
     name: name,
     add: item => {

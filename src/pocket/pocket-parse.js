@@ -76,6 +76,7 @@ const pocketParse = {
 
   next: () => {
     const search = queries.size() > 0 ? queries.last() : defaultSearch
+    console.log(search)
     search.offset = search.offset + search.count
     return {
       name: 'pocket-next',
