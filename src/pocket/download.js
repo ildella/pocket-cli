@@ -2,7 +2,7 @@ const __ = require('highland')
 const pocket = require('./pocket-parse')
 const fs = require('fs')
 const write = fs.createWriteStream('/home/ildella/.config/pocketcli/localdb')
-const max = 10
+const max = 2
 
 module.exports = () => {
   let called = 0
@@ -25,6 +25,8 @@ module.exports = () => {
   __(generator)
     .flatten()
     .map(article => JSON.stringify(article))
+    .map(string => `${string}\n`)
+    // .through(JSON.stringify)
     .pipe(write)
     // .toArray(results => console.log('GENERATOR DONE', results.length))
 }
