@@ -26,5 +26,5 @@ test('archive and readd', async () => {
   const list = await processor.processInput('bitcoin')
   // expect(list.lines[2]).toContain('2.  (A)')
   const output = await processor.processInput('2')
-  expect(output.lines).toContain('4. Re-add')
+  expect(output.lines).toContain('4. Readd')
 })
