@@ -9,7 +9,7 @@ const redirectURI = `http://localhost:${port}/oauth/pocket/callback`
 
 const open = require('../cli/open')
 const auth = require('../auth')()
-const client = require('./pocket-cli-http')({taskName: task})
+const client = require('./pocket-sdk')({taskName: task})
 
 const pocketAuth = {}
 

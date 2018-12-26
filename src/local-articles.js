@@ -1,4 +1,4 @@
-const history = require('../history')
+const history = require('./history')
 
 const localArticles = history('articles')
 

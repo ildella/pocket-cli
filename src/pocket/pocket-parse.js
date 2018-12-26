@@ -13,7 +13,7 @@ const orders = ['newest', 'oldest', 'title', 'site']
 const actionsHistory = []
 const queries = history('queries')
 // const localArticles = history('articles')
-const localArticles = require('./pocket-articles')
+const localArticles = require('../local-articles')
 
 const pocketParse = {
 
@@ -167,8 +167,8 @@ const command2 = cyan('archive 2')
 const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
 const noResultsGuide = yellow('No results found')
 
-const formatter = require('../articles-formatter')
-const {toHumanText} = require('../articles-formatter')
+const formatter = require('./articles-formatter')
+const {toHumanText} = require('./articles-formatter')
 const {toSingleLine} = require('../commons-formatter')
 
 const render = (search, articles) => {

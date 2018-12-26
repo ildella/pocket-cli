@@ -9,7 +9,7 @@ const orderByDesc = (key) => {
 const pocket = {
 
   modify: async actions => {
-    const client = require('./pocket-cli-http')({
+    const client = require('./pocket-sdk')({
       taskName: task,
       auth: auth.get()
     })
@@ -21,7 +21,7 @@ const pocket = {
   },
 
   retrieve: async search => {
-    const client = require('./pocket-cli-http')({
+    const client = require('./pocket-sdk')({
       taskName: task,
       auth: auth.get()
     })
