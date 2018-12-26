@@ -1,7 +1,7 @@
 const axios = require('axios')
 const url = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/RELEASES.md'
 
-const commands = require('./interpreter').commands
+const {commands} = require('./menu')
 const update = require('../npm-update')
 
 const output = []

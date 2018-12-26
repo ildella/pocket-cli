@@ -1,7 +1,8 @@
-const {commands} = require('../cli/interpreter')
+const {green} = require('colorette')
+
+const {commands} = require('../cli/menu')
 const pocketAuth = require('./pocket-auth')
 const pocketParse = require('./pocket-parse')
-const {green} = require('colorette')
 
 const listCommands = {
   archive: {

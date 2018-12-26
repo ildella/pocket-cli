@@ -2,9 +2,8 @@
   Which command will take control of the user input
 */
 
-const commands = {}
-
-commands['null'] = {
+const menu = require('./menu')
+menu.commands['null'] = {
   name: 'null',
   aliases: [],
   description: 'Do nothing',
@@ -33,13 +32,13 @@ const createAction = inputText => {
 }
 
 const createNullAction = () => {
-  return getAction(commands['null'], '')
+  return getAction(menu.commands['null'], '')
 }
 
 const createAnswer = (question, inputText) => {
   const commandIndex = Number(inputText ? inputText : '1')
   const selectionIndex = question.input
-  const command = commands[question.parse().getCommand(commandIndex)]
+  const command = menu.commands[question.parse().getCommand(commandIndex)]
   return getAction(command, selectionIndex)
 }
 
@@ -47,24 +46,21 @@ const defaultCommand = 'list'
 
 const createBasicAction = spaceSeparatedInput => {
   const firstWord = spaceSeparatedInput[0]
-  const candidates = Object.values(commands).filter(command => {
+  // TODO: finally we have a place for this function: menu
+  const candidates = Object.values(menu.commands).filter(command => {
     const matches = new Set(command.aliases)
     matches.add(command.name)
     return matches.has(firstWord)
   })
   const useDefault = candidates.length === 0
   // TODO: default command should not be here
-  const command = useDefault ? commands[defaultCommand] : candidates[0]
+  const command = useDefault ? menu.commands[defaultCommand] : candidates[0]
   // TOFIX: isInteractive should not be here, find new way to ask for isFirstWordACommand
   const isInteractive = command.type === 'interactive'
   const isFirstWordACommand = (!useDefault && !isInteractive)
   const input = isFirstWordACommand ? spaceSeparatedInput.slice(1) : spaceSeparatedInput.slice(0)
   return getAction(command, input)
 }
-
-const history = require('../history')
-const availableCommands = history('commands')
-// availableCommands.addAll(Object.entries(commands))
 
 const interpreter = inputText => {
   const action = createAction(inputText)
@@ -75,10 +71,7 @@ const interpreter = inputText => {
   } else {
     interpreter.question = undefined
   }
-  availableCommands.addAll(Object.entries(Object.assign({}, commands, command.submenu)))
   return action
 }
 
 module.exports = interpreter
-module.exports.commands = commands
-module.exports.availableCommands = availableCommands

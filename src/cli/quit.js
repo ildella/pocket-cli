@@ -1,4 +1,4 @@
-const commands = require('./interpreter').commands
+const commands = require('./menu').commands
 
 const parse = () => {
   return {

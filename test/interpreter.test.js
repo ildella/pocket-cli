@@ -4,7 +4,7 @@ require('../src/cli/quit')
 require('../src/cli/version')
 require('../src/cli/update')
 
-const commands = interpreter.commands
+const commands = require('../src/cli/menu').commands
 
 test('undefined', () => {
   const nullAction = interpreter()

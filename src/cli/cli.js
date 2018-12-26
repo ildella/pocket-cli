@@ -1,7 +1,7 @@
 const readline = require('readline')
 const {blue} = require('colorette')
-const {commands} = require('./interpreter')
-const cliProcessor = require('./cli-processor')
+const {commands} = require('./menu')
+const cliProcessor = require('./process-input')
 
 const cli = {}
 
