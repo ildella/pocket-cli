@@ -11,9 +11,8 @@ module.exports = () => {
     const query = pocket.list()
     const response = await query.execute()
     called++
-    console.log(response.length)
     push(null, response)
-    console.log('... pushed!')
+    console.log('... pushed!', response.length)
     next()
   }
 

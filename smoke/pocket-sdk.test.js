@@ -1,4 +1,5 @@
 const cexpect = require('chai').expect
+
 test('same instance', () => {
   const p1 = require('../src/pocket/pocket-sdk')()
   const p2 = require('../src/pocket/pocket-sdk')()
@@ -23,6 +24,7 @@ test('read from pocket API', async () => {
   expect(response.data.complete).toBe(1)
   expect(response.data.error).toBeNull()
   expect(response.data.search_meta).toEqual({search_type: 'normal'})
+  console.log(response.data)
   expect(Object.values(response.data.list)).toHaveLength(10)
 })
 

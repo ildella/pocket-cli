@@ -14,6 +14,12 @@ const actionsHistory = []
 const queries = history('queries')
 // const localArticles = history('articles')
 const localArticles = require('../local-articles')
+const defaultSearch = {
+  count: 8,
+  offset: 0,
+  detailType: 'complete',
+  since: 0
+}
 
 const pocketParse = {
 
@@ -69,7 +75,7 @@ const pocketParse = {
   },
 
   next: () => {
-    const search = queries.last()
+    const search = queries.size() > 0 ? queries.last() : defaultSearch
     search.offset = search.offset + search.count
     return {
       name: 'pocket-next',
@@ -96,16 +102,12 @@ const pocketParse = {
     const state = reservedState.length > 0 ? reservedState[0] : 'all'
     const order = reservedOrder.length > 0 ? reservedOrder[0] : 'newest'
     const params = reverseIntersection([inputs, states, orders])
-    const search = {
-      count: 8,
-      offset: 0,
-      detailType: 'complete',
+    const search = Object.assign({}, {
       sort: order,
       state: state,
       search: params.toString().replace(',', ' '),
       // since: DateTime.local().startOf('day').minus({month: 1}).ts / 1000
-      since: 0
-    }
+    }, defaultSearch)
     return {
       name: 'pocket-list',
       search: search,

@@ -1,5 +1,9 @@
 const h = require('../src/history')('test')
 
+test('last', () => {
+  expect(() => { h.last() }).toThrow()
+})
+
 test('init', () => {
   // expect(h.hasIndex(0)).toThrow()
   expect(h.hasIndex(1)).toBeFalsy()
@@ -19,4 +23,6 @@ test('add and get', () => {
 test('addAll', () => {
   h.addAll([{a: 1}, {a: 2}])
   expect(h.size()).toBe(2)
+  expect(h.last()).toEqual({a: 2})
 })
+
