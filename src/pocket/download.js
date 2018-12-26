@@ -1,10 +1,13 @@
 const __ = require('highland')
 const pocket = require('./pocket-parse')
+const fs = require('fs')
+const write = fs.createWriteStream('/home/ildella/.config/pocketcli/localdb')
+const max = 10
 
 module.exports = () => {
   let called = 0
   const generator = async (push, next) => {
-    if (called >= 2) {
+    if (called >= max) {
       push(null, __.nil)
       return
     }
@@ -12,12 +15,16 @@ module.exports = () => {
     const response = await query.execute()
     called++
     push(null, response)
-    console.log('... pushed!', response.length)
+    if (response.length === 0) {
+      push(null, __.nil)
+      return
+    }
     next()
   }
 
   __(generator)
-    // .tap(console.log)
     .flatten()
-    .toArray(results => console.log('GENERATOR DONE', results.length))
+    .map(article => JSON.stringify(article))
+    .pipe(write)
+    // .toArray(results => console.log('GENERATOR DONE', results.length))
 }
