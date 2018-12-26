@@ -1,3 +1,7 @@
+/*
+  Which command will take control of the user input
+*/
+
 const commands = {}
 
 commands['null'] = {

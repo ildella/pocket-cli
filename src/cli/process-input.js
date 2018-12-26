@@ -1,3 +1,7 @@
+/*
+  Control the whole flow: parse input, execute action, render result
+*/
+
 const {yellow, red} = require('colorette')
 
 const interpreter = require('./interpreter')
