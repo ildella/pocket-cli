@@ -32,8 +32,7 @@ const callIndex = () => {
   return {
     name: 'search-local-index',
     execute: async () => {
-      const results = idx.search('opensource')
-      console.log(results)
+      console.log(idx.search('opensource'))
       return []
     }
   }
