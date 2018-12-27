@@ -1,3 +1,7 @@
+/*
+  Download JSON with line separator so we can use readline + streams to load
+*/
+
 const __ = require('highland')
 const pocket = require('./pocket-parse')
 const fs = require('fs')
@@ -26,7 +30,5 @@ module.exports = () => {
     .flatten()
     .map(article => JSON.stringify(article))
     .map(string => `${string}\n`)
-    // .through(JSON.stringify)
     .pipe(write)
-    // .toArray(results => console.log('GENERATOR DONE', results.length))
 }
