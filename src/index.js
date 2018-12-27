@@ -5,6 +5,7 @@ require('./cli/update')
 require('./cli/version')
 require('./cli/quit')
 require('./cli/help')
+require('./pocket/load')
 
 const app = {}
 

@@ -39,5 +39,26 @@ test('tame 1', () => {
     })
   })
   const results = idx.search('William')
+  expect(results.length).toBe(1)
+  expect(results[0].score).toBe(0.288)
+})
+
+test('tame 2', () => {
+  const doc = {
+    'title': 'Twelfth-Night',
+    'body': 'If music be the food of love, play on: Give me excess of it…',
+    'author': 'William Shakespeare',
+    'id': '1'
+  }
+  const config = function () {
+    this.field('author')
+    this.field('title')
+    this.field('body')
+
+    this.add(doc)
+  }
+  const idx = lunr(config)
+  const results = idx.search('William')
+  expect(results.length).toBe(1)
   expect(results[0].score).toBe(0.288)
 })

@@ -10,36 +10,50 @@ const generator = push => {
   rl.on('close', () => { push(null, __.nil) })
 }
 
+// const idx = lunr(function () {
+//   this.ref('id')
+//   this.field('authors')
+//   this.field('title')
+//   this.field('url')
+//   this.field('excerpt')
+//   __(generator)
+//     .map(line => JSON.parse(line))
+//     .each(article => { this.add(article) })
+//     .done(() => { console.log('LOADED') })
+//     .toArray(loaded => )
+// })
+
+// __(generator)
+//   .map(line => JSON.parse(line))
+//   .toArray(articles => )
+
+
 const idx = lunr(function () {
   this.ref('id')
-  // this.field('authors')
+  this.field('authors')
   this.field('title')
-  // this.field('url')
-  // this.field('excerpt')
-  // this.add({
-  //   id: '1',
-  //   title: 'Happy dog'
-  // })
-  // console.log(this)
-  __(generator)
-    .map(line => JSON.parse(line))
-    .each(article => {
-      // console.log(article.title)
-      this.add(article)
-    })
-    .done(() => {
-      console.log('DONE')
-      console.log(idx)
-      // console.log(idx.search('start'))
-      // console.log(this)
-    })
-    // .toArray(loaded => console.log(loaded.length))
+  this.field('url')
+  this.field('excerpt')
 })
 
-module.exports = idx
+const callIndex = () => {
+  return {
+    name: 'search-local-index',
+    execute: async () => {
+      console.log(idx)
+      const results = idx.search('Happy')
+      console.log(results)
+      return []
+    }
+  }
+}
 
-// const results = idx.search('Happy')
-// console.log(results[0])
-// console.log(idx)
-// console.log(results[0].matchData.metadata)
-// console.log(results[0].matchData.metadata.happi)
+const {commands} = require('../cli/menu')
+commands['index'] = {
+  name: 'index',
+  aliases: ['i'],
+  description: 'Search local index',
+  parse: callIndex
+}
+
+module.exports = idx
