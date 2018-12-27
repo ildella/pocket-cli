@@ -10,38 +10,29 @@ const generator = push => {
   rl.on('close', () => { push(null, __.nil) })
 }
 
-// const idx = lunr(function () {
-//   this.ref('id')
-//   this.field('authors')
-//   this.field('title')
-//   this.field('url')
-//   this.field('excerpt')
-//   __(generator)
-//     .map(line => JSON.parse(line))
-//     .each(article => { this.add(article) })
-//     .done(() => { console.log('LOADED') })
-//     .toArray(loaded => )
-// })
+__(generator)
+  .map(line => JSON.parse(line))
+  .toArray(articles => buildIndex(articles))
 
-// __(generator)
-//   .map(line => JSON.parse(line))
-//   .toArray(articles => )
+let idx = {}
 
-
-const idx = lunr(function () {
-  this.ref('id')
-  this.field('authors')
-  this.field('title')
-  this.field('url')
-  this.field('excerpt')
-})
+const buildIndex = articles => {
+  const newIndex = lunr(function () {
+    this.ref('id')
+    this.field('authors')
+    this.field('title')
+    this.field('url')
+    this.field('excerpt')
+    articles.forEach(article => this.add(article))
+  })
+  idx = newIndex
+}
 
 const callIndex = () => {
   return {
     name: 'search-local-index',
     execute: async () => {
-      console.log(idx)
-      const results = idx.search('Happy')
+      const results = idx.search('opensource')
       console.log(results)
       return []
     }
@@ -56,4 +47,4 @@ commands['index'] = {
   parse: callIndex
 }
 
-module.exports = idx
+// module.exports = idx

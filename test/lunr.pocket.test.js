@@ -38,16 +38,6 @@ test('index inline', () => {
 })
 
 test('with builder', () => {
-  const config = function () {
-    this.field('title')
-    this.field('body')
-    this.ref('id')
-
-    mockDocs.forEach(function (doc) {
-      this.add(doc)
-    }, this)
-  }
-
   const builder = new lunr.Builder
 
   builder.pipeline.add(
@@ -60,11 +50,31 @@ test('with builder', () => {
     lunr.stemmer
   )
 
-  config.call(builder, builder)
-  const idx = builder.build()
-  // console.log(idx)
-  const results = idx.search('John')
-  console.log(results)
-  // expect(results.length).toBe(2)
+  // config.call(builder, builder)
+  builder.ref('id')
+  builder.field('title')
+  builder.field('body')
+  mockDocs.forEach(doc => { builder.add(doc) })
 
+  const idx = builder.build()
+  const results = idx.search('John')
+  // console.log(results)
+  expect(results.length).toBe(0)
+  // :(
+})
+
+test('async loop', () => {
+  const config = function () {
+    this.ref('id')
+    this.field('authors')
+    this.field('title')
+    this.field('url')
+    this.field('excerpt')
+    for (const doc of mockDocs) {
+      this.add(doc)
+    }
+  }
+  const idx = lunr(config)
+  const results = idx.search('John')
+  expect(results.length).toBe(2)
 })

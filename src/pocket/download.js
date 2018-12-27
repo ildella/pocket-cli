@@ -2,7 +2,7 @@ const __ = require('highland')
 const pocket = require('./pocket-parse')
 const fs = require('fs')
 const write = fs.createWriteStream('/home/ildella/.config/pocketcli/localdb')
-const max = 2
+const max = 10
 
 module.exports = () => {
   let called = 0
