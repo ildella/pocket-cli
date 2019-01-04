@@ -3,7 +3,7 @@ const {commands} = require('../src/cli/menu')
 require('../src/pocket/pocket-commands')
 
 beforeAll(() => {
-  const localArticles = require('../src/pocket/pocket-articles')
+  const localArticles = require('../src/local-articles')
   const mockArticles = require('./mock.articles')
   localArticles.store(mockArticles)
 })
