@@ -1,6 +1,6 @@
 const {green, magenta, cyan, yellow} = require('colorette')
 const {DateTime} = require('luxon')
-const maxColumns = process.stdout.columns
+const maxColumns = process.stdout.columns || 100
 
 const renderArticle = (entry, index) => {
   const indexOutput = `${index || entry.index || 'NA'}`
