@@ -100,3 +100,14 @@ commands['list'] = {
   submenu: listCommands,
   parse: pocketParse.list
 }
+commands['mode'] = {
+  name: 'mode',
+  aliases: ['m', 'filters'],
+  description: 'Enter a specific mode that can act as a filter',
+  guide:
+  `
+  Usage:
+    mode unread --> all future list requests will use this filter
+  `,
+  parse: pocketParse.mode
+}

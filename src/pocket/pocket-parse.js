@@ -150,6 +150,20 @@ const pocketParse = {
         return opts[actionIndex]
       }
     }
+  },
+
+  mode: inputs => {
+    const modes = intersection([states, inputs])
+    const feedback = modes.length > 0 ? [] : [`no modes found for "${inputs}"`]
+    return {
+      name: 'set-mode',
+      execute: () => {
+        return {
+          lines: feedback,
+          prompt: `${blue(`Pocket:${modes}`)}> `
+        }
+      }
+    }
   }
 
 }
