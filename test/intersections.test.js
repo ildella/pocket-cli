@@ -20,3 +20,10 @@ test('reverse intersection', () => {
   const found = reverseIntersection([inputs, reserved])
   expect(found).toEqual(['bitcoin', 'development'])
 })
+
+test('reverse intersection for tags', () => {
+  const inputs = ['1', '2', 'tag1', '4', 'tag2']
+  const reserved = ['1', '2', '3', '4']
+  const found = reverseIntersection([inputs, reserved])
+  expect(found).toEqual(['tag1', 'tag2'])
+})

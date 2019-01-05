@@ -44,25 +44,28 @@ const pocketParse = {
     }
   },
 
-  archive: indexes => {
-    return modify('archive', indexes)
+  archive: (...indexes) => {
+    return modify({action: 'archive', indexes: indexes})
   },
 
   delete: indexes => {
-    return modify('delete', indexes)
+    return modify({action: 'delete', indexes: indexes})
   },
 
   favorite: indexes => {
-    return modify('favorite', indexes)
+    return modify({action: 'favorite', indexes: indexes})
   },
 
   readd: indexes => {
-    return modify('readd', indexes)
+    return modify({action: 'readd', indexes: indexes})
   },
 
-  tag: params => {
-    console.log('tag', params)
-    return modify('tags_add', params)
+  tag: inputs => {
+    // console.log('inputs', inputs)
+    const allIndexes = ['1', '2', '3', '4', '5', '6', '7', '8']
+    const tags = reverseIntersection([inputs, allIndexes])
+    const indexes = intersection([inputs, allIndexes])
+    return modify({action: 'tags_add', custom: {tags: tags}, indexes: indexes})
   },
 
   expand: indexes => {
@@ -158,14 +161,15 @@ const retrieve = async search => {
   return retrievedArticles
 }
 
-const modify = (action, ...indexes) => {
+const modify = ({action, custom = {}, indexes}) => {
   const matches = indexes.flat().map(i => localArticles.get(i)).filter(Boolean)
   const actions = matches.map(article => {
-    return {
+    const base = {
       action: action,
       item_id: article.item_id,
       time: DateTime.local().ts / 1000
     }
+    return {...base, ...custom}
   })
   return {
     // name: `pocket-modify-${action}`,

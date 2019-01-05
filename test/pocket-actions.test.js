@@ -3,8 +3,8 @@ const localArticles = require('../src/local-articles')
 const mockArticles = require('./mock.articles')
 localArticles.store(mockArticles)
 
-test('Modify query', async () => {
-  const query = archive('2')
+test('Archive', async () => {
+  const query = archive(['2'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(1)
   // expect(query.actions).toBe('archive')
@@ -12,19 +12,13 @@ test('Modify query', async () => {
   expect(query.actions[0].item_id).toBe('m2')
 })
 
-// test('Modify query - no matching index', async () => {
-//   const query = modify('archive', '')
-//   expect(query.name).toEqual('pocket-modify')
-//   expect(query.actions).toHaveLength(0)
-// })
-
-test('Modify query - no index', async () => {
+test('Archive no index', async () => {
   const query = archive([])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(0)
 })
 
-test('Modify query with multiple indexes', async () => {
+test('Archive with multiple indexes', async () => {
   const query = archive(['1', '3', '4'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
@@ -57,7 +51,8 @@ test('Readd multiple items', async () => {
 test('Tag - add', async () => {
   const query = tag(['1', '2', 'aTag', '4'])
   expect(query.name).toEqual('pocket-modify')
-  expect(query.actions[0].action).toBe('tag')
+  expect(query.actions).toHaveLength(3)
+  expect(query.actions[0].action).toBe('tags_add')
   expect(query.actions[0].item_id).toBe('m1')
-  expect(query.actions[0].tag).toBe('aTag')
+  expect(query.actions[0].tags).toEqual(['aTag'])
 })
