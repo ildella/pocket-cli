@@ -1,8 +1,10 @@
-## 0.8.0 -> Jan 5th, 2019
+## 0.8.1 -> Jan 5th, 2019
 
   * improved: When an index is selected, action 4 is now Archive or Readd according to the article status
   * improved: command completion has better behavior
   * new: Fav article are marked with a *
+  * new: "tag 1 myTag" will tag. Is not positional
+  * new: list will show the tags of each item
   * change: index and title no longer have bright colors
   * fixed: previous command is broken in 0.7.9
   * under the hood: Large refactoring. Tests % are 80.13 | 62.7 | 67.83 | 80.09

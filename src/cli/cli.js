@@ -34,7 +34,7 @@ cli.init = () => {
     loader.start()
   })
   ui.on('close', () => {
-    console.log('\nuGoodbye.')
+    console.log('\nGoodbye.')
     process.exit(0)
   })
 }
