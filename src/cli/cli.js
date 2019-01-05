@@ -21,7 +21,6 @@ cli.init = () => {
   console.log(`${'Pocket CLI'} - ${platform}`)
   ui.prompt()
   ui.on('line', async string => {
-    // ui.completer(string)
     cliProcessor.processInput(string)
       .then(response => {
         loader.stop()
