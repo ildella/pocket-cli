@@ -49,10 +49,10 @@ test('Readd multiple items', async () => {
 })
 
 test('Tag - add', async () => {
-  const query = tag(['1', '2', 'aTag', '4'])
+  const query = tag(['1', '2', 'aTag', '4', 'anotherTag'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
   expect(query.actions[0].action).toBe('tags_add')
   expect(query.actions[0].item_id).toBe('m1')
-  expect(query.actions[0].tags).toEqual(['aTag'])
+  expect(query.actions[0].tags).toEqual('aTag, anotherTag')
 })

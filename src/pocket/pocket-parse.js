@@ -63,7 +63,7 @@ const pocketParse = {
   tag: inputs => {
     // console.log('inputs', inputs)
     const allIndexes = ['1', '2', '3', '4', '5', '6', '7', '8']
-    const tags = reverseIntersection([inputs, allIndexes])
+    const tags = reverseIntersection([inputs, allIndexes]).join(', ')
     const indexes = intersection([inputs, allIndexes])
     return modify({action: 'tags_add', custom: {tags: tags}, indexes: indexes})
   },
