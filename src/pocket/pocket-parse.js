@@ -1,10 +1,12 @@
-const {gray, cyan, blue, yellow} = require('colorette')
+const {green, gray, cyan, blue, yellow} = require('colorette')
 const {DateTime, Settings} = require('luxon')
 Settings.defaultZoneName = 'utc'
 
 const {intersection, reverseIntersection} = require('../arrays-utils')
-const history = require('../history')
 const {open} = require('../commons-execute')
+const history = require('../history')
+
+const pocketAuth = require('./pocket-auth')
 const pocketExecute = require('./pocket-execute')
 
 const states = ['unread', 'archive']
@@ -12,7 +14,6 @@ const orders = ['newest', 'oldest', 'title', 'site']
 
 const actionsHistory = []
 const queries = history('queries')
-// const localArticles = history('articles')
 const localArticles = require('../local-articles')
 const defaultSearch = {
   count: 8,
@@ -22,6 +23,26 @@ const defaultSearch = {
 }
 
 const pocketParse = {
+
+  login: () => {
+    return {
+      name: 'pocket-auth',
+      execute: async () => {
+        await pocketAuth.login()
+        return {lines: [green('User logged in')]}
+      }
+    }
+  },
+
+  logout: () => {
+    return {
+      name: 'pocket-auth',
+      execute: async () => {
+        pocketAuth.logout()
+        return {lines: [green('User logged out')]}
+      }
+    }
+  },
 
   archive: indexes => {
     return modify('archive', indexes)
@@ -43,13 +64,6 @@ const pocketParse = {
     console.log('tag', params)
     return modify('tags_add', params)
   },
-
-  // print: () => {
-  //   return {
-  //     name: 'pocket-print',
-  //     execute: pocket.render
-  //   }
-  // },
 
   expand: indexes => {
     const index = indexes[0]
