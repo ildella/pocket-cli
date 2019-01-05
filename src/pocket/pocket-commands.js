@@ -23,12 +23,12 @@ const listCommands = {
     description: 'Favorite article',
     parse: pocketParse.favorite
   },
-  // tag: {
-  //   name: 'tag',
-  //   aliases: ['t'],
-  //   description: 'tag article',
-  //   parse: pocketParse.tag
-  // },
+  tag: {
+    name: 'tag',
+    aliases: ['t'],
+    description: 'Tag article',
+    parse: pocketParse.tag
+  },
   readd: {
     name: 'readd',
     aliases: ['unarchive'],

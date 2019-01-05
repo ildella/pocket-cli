@@ -6,10 +6,13 @@ beforeAll(() => {
   const localArticles = require('../src/local-articles')
   const mockArticles = require('./mock.articles')
   localArticles.store(mockArticles)
+  // TOFIX: this is not enough to add subcommand, as they are added in process-input
+  // TODO: ned a way to make this testable
+  interpreter('list').parse() 
+  // expect(commands).toBe({})
+  // expect(commands.archive).toBeDefined()
 })
 
-// TOFIX: all commands should be loaded at start
-// TODO: then we need a way for interpreter / completer to get only available ones
 test('archive', async () => {
   // expect(interpreter('archive 1').command).toBe(commands.archive)
   // expect(interpreter('a 1').command).toBe(commands.archive)

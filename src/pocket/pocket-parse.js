@@ -39,8 +39,9 @@ const pocketParse = {
     return modify('readd', indexes)
   },
 
-  tag: indexes => {
-    return modify('tags_add', indexes)
+  tag: params => {
+    console.log('tag', params)
+    return modify('tags_add', params)
   },
 
   // print: () => {
@@ -143,8 +144,8 @@ const retrieve = async search => {
   return retrievedArticles
 }
 
-const modify = (action, ...index) => {
-  const matches = index.flat().map(i => localArticles.get(i)).filter(Boolean)
+const modify = (action, ...indexes) => {
+  const matches = indexes.flat().map(i => localArticles.get(i)).filter(Boolean)
   const actions = matches.map(article => {
     return {
       action: action,
@@ -152,15 +153,17 @@ const modify = (action, ...index) => {
       time: DateTime.local().ts / 1000
     }
   })
-  actionsHistory.push({
-    timestamp: DateTime.local(),
-    actions: actions
-  })
   return {
     // name: `pocket-modify-${action}`,
     name: 'pocket-modify',
     actions: actions,
-    execute: () => { return pocketExecute.modify(actions) }
+    execute: () => {
+      actionsHistory.push({
+        timestamp: DateTime.local(),
+        actions: actions
+      })
+      return pocketExecute.modify(actions)
+    }
   }
 }
 
@@ -196,4 +199,3 @@ const options = isArchived => {
 }
 
 module.exports = pocketParse
-module.exports.modify = modify
