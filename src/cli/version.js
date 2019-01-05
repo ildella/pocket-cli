@@ -5,7 +5,7 @@ const pjson = require('../../package.json')
 const output = []
 output.push(`${pjson.name} ${pjson.version} - ${pjson.description}`)
 
-const parse = params => {
+const parse = () => {
   return {
     name: 'version',
     execute: () => { return {lines: output} }
@@ -15,6 +15,6 @@ const parse = params => {
 commands['version'] = {
   name: 'version',
   aliases: ['v'],
-  description: 'Pocket CLI version',
+  description: 'Print application version',
   parse: parse
 }

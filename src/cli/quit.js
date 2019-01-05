@@ -13,6 +13,6 @@ const parse = () => {
 commands['quit'] = {
   name: 'quit',
   aliases: ['exit', 'q'],
-  description: 'Quit Pocket CLI',
+  description: 'Quit and terminate application',
   parse: parse
 }
