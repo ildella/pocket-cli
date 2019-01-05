@@ -1,3 +1,4 @@
+const processor = require('../src/cli/process-input')
 const interpreter = require('../src/cli/interpreter')
 const {commands} = require('../src/cli/menu')
 require('../src/pocket/pocket-commands')
@@ -6,11 +7,22 @@ beforeAll(() => {
   const localArticles = require('../src/local-articles')
   const mockArticles = require('./mock.articles')
   localArticles.store(mockArticles)
-  // TOFIX: this is not enough to add subcommand, as they are added in process-input
-  // TODO: ned a way to make this testable
-  interpreter('list').parse() 
   // expect(commands).toBe({})
   // expect(commands.archive).toBeDefined()
+})
+
+test('mode wrong input', async () => {
+  const rendered = await processor.processInput('mode something')
+  expect(rendered.lines[0]).toContain('no modes found')
+})
+
+test('mode unread', async () => {
+  const rendered = await processor.processInput('mode unread')
+  console.log(rendered)
+  // TODO: check that this query has unread in it
+  // const parsed = processor.interpreter('list').parse()
+  // TODO: refactor so rendering happens somewhere else and we can test processor and intepreter together
+  // TODO: remove the console.log for errors in processor, add tracer
 })
 
 test('archive', async () => {
