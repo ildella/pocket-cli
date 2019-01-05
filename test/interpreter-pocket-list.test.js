@@ -3,7 +3,7 @@ const {commands} = require('../src/cli/menu')
 require('../src/pocket/pocket-commands')
 
 test('basic commands are loaded', async () => {
-  expect(Object.entries(commands)).toHaveLength(4)
+  expect(Object.entries(commands)).toHaveLength(3)
 })
 
 test('list with search parameters', async () => {

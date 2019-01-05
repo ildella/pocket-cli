@@ -8,7 +8,7 @@ const commands = require('../src/cli/menu').commands
 
 test('undefined', () => {
   const nullAction = interpreter()
-  expect(nullAction.command).toBe(commands.null)
+  expect(nullAction.command.name).toBe('null')
 })
 
 test('quit', async () => {
