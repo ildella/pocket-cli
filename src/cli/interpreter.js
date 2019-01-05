@@ -3,7 +3,7 @@
 */
 
 const menu = require('./menu')
-menu.commands['null'] = {
+const nullCommand = {
   name: 'null',
   aliases: [],
   description: 'Do nothing',
@@ -32,7 +32,7 @@ const createAction = inputText => {
 }
 
 const createNullAction = () => {
-  return getAction(menu.commands['null'], '')
+  return getAction(nullCommand, '')
 }
 
 const createAnswer = (question, inputText) => {

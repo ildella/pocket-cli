@@ -1,3 +1,5 @@
+const menu = require('../src/cli/menu')
+
 test('same instance', () => {
   const menu1 = require('../src/cli/menu')
   const menu2 = require('../src/cli/menu')

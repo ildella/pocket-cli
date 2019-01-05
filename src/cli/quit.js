@@ -4,7 +4,7 @@ const parse = () => {
   return {
     name: 'quit',
     execute: () => {
-      console.log('user asked to quit...')
+      console.log('Goodbye.')
       process.exit(0)
     }
   }

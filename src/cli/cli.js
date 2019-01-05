@@ -34,7 +34,7 @@ cli.init = () => {
     loader.start()
   })
   ui.on('close', () => {
-    console.log('\nuser request to close the app...')
+    console.log('\nuGoodbye.')
     process.exit(0)
   })
 }
