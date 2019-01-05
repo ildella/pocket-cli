@@ -1,15 +1,10 @@
 const readline = require('readline')
 const {blue} = require('colorette')
-const {commands} = require('./menu')
+
 const cliProcessor = require('./process-input')
+const completer = require('./completer')
 
 const cli = {}
-
-const completer = line => {
-  const completions = Object.keys(commands)
-  const hits = completions.filter(c => c.startsWith(line))
-  return [hits.length ? hits : completions, line]
-}
 
 const defaultPrompt = `${blue('Pocket')}> `
 const ui = readline.createInterface({

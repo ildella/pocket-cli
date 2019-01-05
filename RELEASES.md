@@ -3,8 +3,9 @@
   * improved: When an index is selected, action 4 is now Archive or Readd according to the article status
   * improved: command completion has better formatting
   * new: Fav article are marked with a * 
-  * under the hood: large refactoring, more clean codebase and support/way open to improvements
-
+  * change: index and title no longer have bright colors 
+  * fixed: previous is broken in 0.7.9
+  * under the hood: large refactoring
 
 ## 0.7.9 -> Dec 23, 2018
 
