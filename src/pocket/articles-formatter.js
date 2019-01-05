@@ -1,4 +1,4 @@
-const {green, magenta, cyan, cyanBright, greenBright , yellow} = require('colorette')
+const {green, magenta, cyan, yellow} = require('colorette')
 const {DateTime} = require('luxon')
 const maxColumns = process.stdout.columns
 
@@ -14,7 +14,8 @@ const renderArticle = (entry, index) => {
   const contentType = entry.isArticle ? 'Article' : 'Web Page'
   const details = `(${contentType}, ${entry.word_count} words)`
   const archived = entry.isArchived ? '(A) ' : ''
-  return ` ${cyanBright(indexOutput)}.${margin1}${archived}${greenBright(titleOutput)} ${yellow(urlOutput)} ${cyan(timeAdded)} ${magenta(details)}\n${margin2}${excerptOutput}\n`
+  const favorite = entry.isFavorite ? '(*) ' : ''
+  return ` ${cyan(indexOutput)}.${margin1}${archived}${favorite}${green(titleOutput)} ${yellow(urlOutput)} ${cyan(timeAdded)} ${magenta(details)}\n${margin2}${excerptOutput}\n`
 }
 
 const render = articles => {

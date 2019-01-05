@@ -35,6 +35,7 @@ const pocket = {
       const shortUrl = url.replace('https://', '').replace('http://', '')
       const isArticle = article.is_article === 1
       const isArchived = article.status == 1
+      const isFavorite = article.favorite == 1
       const excerpt = article.excerpt || ''
       const newFields = {
         id: id,
@@ -44,6 +45,7 @@ const pocket = {
         shortUrl: shortUrl,
         isArticle: isArticle,
         isArchived: isArchived,
+        isFavorite: isFavorite,
         excerpt: excerpt
       }
       return Object.assign({}, article, newFields)

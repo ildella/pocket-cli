@@ -1,7 +1,8 @@
 ## 0.8.0 -> in dev...
 
   * improved: When an index is selected, action 4 is now Archive or Readd according to the article status
-  * improved: help anc commands completion (with TAB) are now context aware. Shortly, they do work properly.
+  * improved: command completion has better formatting
+  * new: Fav article are marked with a * 
   * under the hood: large refactoring, more clean codebase and support/way open to improvements
 
 
