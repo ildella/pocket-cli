@@ -21,6 +21,7 @@
         lang: 'en',
         time_to_read: 3,
         top_image_url: 'https://somesite.with.images.com',
+        tags: { vps: { item_id: '2443916156', tag: 'vps' }, brasil: {...} },
         image:
          { item_id: '2412335750',
            src:
