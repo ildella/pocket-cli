@@ -1,3 +1,9 @@
+## 0.9.0 -> in dev
+
+  * refactor the cli/processor/interpreter in order to add new features like permanent filters, permanent custom prompt
+  * complete support for tag command
+  * the refactor will help moving forward offline mode
+
 ## 0.8.1 -> Jan 5th, 2019
 
   * new: Fav article are marked with a *
