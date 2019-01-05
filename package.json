@@ -7,7 +7,8 @@
     "pocket-cli": "bin/pocket-cli"
   },
   "engines": {
-    "node": ">=11.0.0"
+    "node": "11.6.0",
+    "npm": "6.5.0"
   },
   "homepage": "https://github.com/ildella/pocket-cli#readme",
   "repository": {
