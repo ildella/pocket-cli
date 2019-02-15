@@ -13,6 +13,9 @@ Pocket-CLI is an interactive textual application to search and manage your [Pock
 [![David](https://img.shields.io/david/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
 [![David](https://img.shields.io/david/dev/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
 [![David](https://img.shields.io/david/peer/ildella/pocket-cli.svg)](https://david-dm.org/ildella/pocket-cli)
+[![security status](https://www.meterian.com/badge/gh/ildella/pocket-cli/security)](https://www.meterian.com/report/gh/ildella/pocket-cli)
+[![stability status](https://www.meterian.com/badge/gh/ildella/pocket-cli/stability)](https://www.meterian.com/report/gh/ildella/pocket-cli)
+
 ## Install
 
 ### Prerequisites
