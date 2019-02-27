@@ -47,7 +47,7 @@
     "eslint-plugin-sonarjs": "0.2.0",
     "highland": "2.13.0",
     "jest": "23.6.0",
-    "lunr": "2.3.5"
+    "lunr": "2.3.6"
   },
   "scripts": {
     "start": "nodemon -I src",
