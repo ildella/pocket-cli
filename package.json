@@ -32,7 +32,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "colorette": "1.0.7",
-    "luxon": "1.9.0",
+    "luxon": "1.11.4",
     "semver": "5.6.0"
   },
   "devDependencies": {
