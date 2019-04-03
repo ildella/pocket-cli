@@ -46,7 +46,7 @@
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-sonarjs": "0.2.0",
     "highland": "2.13.0",
-    "jest": "23.6.0",
+    "jest": "24.7.0",
     "lunr": "2.3.5"
   },
   "scripts": {
