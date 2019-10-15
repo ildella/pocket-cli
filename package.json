@@ -1,6 +1,6 @@
 {
   "name": "pocket-cli",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Interactive terminal application for Pocket",
   "main": "src/module.js",
   "bin": {
@@ -29,24 +29,24 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "0.18.0",
-    "colorette": "1.0.7",
-    "luxon": "1.8.3",
-    "semver": "5.6.0"
+    "axios": "0.19.0",
+    "colorette": "1.1.0",
+    "luxon": "1.19.3",
+    "semver": "6.3.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "dotenv": "6.2.0",
+    "dotenv": "8.1.0",
     "elasticlunr": "0.9.5",
     "eslint": "5.10.0",
     "eslint-plugin-chai-expect": "2.0.1",
-    "eslint-plugin-jest": "22.1.2",
-    "eslint-plugin-node": "8.0.0",
+    "eslint-plugin-jest": "22.19.0",
+    "eslint-plugin-node": "10.0.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-sonarjs": "0.2.0",
-    "highland": "2.13.0",
-    "jest": "23.6.0",
-    "lunr": "2.3.5"
+    "eslint-plugin-sonarjs": "0.4.0",
+    "highland": "2.13.5",
+    "jest": "24.9.0",
+    "lunr": "2.3.7"
   },
   "scripts": {
     "start": "nodemon -I src",
