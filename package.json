@@ -50,11 +50,11 @@
     "tracer": "^1.0.1"
   },
   "scripts": {
-    "start": "nodemon -I src",
+    "start": "node src",
     "test": "jest",
     "test:ci": "jest --config=jest.ci.js",
     "deps": "npm ls --prod=true",
-    "eslint": "node_modules/eslint/bin/eslint.js src",
+    "lint": "eslint src",
     "snap": "snapcraft clean && snapcraft",
     "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
