@@ -2,13 +2,11 @@
   "name": "pocket-cli",
   "version": "0.9.0-pre",
   "description": "Interactive terminal application for Pocket",
-  "main": "src/module.js",
   "bin": {
     "pocket-cli": "bin/pocket-cli"
   },
   "engines": {
-    "node": "11.6.0",
-    "npm": "6.5.0"
+    "node": ">=12"
   },
   "homepage": "https://github.com/ildella/pocket-cli#readme",
   "repository": {
@@ -30,33 +28,33 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "0.18.0",
-    "colorette": "1.0.7",
-    "luxon": "1.9.0",
-    "semver": "5.6.0"
+    "axios": "0.19.0",
+    "colorette": "1.1.0",
+    "luxon": "1.19.3",
+    "semver": "6.3.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "dotenv": "6.2.0",
+    "dotenv": "8.2.0",
     "elasticlunr": "0.9.5",
-    "eslint": "5.12.0",
+    "eslint": "5.16.0",
     "eslint-plugin-chai-expect": "2.0.1",
-    "eslint-plugin-jest": "22.1.2",
-    "eslint-plugin-node": "8.0.1",
+    "eslint-plugin-jest": "22.19.0",
+    "eslint-plugin-node": "10.0.0",
     "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-sonarjs": "0.2.0",
-    "highland": "2.13.0",
-    "jest": "23.6.0",
-    "lunr": "2.3.5"
+    "eslint-plugin-sonarjs": "0.4.0",
+    "highland": "2.13.5",
+    "jest": "24.9.0",
+    "lunr": "2.3.7",
+    "tracer": "^1.0.1"
   },
   "scripts": {
-    "start": "nodemon -I src",
-    "test": "node_modules/jest/bin/jest.js --watch",
-    "test:ci": "node_modules/jest/bin/jest.js --config=jest.ci.js",
-    "test:unit": "node_modules/jest/bin/jest.js --config=jest.ci.js --watch",
+    "start": "node src",
+    "test": "jest",
+    "test:ci": "jest --config=jest.ci.js",
     "deps": "npm ls --prod=true",
-    "eslint": "node_modules/eslint/bin/eslint.js src",
-    "snap": "snapcraft clean && snapcraft",
+    "lint": "eslint src",
+    "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
   }

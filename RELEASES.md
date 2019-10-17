@@ -1,8 +1,7 @@
-## 0.9.0 -> in dev
+## 0.8.2 -> 17 Oct, 2019
 
-  * refactor the cli/processor/interpreter in order to add new features like permanent filters, permanent custom prompt
-  * complete support for tag command
-  * the refactor will help moving forward offline mode
+  * upgraded all dependencies to latest version to avoid security vulterabilities
+  * upgraded official Node version to 12
 
 ## 0.8.1 -> Jan 5th, 2019
 

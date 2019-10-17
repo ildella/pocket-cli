@@ -1,4 +1,4 @@
-const update = require('../src/npm-update')
+const update = require('../../src/npm-update')
 
 test('last version', async () => {
   const response = await update.lastVersion()

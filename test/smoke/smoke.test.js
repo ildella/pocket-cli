@@ -1,8 +1,8 @@
-const processor = require('../src/cli/process-input')
-require('../src/pocket/pocket-commands')
-require('../src/cli/version')
-require('../src/cli/quit')
-require('../src/cli/help')
+const processor = require('../../src/cli/process-input')
+require('../../src/pocket/pocket-commands')
+require('../../src/cli/version')
+require('../../src/cli/quit')
+require('../../src/cli/help')
 
 test('read from pocket API', async () => {
   const output = await processor.processInput('bitcoin')

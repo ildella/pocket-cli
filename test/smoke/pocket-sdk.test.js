@@ -1,15 +1,16 @@
 const cexpect = require('chai').expect
+const pocketSdk = require('../../src/pocket/pocket-sdk')
 
 test('same instance', () => {
-  const p1 = require('../src/pocket/pocket-sdk')()
-  const p2 = require('../src/pocket/pocket-sdk')()
+  const p1 = pocketSdk()
+  const p2 = pocketSdk()
   expect(p1).not.toBe(p2)
 })
 
 test('read from pocket API', async () => {
-  const auth = require('../src/auth')()
+  const auth = require('../../src/auth')()
   const authJson = auth.get()
-  const pocket = require('../src/pocket/pocket-sdk')({
+  const pocket = pocketSdk({
     taskName: 'pocket-proxy-server-dev',
     auth: authJson
   })
@@ -29,7 +30,7 @@ test('read from pocket API', async () => {
 })
 
 test('unauthorized', async () => {
-  const pocket = require('../src/pocket/pocket-sdk')()
+  const pocket = pocketSdk()
   const search = {
     count: 10,
     offset: 0,
@@ -47,7 +48,7 @@ test('unauthorized', async () => {
 })
 
 test('requestToken', async () => {
-  const pocket = require('../src/pocket/pocket-sdk')()
+  const pocket = pocketSdk()
   const token = await pocket.requestToken('http://localhost:4444/callback')
   expect(token).toBeDefined()
   expect(token).toHaveLength(30)

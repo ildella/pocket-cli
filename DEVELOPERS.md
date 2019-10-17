@@ -30,16 +30,21 @@ wt serve src/server/auth-proxy.js --port 4040
 ## Run it
 
 ```bash
-npm start
-[or]
 ./bin/pocket-cli
 ```
 
 ### Link
 
+To use locally the current branch:
+
 ```bash
 npm link
-sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli /usr/local/bin/pocket-cli-dev
+```
+
+To link it to a different bin:
+
+```
+sudo ln -s "$HOME/n/bin/pocket-cli" /usr/local/bin/pocket-cli-dev
 ```
 
 ## Depencencies. 
@@ -65,3 +70,12 @@ What I rely on:
   - Axios - http client
   - Colorette - a dependency free ansii coloring
   - Luxon - a dependency free, immutable momentjs
+
+## Snap
+
+To release as a snap installer:
+
+```shell
+sudo apt install snapcraft
+snapcraft
+```

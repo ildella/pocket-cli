@@ -1,9 +1,11 @@
+const defaultJestConfig = require('./jest.config')
 module.exports = {
-  verbose: false,
-  notify: false,
-  testEnvironment: 'node',
+  ...defaultJestConfig,
   testMatch: ['**/test/**/?(*.)+(spec|test).js?(x)'],
   collectCoverage: true,
-  coverageReporters: ['json', 'lcov', 'text', 'clover', 'html', 'json-summary']
-}
+  //TODO: super-shame...
+  coverageThreshold: {
+    global: {branches: 30, functions: 30, lines: 30, statements: 30}
+  },
 
+}

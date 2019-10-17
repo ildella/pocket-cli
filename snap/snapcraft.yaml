@@ -8,18 +8,22 @@ description: >
   List all 
     > list
   Search for keyword
-    > list something
-    > something
+    > list bitcoin
+    > bitcoin
+  All commands
+    > help
 
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+base: core18
+confinement: devmode
 
 parts:
-  nodejs:
+  main:
     plugin: nodejs
     source: .
-    node-engine: 11.4.0
+    nodejs-version: 12
+    nodejs-package-manager: npm
+    # node-engine: 12
 
 apps:
-  myapp:
+  PocketCLI:
     command: bin/pocket-cli

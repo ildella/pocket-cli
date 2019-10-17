@@ -54,3 +54,9 @@ rules:
   sonarjs/prefer-immediate-return: warn
   sonarjs/no-small-switch: [warn, 3]
   space-before-function-paren: warn
+overrides:
+  files: ['**/test/**']
+  rules:
+    node/no-unpublished-require: off
+    max-nested-callbacks: [error, 3]
+    max-lines: [error, 150]
