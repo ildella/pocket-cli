@@ -54,7 +54,7 @@
     "test:ci": "jest --config=jest.ci.js",
     "deps": "npm ls --prod=true",
     "lint": "eslint src",
-    "snap": "snapcraft clean && snapcraft",
+    "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
   }

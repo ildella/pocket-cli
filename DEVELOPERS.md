@@ -35,9 +35,16 @@ wt serve src/server/auth-proxy.js --port 4040
 
 ### Link
 
+To use locally the current branch:
+
 ```bash
 npm link
-sudo ln -s $HOME/n/lib/node_modules/pocklet-cli/bin/pocket-cli /usr/local/bin/pocket-cli-dev
+```
+
+To link it to a different bin:
+
+```
+sudo ln -s "$HOME/n/bin/pocket-cli" /usr/local/bin/pocket-cli-dev
 ```
 
 ## Depencencies. 
@@ -70,5 +77,5 @@ To release as a snap installer:
 
 ```shell
 sudo apt install snapcraft
-npm run snap
+snapcraft
 ```
