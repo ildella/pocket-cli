@@ -1,3 +1,7 @@
+## 0.8.2 -> Oct, 2019
+
+  * upgraded all dependencies to latest version to avoid security vulterabilities
+
 ## 0.8.1 -> Jan 5th, 2019
 
   * new: Fav article are marked with a *
