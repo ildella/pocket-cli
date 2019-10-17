@@ -1,7 +1,7 @@
 language: node_js
-cache: npm
+cache: yarn
 node_js:
   - "12"
 before_script: 
-  - npm ci
-script: npm run test:ci
+  - yarn
+script: yarn test:ci
