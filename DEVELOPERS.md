@@ -65,3 +65,12 @@ What I rely on:
   - Axios - http client
   - Colorette - a dependency free ansii coloring
   - Luxon - a dependency free, immutable momentjs
+
+## Snap
+
+To release as a snap installer:
+
+```shell
+sudo apt install snapcraft
+npm run snap
+```
