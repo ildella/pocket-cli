@@ -2,7 +2,6 @@
   "name": "pocket-cli",
   "version": "0.8.2",
   "description": "Interactive terminal application for Pocket",
-  "main": "src/index.js",
   "bin": {
     "pocket-cli": "bin/pocket-cli"
   },
@@ -36,9 +35,9 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "dotenv": "8.1.0",
+    "dotenv": "8.2.0",
     "elasticlunr": "0.9.5",
-    "eslint": "5.10.0",
+    "eslint": "5.16.0",
     "eslint-plugin-chai-expect": "2.0.1",
     "eslint-plugin-jest": "22.19.0",
     "eslint-plugin-node": "10.0.0",

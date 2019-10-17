@@ -30,8 +30,6 @@ wt serve src/server/auth-proxy.js --port 4040
 ## Run it
 
 ```bash
-npm start
-[or]
 ./bin/pocket-cli
 ```
 
