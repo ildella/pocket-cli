@@ -2,7 +2,8 @@ module.exports = {
   verbose: false,
   notify: false,
   testEnvironment: 'node',
-  testMatch: ['**/test/**/?(*.)(spec|test).js?(x)'],
+  setupFilesAfterEnv: ['./test/test-helpers.js'],
+  testMatch: ['**/test/?(*.)(spec|test).js?(x)'],
   testPathIgnorePatterns: ['/node_modules', 'parts/*'],
   collectCoverage: false,
   collectCoverageFrom: [

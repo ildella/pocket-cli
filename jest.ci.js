@@ -1,7 +1,6 @@
 const defaultJestConfig = require('./jest.config')
 module.exports = {
   ...defaultJestConfig,
-  testMatch: ['**/test/**/?(*.)+(spec|test).js?(x)'],
   collectCoverage: true,
   //TODO: super-shame...
   coverageThreshold: {
