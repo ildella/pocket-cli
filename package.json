@@ -34,6 +34,7 @@
     "fuse.js": "3.4.5",
     "highland": "2.13.5",
     "jsdom": "15.2.1",
+    "luxon": "1.21.1",
     "moz-readability-node": "0.2.4",
     "semver": "6.3.0"
   },
