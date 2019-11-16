@@ -46,6 +46,7 @@
     "eslint": "5.16.0",
     "eslint-config-node-opinionated": "0.2.6",
     "eslint-plugin-chai-expect": "2.0.1",
+    "faker": "4.1.0",
     "jest": "24.9.0",
     "natural": "0.6.3",
     "tracer": "^1.0.1"
