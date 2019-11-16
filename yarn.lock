@@ -2790,10 +2790,10 @@ lunr@2.3.8:
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.8.tgz#a8b89c31f30b5a044b97d2d28e2da191b6ba2072"
   integrity sha512-oxMeX/Y35PNFuZoHp+jUj5OSEmLCaIH4KTFJh7a93cHBoFmpw2IoPs22VIz7vyO2YUnx2Tn9dzIwO2P/4quIRg==
 
-luxon@1.21.2:
-  version "1.21.2"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.21.2.tgz#2df6d2bba855a12953e076e855604aa3482677a6"
-  integrity sha512-yshwnlkA79WfC24/BC9Rd1n0mhorP22Sc7GYn0puRU6wD/douCgNJIzI9qQBuT9m2/bU+n9v1RflVNE4rMPPxQ==
+luxon@1.21.1:
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.21.1.tgz#00c9c9e624e66cfef745a8476c4ead14a3966a61"
+  integrity sha512-3zxaKX7mj7eA80TU0sm4CfNEtiUZ2QXGjMc80rfG4d1dOnnOOWz63U9j4nYR7+1w716DYtWfdOeVhDXYlH+D4w==
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
