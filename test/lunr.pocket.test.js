@@ -12,8 +12,8 @@ test('index inline', () => {
     mockDocs.forEach(doc => { this.add(doc) })
   })
   // console.log(idx)
-  const results = idx.search('John')
-  expect(results.length).toBe(2)
+  expect(idx.search('John').length).toBe(2)
+  expect(idx.search('something').length).toBe(1)
 })
 
 test('with builder', () => {
@@ -22,23 +22,24 @@ test('with builder', () => {
   builder.pipeline.add(
     lunr.trimmer,
     lunr.stopWordFilter,
-    lunr.stemmer
+    // lunr.stemmer
   )
 
-  builder.searchPipeline.add(
-    lunr.stemmer
-  )
+  // builder.searchPipeline.add(
+  //   lunr.stemmer
+  // )
 
   builder.ref('id')
+  builder.field('authors')
   builder.field('title')
-  builder.field('body')
-  mockDocs.forEach(doc => { builder.add(doc) })
+  builder.field('url')
+  builder.field('excerpt')
+  // builder.field('body')
 
+  mockDocs.forEach(doc => { builder.add(doc) })
   const idx = builder.build()
-  const results = idx.search('John')
-  // console.log(results)
-  expect(results.length).toBe(0)
-  // :(
+  expect(idx.search('something').length).toBe(1)
+  expect(idx.search('John').length).toBe(2)
 })
 
 test('async loop', () => {
