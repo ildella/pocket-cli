@@ -31,6 +31,10 @@
     "axios": "0.19.0",
     "colorette": "1.1.0",
     "luxon": "1.21.2",
+    "fuse.js": "3.4.5",
+    "highland": "2.13.5",
+    "jsdom": "15.2.1",
+    "moz-readability-node": "0.2.4",
     "semver": "6.3.0"
   },
   "devDependencies": {
@@ -38,14 +42,15 @@
     "dotenv": "8.2.0",
     "elasticlunr": "0.9.5",
     "eslint": "5.16.0",
+    "eslint-config-node-opinionated": "0.2.6",
     "eslint-plugin-chai-expect": "2.0.1",
     "eslint-plugin-jest": "22.19.0",
     "eslint-plugin-node": "10.0.0",
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-sonarjs": "0.4.0",
-    "highland": "2.13.5",
     "jest": "24.9.0",
     "lunr": "2.3.8",
+    "natural": "0.6.3",
     "tracer": "^1.0.1"
   },
   "scripts": {
