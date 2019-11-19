@@ -1,3 +1,16 @@
 extends: ['node-opinionated']
 rules: 
   jest/expect-expect: off
+  overrides: 
+    files: ['**/tests/**']
+    rules:
+      node/no-unpublished-require: off
+      # max-nested-callbacks: [error, 3]
+      # max-lines: [warn, 200]
+      # no-sync: off
+      # sonarjs/no-duplicate-string: off
+      # no-console: off
+      # no-new-function: off
+      # no-new-wrapper: off
+      # no-magic-numbers: off
+
