@@ -1,4 +1,3 @@
-// const tracer = require('./logger')()
 const fs = require('fs')
 const homedir = require('os').homedir()
 

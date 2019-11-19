@@ -1,5 +1,5 @@
 const webtask = require('webtask-tools')
-const tracer = require('../logger')()
+const tracer = require('./logger')()
 const secrets = module.webtask ? module.webtask.secrets : process.env
 process.on('unhandledRejection', (reason, p) => {
   const response = reason.response
