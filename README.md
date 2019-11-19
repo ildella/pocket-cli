@@ -17,19 +17,21 @@ Pocket-CLI is an interactive textual application to search and manage your [Pock
 
 ### Prerequisites
 
-You must have Node.js. You can install the required version with:
+You must have [Node.js](https://nodejs.org/)
+
+In Ubuntu: 
 
 ```bash
-sudo snap install node --channel=11
+sudo snap install node --channel=12
 ```
 
-### NPM
+### Install with NPM
 
 ```bash
 npm i -g pocket-cli
 ```
 
-### Snap
+### Install with Snap
 
 TBD
 
@@ -37,8 +39,9 @@ TBD
 
 Some example command
 
-```
+```shell
 $ pocket-cli
+
 Pocket> login // Authenticate with Pocket to get access to your articles
 Pocket> ? // prints help
 Pocket> list // last 8 articles
