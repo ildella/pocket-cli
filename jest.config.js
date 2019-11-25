@@ -11,7 +11,7 @@ module.exports = {
     '!**/node_modules/**',
     '!**/parts/**',
   ],
-  //TODO: shame...
+  // TODO: shame...
   coverageThreshold: {
     global: {branches: 50, functions: 50, lines: 50, statements: 50}
   },
