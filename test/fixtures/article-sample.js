@@ -1,8 +1,8 @@
-module.exports = { 
+module.exports = {
   item_id: '2412335750',
   resolved_id: '2412335762',
   given_url: 'https://example.com/path/to/article',
-  given_title: 'Soemthing/important: the best article on the topic',
+  given_title: 'Something/important: the best article on the topic',
   favorite: '0',
   status: '1',
   time_added: '1544141452',
@@ -22,27 +22,25 @@ module.exports = {
   lang: 'en',
   time_to_read: 3,
   top_image_url: 'https://somesite.with.images.com',
-  tags: { vps: { item_id: '2443916156', tag: 'vps' }, brasil: {...} },
+  tags: {vps: {item_id: '2443916156', tag: 'vps'}, brasil: {}},
   image:
-   { item_id: '2412335750',
-     src:
-      'https://something.com/image.png',
+   {item_id: '2412335750',
+     src: 'https://something.com/image.png',
      width: '0',
-     height: '0' },
-  images:
-   { '1':
-      { item_id: '2412335750',
-        image_id: '1',
-        src:
-         'https://something.com/image.png',
-        width: '0',
-        height: '0',
-        credit: '',
-        caption: '' } },
-  domain_metadata:
-   { name: 'GitHub',
-     logo: 'https://logo.clearbit.com/github.com?size=800',
-     greyscale_logo:
-      'https://logo.clearbit.com/github.com?size=800&greyscale=true' },
-  listen_duration_estimate: 274 ,
+     height: '0'},
+  images: {
+    '1': {item_id: '2412335750',
+      image_id: '1',
+      src: 'https://something.com/image.png',
+      width: '0',
+      height: '0',
+      credit: '',
+      caption: ''}
+  },
+  domain_metadata: {
+    name: 'GitHub',
+    logo: 'https://logo.clearbit.com/github.com?size=800',
+    greyscale_logo: 'https://logo.clearbit.com/github.com?size=800&greyscale=true',
+  },
+  listen_duration_estimate: 274,
 }
