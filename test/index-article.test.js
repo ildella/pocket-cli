@@ -1,4 +1,4 @@
-const sampleDocs = require('./mock.parsed.articles.js')
+const sampleDocs = require('./fixtures/mock.parsed.articles.js')
 const builder = require('./indexer')()
 sampleDocs.forEach(doc => { builder.add(doc) })
 

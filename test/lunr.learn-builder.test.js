@@ -1,6 +1,6 @@
 const lunr = require('lunr')
 
-const mockDocs = require('./mock.parsed.articles.js')
+const mockDocs = require('./fixtures/mock.parsed.articles.js')
 
 test('index inline', () => {
   const idx = lunr(function () {

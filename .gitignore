@@ -7,3 +7,4 @@ parts
 *.snap
 prime
 stage
+index-lunr*
