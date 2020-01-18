@@ -5,8 +5,10 @@ const fsp = fs.promises
 const start = async () => {
   const start = Date.now()
   const data = await fsp.readFile('index-lunr')
-  const idx = lunr.Index.load(JSON.parse(data))
-  console.log(idx.search(''))
+  const parsed = JSON.parse(data)
+  console.log(parsed)
+  const idx = lunr.Index.load(parsed)
+  console.log(idx.search('Ayana'))
   console.log(Date.now() - start)
 }
 
