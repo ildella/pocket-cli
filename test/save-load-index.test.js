@@ -21,7 +21,6 @@ const createArticle = () => ({
   textContent: faker.lorem.paragraphs(),
 })
 
-// const builder = require('./indexer')()
 const lunr = require('lunr')
 const builder = new lunr.Builder
 builder.pipeline.add(

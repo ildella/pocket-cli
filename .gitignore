@@ -8,3 +8,4 @@ parts
 prime
 stage
 index-lunr*
+yarn-error.log
