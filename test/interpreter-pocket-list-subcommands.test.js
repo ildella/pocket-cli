@@ -5,7 +5,7 @@ require('../src/pocket/pocket-commands')
 
 beforeAll(() => {
   const localArticles = require('../src/local-articles')
-  const mockArticles = require('./mock.articles')
+  const mockArticles = require('./fixtures/mock.parsed.articles')
   localArticles.store(mockArticles)
   // expect(commands).toBe({})
   // expect(commands.archive).toBeDefined()

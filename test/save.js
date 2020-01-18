@@ -1,4 +1,7 @@
-jest.setTimeout(3000)
+const builder = require('./indexer')()
+const fs = require('fs')
+const fsp = fs.promises
+
 const faker = require('faker')
 const __ = require('highland')
 
@@ -18,16 +21,12 @@ const createArticle = () => ({
   textContent: faker.lorem.paragraphs(),
 })
 
-const builder = require('./indexer')()
-const fs = require('fs')
-const fsp = fs.promises
-
-test('generate and index lots of items', done => {
-  const source = iterateFor(1000, createArticle)
+const load = done => {
+  const source = iterateFor(45000, createArticle)
 
   __(source())
     .ratelimit(1, 1)
-    // .tap(console.log)
+    .tap(console.log)
     .each(doc => {
       builder.add(doc)
     })
@@ -38,4 +37,11 @@ test('generate and index lots of items', done => {
       await fsp.writeFile('index-lunr', serializedIdx)
       done()
     })
-})
+}
+
+const {promisify} = require('util')
+const start = async () => {
+  await promisify(load)()
+}
+
+start()
