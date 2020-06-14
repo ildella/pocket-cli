@@ -54,7 +54,7 @@
     "start": "node src",
     "test": "jest",
     "test:ci": "jest --config=jest.ci.js",
-    "deps": "npm ls --prod=true",
+    "deps": "yarn list --prod",
     "lint": "eslint src",
     "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",
