@@ -52,7 +52,7 @@ sudo ln -s "$HOME/n/bin/pocket-cli" /usr/local/bin/pocket-cli-dev
 I have a quite strict policy on dependencies.
 
 ```bash
-$ npm ls --prod
+$ yarn list --prod
 pocket-cli@0.4.2 /home/ildella/projects/personal/pocket-cli
 ├─┬ axios@0.18.0
 │ ├─┬ follow-redirects@1.5.9

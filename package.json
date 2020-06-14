@@ -42,7 +42,7 @@
     "dotenv": "8.2.0",
     "elasticlunr": "0.9.5",
     "eslint": "5.16.0",
-    "eslint-config-node-opinionated": "0.2.6",
+    "eslint-config-node-opinionated": "0.2.5",
     "eslint-plugin-chai-expect": "2.0.1",
     "faker": "4.1.0",
     "fuse.js": "3.4.5",

@@ -1354,10 +1354,10 @@ escodegen@^1.11.1, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-node-opinionated@0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/eslint-config-node-opinionated/-/eslint-config-node-opinionated-0.2.6.tgz#445d9915f178250054f5669f6720ed6f5dd47017"
-  integrity sha512-JwT+kJSrNz5acKCmuicyhFBnsHzTb2QUvSeDxvYeCfBsI3ICd4Fi8WU1GGtHP5CsSQPojhCM7agDKIJUAy30IQ==
+eslint-config-node-opinionated@0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-node-opinionated/-/eslint-config-node-opinionated-0.2.5.tgz#ad780108fb41a916290ce62965d46a4b879de3e6"
+  integrity sha512-CdXafdvWptbQU2neYcf0/YSUgPiYLwledZkJ5RKVNoPVHsnFI74uj1iruAK+a38bnsyL0V++01bKJ42BzfORAw==
   dependencies:
     eslint-plugin-jest "23.0.2"
     eslint-plugin-node "10.0.0"

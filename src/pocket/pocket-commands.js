@@ -96,6 +96,7 @@ commands['list'] = {
 
     unread             search only for non-archived articles
     oldest / newest    list starting from oldest / newest
+  
   `,
   submenu: listCommands,
   parse: pocketParse.list
