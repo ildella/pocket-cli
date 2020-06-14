@@ -25,14 +25,9 @@ commands['help'] = {
   parse: parse
 }
 const usage = `
-Search: 
+  Type any text and I will search for it.
 
-  Type any text and I will search your Pocket collection
-
-  Available parameters:
-
-    unread             search only for non-archived articles
-    oldest / newest    list starting from oldest / newest
+  Type: "help {command}" to display the help for the specific command
 `
 output.push(usage)
 output.push('Commands:')
