@@ -35,7 +35,8 @@
     "lunr": "2.3.8",
     "luxon": "1.21.1",
     "moz-readability-node": "0.2.4",
-    "semver": "6.3.0"
+    "semver": "6.3.0",
+    "tracer": "1.0.1"
   },
   "devDependencies": {
     "chai": "4.2.0",
@@ -47,8 +48,7 @@
     "faker": "4.1.0",
     "fuse.js": "3.4.5",
     "jest": "24.9.0",
-    "natural": "0.6.3",
-    "tracer": "^1.0.1"
+    "natural": "0.6.3"
   },
   "scripts": {
     "start": "node src",
