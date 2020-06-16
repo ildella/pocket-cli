@@ -33,7 +33,7 @@
     "colorette": "1.1.0",
     "highland": "2.13.5",
     "luxon": "1.21.1",
-    "semver": "6.3.0"
+    "semver": "7.3.2"
   },
   "devDependencies": {
     "chai": "4.2.0",
