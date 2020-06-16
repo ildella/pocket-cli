@@ -7,3 +7,5 @@ parts
 *.snap
 prime
 stage
+index-lunr*
+yarn-error.log

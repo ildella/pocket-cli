@@ -5,12 +5,10 @@ const pjson = require('../../package.json')
 const output = []
 output.push(`${pjson.name} ${pjson.version} - ${pjson.description}`)
 
-const parse = () => {
-  return {
-    name: 'version',
-    execute: () => { return {lines: output} }
-  }
-}
+const parse = () => ({
+  name: 'version',
+  execute: () => ({lines: output})
+})
 
 commands['version'] = {
   name: 'version',

@@ -1,6 +1,6 @@
 {
   "name": "pocket-cli",
-  "version": "0.9.0-pre",
+  "version": "0.8.3",
   "description": "Interactive terminal application for Pocket",
   "bin": {
     "pocket-cli": "bin/pocket-cli"
@@ -20,39 +20,34 @@
     "pocket",
     "readitlater",
     "cli",
-    "interactive"
+    "interactive",
+    "shell"
   ],
   "author": {
     "name": "Daniele Dellafiore",
-    "email": "daniele@pipelean.com"
+    "email": "daniele@dellafiore.net"
   },
   "license": "MIT",
   "dependencies": {
     "axios": "0.19.0",
     "colorette": "1.1.0",
-    "luxon": "1.21.2",
+    "highland": "2.13.5",
+    "luxon": "1.21.1",
     "semver": "6.3.0"
   },
   "devDependencies": {
     "chai": "4.2.0",
+    "depcheck": "0.9.2",
     "dotenv": "8.2.0",
-    "elasticlunr": "0.9.5",
     "eslint": "5.16.0",
-    "eslint-plugin-chai-expect": "2.0.1",
-    "eslint-plugin-jest": "22.19.0",
-    "eslint-plugin-node": "10.0.0",
-    "eslint-plugin-security": "1.4.0",
-    "eslint-plugin-sonarjs": "0.4.0",
-    "highland": "2.13.5",
-    "jest": "24.9.0",
-    "lunr": "2.3.8",
-    "tracer": "^1.0.1"
+    "eslint-config-node-opinionated": "0.2.5",
+    "jest": "24.9.0"
   },
   "scripts": {
+    "depcheck": "depcheck .",
     "start": "node src",
     "test": "jest",
     "test:ci": "jest --config=jest.ci.js",
-    "deps": "npm ls --prod=true",
     "lint": "eslint src",
     "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",

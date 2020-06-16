@@ -1,13 +1,17 @@
-const platform = require('os').platform()
+const os = require('os')
 
 const openCommands = {
   linux: 'xdg-open',
-  osx: 'open',
-  windows: 'start'
+  darwin: 'open',
+  win32: 'start'
 }
 
 const open = {
-  get: input => openCommands[input || platform]
+  get: (system = os.platform()) => {
+    const command = openCommands[system]
+    console.log(`open command for ${system}: ${command}`)
+    return command
+  }
 }
 
 module.exports = open

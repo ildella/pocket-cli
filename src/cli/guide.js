@@ -3,16 +3,14 @@ const url = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/GUIDE.m
 
 const commands = require('./menu').commands
 
-const parse = () => {
-  return {
-    name: 'guide',
-    execute: async () => {
-      const response = await axios(url)
-      console.log(response.data)
-      return {lines: []}
-    }
+const parse = () => ({
+  name: 'guide',
+  execute: async () => {
+    const response = await axios(url)
+    console.log(response.data)
+    return {lines: []}
   }
-}
+})
 
 commands['guide'] = {
   name: 'guide',

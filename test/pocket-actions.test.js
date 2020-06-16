@@ -1,6 +1,6 @@
 const {archive, favorite, tag, readd} = require('../src/pocket/pocket-parse')
 const localArticles = require('../src/local-articles')
-const mockArticles = require('./mock.articles')
+const mockArticles = require('./fixtures/mock.parsed.articles')
 localArticles.store(mockArticles)
 
 test('Archive', async () => {

@@ -14,9 +14,7 @@ const pocket = (client, authJson) => {
     return response.data.code
   }
 
-  pocket.authorize = requestToken => {
-    return client.post('/oauth/authorize', {code: requestToken})
-  }
+  pocket.authorize = requestToken => client.post('/oauth/authorize', {code: requestToken})
 
   pocket.retrieve = async search => {
     const query = Object.assign(authJson, search)
@@ -49,9 +47,7 @@ const build = config => {
     }
   })
 
-  client.interceptors.response.use(response => {
-    return response
-  }, error => {
+  client.interceptors.response.use(response => response, error => {
     const response = error.response
     if (response) {
       const config = response.config

@@ -1,10 +1,8 @@
 const values = ['\\', '|', '/', '|']
 
-const getValue = index => {
-  return new Promise(resolve=>{
-    setTimeout(()=>resolve(values[index]), 250)
-  })
-}
+const getValue = index => new Promise(resolve => {
+  setTimeout(() => resolve(values[index]), 250)
+})
 
 const asyncGenerator = async function* () {
   let index = 0

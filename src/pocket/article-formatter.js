@@ -6,7 +6,7 @@ const renderArticle = (entry, index, maxColumns) => {
   const margin1 = ' '.repeat(3 - indexOutput.length)
   const url = entry.shortUrl.replace('http', 'https').replace('https://', '')
   const urlOutput = `[${url.substring(0, url.indexOf('/'))}]`
-  const titleOutput = entry.title.substring(0, (maxColumns / 2) - 10)
+  const titleOutput = entry.title.substring(0, maxColumns / 2 - 10)
   const margin2 = ' '.repeat(5)
   const excerptOutput = entry.excerpt.substring(0, maxColumns - 15)
   const timeAdded = DateTime.fromMillis(Number(entry.time_added) * 1000).toISODate()

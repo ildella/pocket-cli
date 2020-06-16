@@ -2,21 +2,19 @@ const commands = require('./menu').commands
 
 const output = []
 
-//TODO: support sort alphabetical or native
-const parse = params => {
-  return {
-    name: 'help',
-    execute: () => {
-      if (params) {
-        const command = commands[params[0]]
-        if (command) {
-          return {lines: [command.guide]}
-        }
+// TODO: support sort alphabetical or native
+const parse = params => ({
+  name: 'help',
+  execute: () => {
+    if (params) {
+      const command = commands[params[0]]
+      if (command) {
+        return {lines: [command.guide]}
       }
-      return {lines: output}
     }
+    return {lines: output}
   }
-}
+})
 
 commands['help'] = {
   name: 'help',
@@ -25,14 +23,9 @@ commands['help'] = {
   parse: parse
 }
 const usage = `
-Search: 
+  Type any text and I will search for it.
 
-  Type any text and I will search your Pocket collection
-
-  Available parameters:
-
-    unread             search only for non-archived articles
-    oldest / newest    list starting from oldest / newest
+  Type: "help {command}" to display the help for the specific command
 `
 output.push(usage)
 output.push('Commands:')

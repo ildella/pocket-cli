@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-small-switch */
 const axios = require('axios')
 const url = 'https://raw.githubusercontent.com/ildella/pocket-cli/master/RELEASES.md'
 

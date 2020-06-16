@@ -24,41 +24,29 @@ const defaultSearch = {
 
 const pocketParse = {
 
-  login: () => {
-    return {
-      name: 'pocket-auth',
-      execute: async () => {
-        await pocketAuth.login()
-        return {lines: [green('User logged in')]}
-      }
+  login: () => ({
+    name: 'pocket-auth',
+    execute: async () => {
+      await pocketAuth.login()
+      return {lines: [green('User logged in')]}
     }
-  },
+  }),
 
-  logout: () => {
-    return {
-      name: 'pocket-auth',
-      execute: async () => {
-        pocketAuth.logout()
-        return {lines: [green('User logged out')]}
-      }
+  logout: () => ({
+    name: 'pocket-auth',
+    execute: async () => {
+      pocketAuth.logout()
+      return {lines: [green('User logged out')]}
     }
-  },
+  }),
 
-  archive: (...indexes) => {
-    return modify({action: 'archive', indexes: indexes})
-  },
+  archive: (...indexes) => modify({action: 'archive', indexes: indexes}),
 
-  delete: indexes => {
-    return modify({action: 'delete', indexes: indexes})
-  },
+  delete: indexes => modify({action: 'delete', indexes: indexes}),
 
-  favorite: indexes => {
-    return modify({action: 'favorite', indexes: indexes})
-  },
+  favorite: indexes => modify({action: 'favorite', indexes: indexes}),
 
-  readd: indexes => {
-    return modify({action: 'readd', indexes: indexes})
-  },
+  readd: indexes => modify({action: 'readd', indexes: indexes}),
 
   tag: inputs => {
     // console.log('inputs', inputs)
@@ -88,7 +76,7 @@ const pocketParse = {
     return {
       name: 'pocket-open',
       indexes: indexes,
-      execute: () => { return open(selected) }
+      execute: () => open(selected)
     }
   },
 
@@ -99,8 +87,8 @@ const pocketParse = {
     return {
       name: 'pocket-next',
       search: search,
-      execute: () => { return retrieve(search) },
-      render: articles => { return render(search, articles) }
+      execute: () => retrieve(search),
+      render: articles => render(search, articles)
     }
   },
 
@@ -110,8 +98,8 @@ const pocketParse = {
     return {
       name: 'pocket-next',
       search: search,
-      execute: () => { return retrieve(search) },
-      render: articles => { return render(search, articles) }
+      execute: () => retrieve(search),
+      render: articles => render(search, articles)
     }
   },
 
@@ -130,8 +118,8 @@ const pocketParse = {
     return {
       name: 'pocket-list',
       search: search,
-      execute: () => { return retrieve(search) },
-      render: articles => { return render(search, articles) }
+      execute: () => retrieve(search),
+      render: articles => render(search, articles)
     }
   },
 
@@ -140,15 +128,11 @@ const pocketParse = {
     const opts = options(article.isArchived)
     return {
       name: 'select-query',
-      execute: () => {
-        return {
-          lines: [toSingleLine(opts)],
-          prompt: yellow('select: ')
-        }
-      },
-      getCommand: actionIndex => {
-        return opts[actionIndex]
-      }
+      execute: () => ({
+        lines: [toSingleLine(opts)],
+        prompt: yellow('select: ')
+      }),
+      getCommand: actionIndex => opts[actionIndex]
     }
   },
 
@@ -157,12 +141,10 @@ const pocketParse = {
     const feedback = modes.length > 0 ? [] : [`no modes found for "${inputs}"`]
     return {
       name: 'set-mode',
-      execute: () => {
-        return {
-          lines: feedback,
-          prompt: `${blue(`Pocket:${modes}`)}> `
-        }
-      }
+      execute: () => ({
+        lines: feedback,
+        prompt: `${blue(`Pocket:${modes}`)}> `
+      })
     }
   }
 
@@ -220,14 +202,12 @@ const render = (search, articles) => {
   return {lines: output}
 }
 
-const options = isArchived => {
-  return {
-    '1': 'open',
-    '2': 'expand',
-    '3': 'favorite',
-    '4': isArchived ? 'readd' : 'archive',
-    '5': 'delete',
-  }
-}
+const options = isArchived => ({
+  '1': 'open',
+  '2': 'expand',
+  '3': 'favorite',
+  '4': isArchived ? 'readd' : 'archive',
+  '5': 'delete',
+})
 
 module.exports = pocketParse

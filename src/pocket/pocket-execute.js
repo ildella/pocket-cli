@@ -2,9 +2,7 @@ const auth = require('../auth')()
 
 const task = process.env.TASK || 'pocket-proxy-server-dev'
 
-const orderByDesc = (key) => {
-  return (a, b) => (a[key] > b[key]) ? -1 : ((b[key] > a[key]) ? 1 : 0)
-}
+const orderByDesc = key => (a, b) => a[key] > b[key] ? -1 : b[key] > a[key] ? 1 : 0
 
 const pocket = {
 
@@ -14,9 +12,7 @@ const pocket = {
       auth: auth.get()
     })
     const response = await client.modify(actions)
-    const results = response.data.action_results.map(result => {
-      return result ? 'success' : 'failed'
-    })
+    const results = response.data.action_results.map(result => result ? 'success' : 'failed')
     return {lines: [`${results}`]}
   },
 
