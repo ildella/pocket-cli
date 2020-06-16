@@ -71,6 +71,52 @@ What I rely on:
   - Colorette - a dependency free ansii coloring
   - Luxon - a dependency free, immutable momentjs
 
+## Publish from master
+
+Docs: https://docs.travis-ci.com/user/deployment/npm/
+
+Install travis locally:
+
+```shell
+sudo apt install ruby ruby-dev
+sudo gem install travis --no-document
+```
+
+Generate a new [GitHub Access Token](https://github.com/settings/tokens) with the [scopes](https://docs.travis-ci.com/user/github-oauth-scopes/#travis-ci-for-open-source-projects) as specified in "Repositories on https://travis-ci.org" section.
+
+Now, authenticate to Travis and setup the project. This whole thing should be done only once.
+
+```shell
+travis login --github-token GITHUB_ACCESS_TOKEN
+```
+
+Generate a new [NPM access token](https://www.npmjs.com/settings/ildella/tokens/) which will be used and encrypted in this interactive shell:
+
+```shell
+travis setup npm
+```
+
+This will generate or upgrade the `.travis.yml` file in the project. The relevant portion is
+
+```yaml
+deploy:
+  provider: npm
+  email: ildella@gmail.com
+  api_key:
+    secure: xxxxxxxxxxxxxx
+  on:
+    tags: true
+    repo: ildella/pocket-cli
+  skip_cleanup: 'true'
+```
+
+This will publish to npm each tag that we push to GitHub like this:
+
+```shell
+git tag v0.x.x
+git push origin v0.x.x
+```
+
 ## Snap
 
 To release as a snap installer:

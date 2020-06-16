@@ -1,10 +1,17 @@
 language: node_js
 cache: yarn
 node_js:
-  - "12"
-# before_script: 
-  # - yarn
-script: 
-  - yarn depcheck
-  - yarn lint
-  - yarn test:ci
+- '12'
+script:
+- yarn depcheck
+- yarn lint
+- yarn test:ci
+deploy:
+  provider: npm
+  email: ildella@gmail.com
+  api_key:
+    secure: XvBht9Pm3lr/Oc0WY4a4z+Dbqj1JbymHzgX2bT/4FEBi3d4IEDmrpZdwMqLwuN1scGvEL2/UN6Hy5HZJbfvR0Bik5K5aFWSd+rs2/8U95CGI3jRBaDOORpMI+102VAStuP2lemezyJjgDK2kWPYHXe+WIUh6YNNA18SxHc3LQ9hgfe7K/c8XliLWMhgmHoBegDEkAHwvDvag59nARXFlV8Jhu03Cd/K/Z67L9EYs3Y/sN7SV9TsYdH+r4eYWVwGEUtWuLEVTcrlq4kw762E6C0DAO+jWJ0OLFv7Wy374rvWd9pqNkrJTOykSGuqFqdc1WkhWMLPzC6gCWQ+bEi2rsnB+Djp5ryI6lABXOd+fPH2opNtWFZvDNehPxegJqo1mNPwgLaPyevJrKC489fNSbbL/tWoqu3ymaqHUv8XKD90uioMTIJ0C4HahHL6t9x6sRcA/NprFuGbleobmcxRNayVl9sWpyFi2tGs8CyUh5yzFMiXz0rkMC/i6BKgHXA90woCy0MuQSQuDuz6oxX1qwjQ97iDMiomb2mCKkRynbdedHk3vZNyhQp/vQwNRJFx0ryQHjP+XSC1iIfUWUUlnGkpYslopdxTdj9vJJt05Plz/KumpFnp6ZExxKzto2vpHXWNo1xXXU4H8ZqK2YX2OBoyOEXMmHqQzpTe3dr3l41I=
+  on:
+    tags: true
+    repo: ildella/pocket-cli
+  skip_cleanup: 'true'
