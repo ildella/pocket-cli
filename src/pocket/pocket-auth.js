@@ -11,6 +11,14 @@ const open = require('../cli/open')
 const auth = require('../auth')()
 const client = require('./pocket-sdk')({taskName: task})
 
+const authorize = async requestToken => {
+  // TODO authorize should return the code, not the whole response
+  const response = await client.authorize(requestToken)
+  // TODO: use auth.write instead of direct fs write
+  fs.writeFileSync(`${homedir}/.config/pocket_access_token`, `${response.data.access_token}\n`)
+  return response.data.username
+}
+
 const simpleServer = async requestToken => {
   const server = http.createServer(async (req, res) => {
     if (req.url === '/' && req.method === 'GET') {
@@ -47,14 +55,6 @@ pocketAuth.login = async () => {
 
 pocketAuth.logout = () => {
   auth.clear()
-}
-
-const authorize = async requestToken => {
-  // TODO authorize should return the code, not the whole response
-  const response = await client.authorize(requestToken)
-  // TODO: use auth.write instead of direct fs write
-  fs.writeFileSync(`${homedir}/.config/pocket_access_token`, `${response.data.access_token}\n`)
-  return response.data.username
 }
 
 module.exports = pocketAuth

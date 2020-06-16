@@ -4,7 +4,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['**/*test*/**', '**/fixtures/**', '*test.*'],
+      files: ['**/*test*/**'],
       rules: {
         'node/no-unpublished-require': 'off',
         'node/no-unpublished-import': 'off',
@@ -17,6 +17,13 @@ module.exports = {
         'security/detect-child-process': 'off',
         'security/detect-non-literal-fs-filename': 'off',
         'security/detect-non-literal-require': 'off'
+      }
+    },
+    {
+      files: ['**/*src*/**'],
+      rules: {
+        'no-console': 'off',
+        'security/detect-child-process': 'off',
       }
     },
   ]

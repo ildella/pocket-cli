@@ -12,7 +12,7 @@ const pocketExecute = require('./pocket-execute')
 const states = ['unread', 'archive']
 const orders = ['newest', 'oldest', 'title', 'site']
 
-const actionsHistory = []
+// const actionsHistory = []
 const queries = history('queries')
 const localArticles = require('../local-articles')
 const defaultSearch = {
