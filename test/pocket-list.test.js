@@ -8,7 +8,7 @@ pocket.client = {
   add: () => []
 }
 
-test('retrieve defaults', async () => {
+test('retrieve defaults', () => {
   const output = list()
   expect(output.name).toBe('pocket-list')
   expect(output.search.count).toEqual(8)
@@ -19,18 +19,18 @@ test('retrieve defaults', async () => {
   expect(output.search.state).toEqual('all')
 })
 
-test('search params', async () => {
+test('search params', () => {
   const output = list(['bitcoin', 'block'])
   expect(output.search.search).toEqual('bitcoin block')
 })
 
-test('reserverd - unread', async () => {
+test('reserverd - unread', () => {
   const output = list(['unread', 'nodejs'])
   expect(output.search.state).toEqual('unread')
   expect(output.search.search).toEqual('nodejs')
 })
 
-test('json query to human readable text', async () => {
+test('json query to human readable text', () => {
   list(['unread', 'nodejs', 'oldest'])
   // expect(pocket.toHumanText()).toContain('nodejs')
   // expect(pocket.toHumanText()).toContain('unread')
