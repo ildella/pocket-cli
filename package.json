@@ -41,7 +41,7 @@
     "dotenv": "8.2.0",
     "eslint": "5.16.0",
     "eslint-config-node-opinionated": "0.2.5",
-    "jest": "24.9.0"
+    "jest": "26.0.1"
   },
   "scripts": {
     "depcheck": "depcheck .",
