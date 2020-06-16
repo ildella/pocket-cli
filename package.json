@@ -31,8 +31,12 @@
   "dependencies": {
     "axios": "0.19.2",
     "colorette": "1.2.0",
+    "elasticlunr": "0.9.5",
     "highland": "2.13.5",
+    "jsdom": "16.2.2",
+    "lunr": "2.3.8",
     "luxon": "1.24.1",
+    "moz-readability-node": "0.2.4",
     "semver": "7.3.2"
   },
   "devDependencies": {
