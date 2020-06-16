@@ -11,20 +11,6 @@ const open = require('../cli/open')
 const auth = require('../auth')()
 const client = require('./pocket-sdk')({taskName: task})
 
-const pocketAuth = {}
-
-pocketAuth.login = async () => {
-  // TODO should return the authorizeUrl
-  const requestToken = await client.requestToken(redirectURI)
-  const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
-  await simpleServer(requestToken)
-  const exec = execSync(`${open.get()} "${authorizeUrl}"`)
-}
-
-pocketAuth.logout = () => {
-  auth.clear()
-}
-
 const authorize = async requestToken => {
   // TODO authorize should return the code, not the whole response
   const response = await client.authorize(requestToken)
@@ -55,6 +41,20 @@ const simpleServer = async requestToken => {
   })
   const listener = await server.listen(process.env.CALLBACK_PORT || 3300)
   // console.log(`Auth Callback Server started -> http://localhost:${listener.address().port}`)
+}
+
+const pocketAuth = {}
+
+pocketAuth.login = async () => {
+  // TODO should return the authorizeUrl
+  const requestToken = await client.requestToken(redirectURI)
+  const authorizeUrl = `https://getpocket.com/auth/authorize?request_token=${requestToken}&redirect_uri=${redirectURI}`
+  await simpleServer(requestToken)
+  const exec = execSync(`${open.get()} "${authorizeUrl}"`)
+}
+
+pocketAuth.logout = () => {
+  auth.clear()
 }
 
 module.exports = pocketAuth

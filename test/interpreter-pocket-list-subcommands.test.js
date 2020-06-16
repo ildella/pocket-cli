@@ -1,6 +1,6 @@
 const processor = require('../src/cli/process-input')
-const interpreter = require('../src/cli/interpreter')
-const {commands} = require('../src/cli/menu')
+// const interpreter = require('../src/cli/interpreter')
+// const {commands} = require('../src/cli/menu')
 require('../src/pocket/pocket-commands')
 
 beforeAll(() => {
@@ -18,19 +18,19 @@ test('mode wrong input', async () => {
 
 test('mode unread', async () => {
   const rendered = await processor.processInput('mode unread')
-  console.log(rendered)
+  // console.log(rendered)
   // TODO: check that this query has unread in it
   // const parsed = processor.interpreter('list').parse()
   // TODO: refactor so rendering happens somewhere else and we can test processor and intepreter together
   // TODO: remove the console.log for errors in processor, add tracer
 })
 
-test('archive', async () => {
-  // expect(interpreter('archive 1').command).toBe(commands.archive)
-  // expect(interpreter('a 1').command).toBe(commands.archive)
-  // expect(interpreter('aa 1').command).toBe(commands.list)
-  // interpreter('a 1').parse()
-})
+// test('archive', async () => {
+// expect(interpreter('archive 1').command).toBe(commands.archive)
+// expect(interpreter('a 1').command).toBe(commands.archive)
+// expect(interpreter('aa 1').command).toBe(commands.list)
+// interpreter('a 1').parse()
+// })
 
 // test('archive multiple items', async () => {
 //   const archiveMultiple = interpreter('a 1 2 3')

@@ -12,7 +12,6 @@ const pocketExecute = require('./pocket-execute')
 const states = ['unread', 'archive']
 const orders = ['newest', 'oldest', 'title', 'site']
 
-const actionsHistory = []
 const queries = history('queries')
 const localArticles = require('../local-articles')
 const defaultSearch = {
@@ -20,6 +19,68 @@ const defaultSearch = {
   offset: 0,
   detailType: 'complete',
   since: 0
+}
+
+const indexes = cyan('1-8')
+const command1 = cyan('open 1')
+const command2 = cyan('archive 2')
+const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
+const noResultsGuide = yellow('No results found')
+
+const formatter = require('./articles-formatter')
+const {toHumanText} = require('./articles-formatter')
+const {toSingleLine} = require('../commons-formatter')
+
+const render = (search, articles) => {
+  const renderedArticles = formatter(articles)
+  const output = [''].concat(renderedArticles)
+  const guide = articles.length > 0 ? listGuide : noResultsGuide
+  const leftMargin = ' '.repeat(5)
+  output.push(`${leftMargin}${blue(toHumanText(search))}`)
+  output.push(`${leftMargin}${guide}`)
+  output.push('')
+  return {lines: output}
+}
+
+const options = isArchived => ({
+  '1': 'open',
+  '2': 'expand',
+  '3': 'favorite',
+  '4': isArchived ? 'readd' : 'archive',
+  '5': 'delete',
+})
+
+const retrieve = async search => {
+  queries.add(search)
+  const retrievedArticles = await pocketExecute.retrieve(search)
+  localArticles.store(retrievedArticles)
+  return retrievedArticles
+}
+
+const actionsHistory = []
+
+const modify = ({action, custom = {}, indexes}) => {
+  const matches = indexes.flat().map(i => localArticles.get(i)).filter(Boolean)
+  const actions = matches.map(article => {
+    const base = {
+      action: action,
+      item_id: article.item_id,
+      time: DateTime.local().ts / 1000
+    }
+    return {...base, ...custom}
+  })
+  return {
+    // name: `pocket-modify-${action}`,
+    name: 'pocket-modify',
+    actions: actions,
+    execute: () => {
+      actionsHistory.push({
+        timestamp: DateTime.local(),
+        actions: actions
+      })
+      return pocketExecute.modify(actions)
+    }
+  }
 }
 
 const pocketParse = {
@@ -149,65 +210,5 @@ const pocketParse = {
   }
 
 }
-
-const retrieve = async search => {
-  queries.add(search)
-  const retrievedArticles = await pocketExecute.retrieve(search)
-  localArticles.store(retrievedArticles)
-  return retrievedArticles
-}
-
-const modify = ({action, custom = {}, indexes}) => {
-  const matches = indexes.flat().map(i => localArticles.get(i)).filter(Boolean)
-  const actions = matches.map(article => {
-    const base = {
-      action: action,
-      item_id: article.item_id,
-      time: DateTime.local().ts / 1000
-    }
-    return {...base, ...custom}
-  })
-  return {
-    // name: `pocket-modify-${action}`,
-    name: 'pocket-modify',
-    actions: actions,
-    execute: () => {
-      actionsHistory.push({
-        timestamp: DateTime.local(),
-        actions: actions
-      })
-      return pocketExecute.modify(actions)
-    }
-  }
-}
-
-const indexes = cyan('1-8')
-const command1 = cyan('open 1')
-const command2 = cyan('archive 2')
-const listGuide = gray(`Type ${indexes} to select an index or isuse commands like ${command1} and ${command2}. Press TAB to show commands`)
-const noResultsGuide = yellow('No results found')
-
-const formatter = require('./articles-formatter')
-const {toHumanText} = require('./articles-formatter')
-const {toSingleLine} = require('../commons-formatter')
-
-const render = (search, articles) => {
-  const renderedArticles = formatter(articles)
-  const output = [''].concat(renderedArticles)
-  const guide = articles.length > 0 ? listGuide : noResultsGuide
-  const leftMargin = ' '.repeat(5)
-  output.push(`${leftMargin}${blue(toHumanText(search))}`)
-  output.push(`${leftMargin}${guide}`)
-  output.push('')
-  return {lines: output}
-}
-
-const options = isArchived => ({
-  '1': 'open',
-  '2': 'expand',
-  '3': 'favorite',
-  '4': isArchived ? 'readd' : 'archive',
-  '5': 'delete',
-})
 
 module.exports = pocketParse

@@ -20,13 +20,6 @@ const getAction = (command, input) => ({
   parse: () => command.parse(input)
 })
 
-const createAction = inputText => {
-  if (interpreter.question) { return createAnswer(interpreter.question, inputText) }
-  const validString = isValidString(inputText)
-  if (!validString) return createNullAction()
-  return createBasicAction(validString.split(' '))
-}
-
 const createNullAction = () => getAction(nullCommand, '')
 
 const createAnswer = (question, inputText) => {
@@ -55,6 +48,15 @@ const createBasicAction = spaceSeparatedInput => {
   const input = isFirstWordACommand ? spaceSeparatedInput.slice(1) : spaceSeparatedInput.slice(0)
   return getAction(command, input)
 }
+
+/* eslint-disable no-use-before-define */
+const createAction = inputText => {
+  if (interpreter.question) { return createAnswer(interpreter.question, inputText) }
+  const validString = isValidString(inputText)
+  if (!validString) return createNullAction()
+  return createBasicAction(validString.split(' '))
+}
+/* eslint-enable no-use-before-define */
 
 const interpreter = inputText => {
   const action = createAction(inputText)

@@ -11,28 +11,28 @@ test('undefined', () => {
   expect(nullAction.command.name).toBe('null')
 })
 
-test('quit', async () => {
+test('quit', () => {
   const action = interpreter('quit')
   expect(action.command).toBe(commands.quit)
   const query = action.parse()
   expect(query.name).toBe('quit')
 })
 
-test('help', async () => {
+test('help', () => {
   const action = interpreter('help')
   expect(action.command).toBe(commands.help)
   const query = action.parse()
   expect(query.name).toBe('help')
 })
 
-test('version', async () => {
+test('version', () => {
   const action = interpreter('version')
   expect(action.command).toBe(commands.version)
   const query = action.parse()
   expect(query.name).toBe('version')
 })
 
-test('update', async () => {
+test('update', () => {
   const action = interpreter('update')
   expect(action.command).toBe(commands.update)
   const query = action.parse()

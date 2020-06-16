@@ -5,13 +5,9 @@ require('../src/cli/version')
 require('../src/cli/update')
 require('../src/cli/help')
 
-const isFunction = x => {
-  return typeof x === 'function'
-}
+const isFunction = x => typeof x === 'function'
 
-const isAsyncFunction = f => {
-  return f[Symbol.toStringTag] === 'AsyncFunction'
-}
+const isAsyncFunction = f => f[Symbol.toStringTag] === 'AsyncFunction'
 
 test('call commands query', async () => {
   const query = commands.quit.parse()
@@ -26,4 +22,3 @@ test('help', async () => {
   expect(interpreter('version').command).toBe(commands.version)
   expect(interpreter('update').command).toBe(commands.update)
 })
-

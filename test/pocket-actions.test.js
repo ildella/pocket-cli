@@ -3,7 +3,7 @@ const localArticles = require('../src/local-articles')
 const mockArticles = require('./fixtures/mock.parsed.articles')
 localArticles.store(mockArticles)
 
-test('Archive', async () => {
+test('Archive', () => {
   const query = archive(['2'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(1)
@@ -12,13 +12,13 @@ test('Archive', async () => {
   expect(query.actions[0].item_id).toBe('m2')
 })
 
-test('Archive no index', async () => {
+test('Archive no index', () => {
   const query = archive([])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(0)
 })
 
-test('Archive with multiple indexes', async () => {
+test('Archive with multiple indexes', () => {
   const query = archive(['1', '3', '4'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
@@ -28,7 +28,7 @@ test('Archive with multiple indexes', async () => {
   expect(query.actions[1].item_id).toBe('m3')
 })
 
-test('Favorite multiple items', async () => {
+test('Favorite multiple items', () => {
   const query = favorite(['1', '2', '4'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
@@ -38,7 +38,7 @@ test('Favorite multiple items', async () => {
   expect(query.actions[1].item_id).toBe('m2')
 })
 
-test('Readd multiple items', async () => {
+test('Readd multiple items', () => {
   const query = readd(['1', '2', '4'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
@@ -48,7 +48,7 @@ test('Readd multiple items', async () => {
   expect(query.actions[1].item_id).toBe('m2')
 })
 
-test('Tag - add', async () => {
+test('Tag - add', () => {
   const query = tag(['1', '2', 'aTag', '4', 'anotherTag'])
   expect(query.name).toEqual('pocket-modify')
   expect(query.actions).toHaveLength(3)
