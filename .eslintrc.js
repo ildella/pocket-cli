@@ -23,6 +23,9 @@ module.exports = {
       files: ['**/*src*/**'],
       rules: {
         'no-console': 'off',
+        'no-process-exit': 'off',
+        'no-sync': 'off', // TBRemoved as we're not on Node12
+        'sonarjs/no-unused-collection': 'off',
         'security/detect-child-process': 'off',
       }
     },
