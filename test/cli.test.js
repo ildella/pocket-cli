@@ -4,4 +4,3 @@ test('cli starts', () => {
   // expect(cli).toBeDefined()
   // TODO: figure out what's Jest problem with function* ()
 })
-

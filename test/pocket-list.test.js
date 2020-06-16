@@ -3,9 +3,9 @@ const pocket = require('../src/pocket/pocket-parse')
 const {list} = require('../src/pocket/pocket-parse')
 
 pocket.client = {
-  read: () => { return [] },
-  modify: () => { return [] },
-  add: () => { return [] }
+  read: () => [],
+  modify: () => [],
+  add: () => []
 }
 
 test('retrieve defaults', async () => {

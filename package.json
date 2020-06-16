@@ -45,10 +45,10 @@
   },
   "scripts": {
     "depcheck": "depcheck .",
-    "start": "node src",
+    "start": "node .",
     "test": "jest",
     "test:ci": "jest --config=jest.ci.js",
-    "lint": "eslint .",
+    "lint": "eslint src/ test/",
     "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"

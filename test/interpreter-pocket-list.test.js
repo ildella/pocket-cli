@@ -29,4 +29,3 @@ test('parse', async () => {
   const query = action.parse()
   expect(query.name).toEqual('pocket-list')
 })
-

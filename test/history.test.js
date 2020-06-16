@@ -39,4 +39,3 @@ test('addAll', () => {
   expect(h.size()).toBe(2)
   expect(h.last()).toEqual({a: 2})
 })
-
