@@ -49,12 +49,14 @@ const createBasicAction = spaceSeparatedInput => {
   return getAction(command, input)
 }
 
+/* eslint-disable no-use-before-define */
 const createAction = inputText => {
   if (interpreter.question) { return createAnswer(interpreter.question, inputText) }
   const validString = isValidString(inputText)
   if (!validString) return createNullAction()
   return createBasicAction(validString.split(' '))
 }
+/* eslint-enable no-use-before-define */
 
 const interpreter = inputText => {
   const action = createAction(inputText)
