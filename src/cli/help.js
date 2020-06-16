@@ -2,21 +2,19 @@ const commands = require('./menu').commands
 
 const output = []
 
-//TODO: support sort alphabetical or native
-const parse = params => {
-  return {
-    name: 'help',
-    execute: () => {
-      if (params) {
-        const command = commands[params[0]]
-        if (command) {
-          return {lines: [command.guide]}
-        }
+// TODO: support sort alphabetical or native
+const parse = params => ({
+  name: 'help',
+  execute: () => {
+    if (params) {
+      const command = commands[params[0]]
+      if (command) {
+        return {lines: [command.guide]}
       }
-      return {lines: output}
     }
+    return {lines: output}
   }
-}
+})
 
 commands['help'] = {
   name: 'help',
