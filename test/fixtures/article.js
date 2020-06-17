@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   textContent: '\n' +
     '    Have a look at the part 1 for the necessary context. Here we go.\n' +

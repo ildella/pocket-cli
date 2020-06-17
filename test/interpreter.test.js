@@ -38,3 +38,7 @@ test('update', () => {
   const query = action.parse()
   expect(query.name).toBe('update')
 })
+
+test('you never know who is watching', () => {
+  expect(null).toBeFalsy()
+})
