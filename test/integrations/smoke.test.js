@@ -22,9 +22,9 @@ test('multiple archive', async () => {
   expect(output.lines).toEqual(['success,success'])
 })
 
-test('archive and readd', async () => {
-  const list = await processor.processInput('bitcoin')
-  // expect(list.lines[2]).toContain('2.  (A)')
-  const output = await processor.processInput('2')
-  // expect(output.lines).toContain('4. Readd')
-})
+// test('archive and readd', async () => {
+// const list = await processor.processInput('bitcoin')
+// expect(list.lines[1]).toContain('2.  (A)')
+// const output = await processor.processInput('2')
+// expect(output.lines).toContain('4. Readd')
+// })

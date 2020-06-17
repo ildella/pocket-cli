@@ -52,7 +52,7 @@
     "start": "node .",
     "test": "jest",
     "test:ci": "jest --config=jest.ci.js",
-    "lint": "eslint src/ test/ --max-warnings 60",
+    "lint": "eslint src/ test/ --max-warnings 71",
     "snap": "snapcraft",
     "snap:help": "snapcraft help nodejs",
     "snap:clean": "snapcraft clean pocket-cli -s pull"
