@@ -3,7 +3,7 @@ module.exports = {
   notify: false,
   notifyMode: 'failure-change, success-change',
   testEnvironment: 'node',
-  testMatch: ['**/test*/**/*.test.js'],
+  testMatch: ['**/test*/*.test.js'],
   testPathIgnorePatterns: ['/node_modules'],
   // setupFilesAfterEnv: ['./tests/test-helpers.js'],
   collectCoverage: false,
