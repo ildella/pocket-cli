@@ -1,7 +1,9 @@
 module.exports = {
   extends: [
     'node-opinionated',
+    'plugin:jest/recommended'
   ],
+  plugins: ['jest'],
   overrides: [
     {
       files: ['**/*test*/**'],
@@ -27,6 +29,12 @@ module.exports = {
         'no-sync': 'off', // TBRemoved as we're not on Node12
         'sonarjs/no-unused-collection': 'off',
         'security/detect-child-process': 'off',
+      }
+    },
+    {
+      files: ['**/**'],
+      rules: {
+        'camelcase': 'off',
       }
     },
   ]

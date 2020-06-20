@@ -65,7 +65,7 @@ const interpreter = inputText => {
   if (isInteractive) {
     interpreter.question = action
   } else {
-    interpreter.question = undefined
+    interpreter.question = null
   }
   return action
 }

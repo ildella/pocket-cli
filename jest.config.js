@@ -1,19 +1,15 @@
 module.exports = {
   verbose: false,
   notify: false,
+  notifyMode: 'failure-change, success-change',
   testEnvironment: 'node',
-  setupFilesAfterEnv: ['./test/test-helpers.js'],
-  testMatch: ['**/test/?(*.)(spec|test).js?(x)'],
-  testPathIgnorePatterns: ['/node_modules', 'parts/*'],
+  testMatch: ['**/test*/*.test.js'],
+  testPathIgnorePatterns: ['/node_modules'],
+  // setupFilesAfterEnv: ['./tests/test-helpers.js'],
   collectCoverage: false,
   collectCoverageFrom: [
-    '**/src/**/*.{js,jsx}',
+    '**/src/*.{js,jsx}',
     '!**/node_modules/**',
-    '!**/parts/**',
   ],
-  // TODO: shame...
-  coverageThreshold: {
-    global: {branches: 50, functions: 50, lines: 50, statements: 50}
-  },
   coverageReporters: ['text', 'text-summary', 'json', 'json-summary', 'lcov', 'clover', 'html'],
 }

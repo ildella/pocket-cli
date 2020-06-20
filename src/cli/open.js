@@ -9,7 +9,7 @@ const openCommands = {
 const open = {
   get: (system = os.platform()) => {
     const command = openCommands[system]
-    console.log(`open command for ${system}: ${command}`)
+    // console.log(`open command for ${system}: ${command}`)
     return command
   }
 }
