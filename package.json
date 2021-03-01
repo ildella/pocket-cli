@@ -30,7 +30,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "0.19.2",
-    "colorette": "1.2.0",
+    "colorette": "1.2.2",
     "highland": "2.13.5",
     "luxon": "1.24.1",
     "semver": "7.3.2"
