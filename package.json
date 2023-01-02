@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "0.19.2",
+    "axios": "1.2.2",
     "colorette": "1.2.0",
     "highland": "2.13.5",
     "luxon": "1.24.1",
